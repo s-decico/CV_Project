@@ -1,0 +1,39 @@
+/*
+Colour Palette
+FFF1DC: Background
+EEEEEE : Secondary
+E8D5C4
+Accent: 3A98B9
+*/
+
+*{
+    box-sizing: border-box;
+
+}
+.navbar{
+    display: flex;
+    background-color: brown;
+    width:fit-content;
+    color: white;
+    /*margin: 1.5em;*/
+    border-radius: 1em;
+
+
+}
+
+.nav_ele{
+    padding: 20px;
+    margin: 0 1em 0 1em;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userimg{
+width: 60px;
+height: auto;
+border-radius: 50%;
+}

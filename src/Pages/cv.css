@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+}
+
+.cv_area{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: auto;
+    /*background-color: bisque;*/
+}
+.input_box{
+    background-color: darkseagreen;
+    width: 50vw;
+    height: 100vh;
+    
+}
+.cv_box{
+    background-color: cadetblue;
+    width: 50vw;
+    height: 100vh;
+}
+
+.cvinputform{
+    display: flex;
+    flex-direction: column;
+    
+}
+.formrow2c{
+    width: 100%;
+    
+}

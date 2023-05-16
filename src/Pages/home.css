@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;
+}
+.home{
+    background-image: url(../Images/home_back.jpg);
+    width: 100vw;
+    height: 100vh;
+    background-repeat:no-repeat;
+    background-position: center;
+}
+.home_body{
+    color: #ffffff;
+}
