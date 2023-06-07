@@ -1,31 +1,37 @@
 import React from "react";
+import { TextField, Button } from "@mui/material";
 
 function EducationInput({ handleEducationChange, index }) {
   return (
     <>
-      <label htmlFor="degree">Degree</label>
-      <input
+      <TextField
+        id="outlined-basic"
+        label="Degree"
+        variant="outlined"
         type="text"
         name="degree"
-        id="input_text"
         onChange={(event) => {
           handleEducationChange(event, index);
         }}
       />
-      <label htmlFor="school">School/College</label>
-      <input
+
+      <TextField
+        id="outlined-basic"
+        label="School/College"
+        variant="outlined"
         type="text"
         name="school"
-        id="input_text"
         onChange={(event) => {
           handleEducationChange(event, index);
         }}
       />
-      <label htmlFor="doj">Date of joining</label>
-      <input
+
+      <TextField
+        id="outlined-basic"
+        label="Date of joining"
+        variant="outlined"
         type="text"
         name="doj"
-        id="input_text"
         onChange={(event) => {
           handleEducationChange(event, index);
         }}

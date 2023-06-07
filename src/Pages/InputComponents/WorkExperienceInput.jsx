@@ -2,26 +2,30 @@ import React from "react";
 import { useState } from "react";
 import { workExperienceAtom } from "../../Atoms/CVAtoms";
 import "../cv.css";
+import { TextField, Button } from "@mui/material";
 
 function WorkExperienceInput({ handleWorkExpChange, index }) {
   const [workExperience, setWorkExperience] = useState([]);
 
   return (
     <>
-      <label htmlFor="designation">Designation</label>
-      <input
+      <TextField
+        id="outlined-basic"
+        label="Designation"
+        variant="outlined"
         type="text"
         name="designation"
-        id="input_text"
         onChange={(event) => {
           handleWorkExpChange(event, index);
         }}
       />
-      <label htmlFor="companyname">Company Name</label>
-      <input
+
+      <TextField
+        id="outlined-basic"
+        label="Company Name"
+        variant="outlined"
         type="text"
         name="companyname"
-        id="input_text"
         onChange={(event) => {
           handleWorkExpChange(event, index);
         }}

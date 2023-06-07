@@ -4,11 +4,15 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import CV from "./Pages/CV";
 import Home from "./Pages/Home";
+import { ThemeProvider } from "@mui/system";
+import { MuiThemeContext } from "./MuiThemeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CV />
+    <ThemeProvider theme={MuiThemeContext}>
+      <CV />
+    </ThemeProvider>
   </React.StrictMode>
 );
 

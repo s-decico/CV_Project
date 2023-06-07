@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TextField, Button } from "@mui/material";
 
 function SkillsInput({ skills, setSkills }) {
   let tempskills = "";
@@ -10,20 +11,24 @@ function SkillsInput({ skills, setSkills }) {
           return <div>{x}</div>;
         })}
       </div>
-      <input
+      <TextField
+        id="outlined-basic"
+        label="Type your skill"
+        variant="outlined"
         type="text"
         onChange={(e) => {
           tempskills = e.target.value;
         }}
       />
-      <button
+      <Button
+        variant="outlined"
         type="button"
         onClick={() => {
           setSkills([...skills, tempskills]);
         }}
       >
         +
-      </button>
+      </Button>
     </>
   );
 }

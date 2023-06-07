@@ -11,3 +11,5 @@ export const userDetailsAtom = atom({
     linkedin: "",
   },
 });
+
+//export const Details = atom({ key: "Full-Details", default: {} });

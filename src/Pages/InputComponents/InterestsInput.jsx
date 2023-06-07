@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TextField, Button } from "@mui/material";
 
 function InterestsInput({ interests, setInterests }) {
   let tempinterests = "";
@@ -10,20 +11,24 @@ function InterestsInput({ interests, setInterests }) {
           return <div>{x}</div>;
         })}
       </div>
-      <input
+      <TextField
+        id="outlined-basic"
+        label="Type your interests"
+        variant="outlined"
         type="text"
         onChange={(e) => {
           tempinterests = e.target.value;
         }}
       />
-      <button
+      <Button
+        variant="outlined"
         type="button"
         onClick={() => {
           setInterests([...interests, tempinterests]);
         }}
       >
         +
-      </button>
+      </Button>
     </>
   );
 }
