@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { createElement } from "react";
 import { RecoilState, useRecoilState, useRecoilValue } from "recoil";
 import {
+  Details,
   userDetailsAtom,
   workCountAtom,
   workExperienceAtom,
 } from "../Atoms/CVAtoms";
 import "./cv.css";
+
 import AchievementInput from "./InputComponents/AchievementInput";
 import EducationInput from "./InputComponents/EducationInput";
 import InterestsInput from "./InputComponents/InterestsInput";
@@ -20,7 +22,7 @@ import { TextField, Button } from "@mui/material";
 function CVInputBox() {
   //Main State
   const [userDetails, setUserDetails] = useRecoilState(userDetailsAtom);
-  //const [fullDetails, setfullDetails] = useRecoilState(Details);
+  const [fullDetails, setfullDetails] = useRecoilState(Details);
   //Variables
   //--------------------------------
   const [_companyname, setCompanyname] = useState("");
@@ -133,7 +135,7 @@ function CVInputBox() {
     setAchievementObj(tempobj);
     console.log(achievementObj);
   };
-  /*const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     tempobj = {};
     tempobj = {
       UserDetails: userDetails,
@@ -145,10 +147,10 @@ function CVInputBox() {
       Language: language,
       Interest: interests,
     };
-    //setfullDetails(tempobj);
-    console.log(tempobj);
-  };*/
-  const handleFormSubmit = (e) => {};
+    setfullDetails(tempobj);
+    console.log(fullDetails);
+  };
+
   //Render function
   return (
     <div className="input_box">
@@ -266,7 +268,7 @@ function CVInputBox() {
             +
           </Button>
         </div>
-        {/*<div className="formrow1c">
+        <div className="formrow1c">
           Achievement
           {achievementComponent.map((obj, index) => {
             return (
@@ -279,7 +281,7 @@ function CVInputBox() {
           <Button variant="outlined" type="button" onClick={renderAchievement}>
             +
           </Button>
-        </div>*/}
+        </div>
 
         <Button variant="contained" type="button" onClick={handleFormSubmit}>
           Submit
