@@ -28,13 +28,21 @@ app.post("/", function (req, res) {
   try {
     if (req) {
       const obj = req.body;
-      const receivedData = querystring.parse(req.body, null, null, {
-        decodeURIComponent: querystring.unescape,
-      });
+      let jsonString = "";
+      for (const key in obj) {
+        jsonString += obj[key];
+      }
+      const parsedObject = JSON.parse(jsonString);
 
-      // console.log(obj);
-      // const data = JSON.parse(Object.keys(req.body)[0]);
-      console.log(obj);
+      parsedObject.UserDetails = JSON.parse(parsedObject.UserDetails);
+      parsedObject.WorkExperience = JSON.parse(parsedObject.WorkExperience);
+      parsedObject.Education = JSON.parse(parsedObject.Education);
+      parsedObject.Project = JSON.parse(parsedObject.Project);
+      parsedObject.Achievement = JSON.parse(parsedObject.Achievement);
+      console.log(parsedObject);
+      // const receivedData = querystring.parse(req.body, null, null, {
+      //   decodeURIComponent: querystring.unescape,
+      // });
     } else res.send("Success");
   } catch (err) {
     console.log(err);

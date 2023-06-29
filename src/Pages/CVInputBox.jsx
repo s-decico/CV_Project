@@ -143,6 +143,7 @@ function CVInputBox() {
       encodeURIComponent: queryString.unescape,
       allowDots: true,
     });
+    console.log(stringy);
     axios
       .post("http://localhost:3001/", encodedData, {
         headers: {
@@ -175,15 +176,16 @@ function CVInputBox() {
     tempobj.Education = JSON.stringify(educationObj);
     tempobj.Project = JSON.stringify(projectObj);
     tempobj.Achievement = JSON.stringify(achievementObj);
+    sendDataToServer(tempobj);
     // tempobj.Skills = skills.toString();
     // tempobj.Language = language.toString();
     // tempobj.Interest = interests.toString();
 
-    var jsonString = JSON.stringify(tempobj);
-    //jsonString = JSON.stringify(jsonString);
-    console.log(queryString.stringify(tempobj));
+    // var jsonString = JSON.stringify(tempobj);
+    // jsonString = JSON.stringify(jsonString);
+    // console.log(queryString.stringify(tempobj));
     //console.log(jsonString);
-    sendDataToServer(tempobj);
+
     // const option = {
     //   method: "POST",
     //   headers: { "Content-Type": "applicaiton/json" },
