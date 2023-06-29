@@ -2,8 +2,8 @@ import { render } from "@testing-library/react";
 import React, { useState } from "react";
 import { createElement } from "react";
 import { RecoilState, useRecoilState, useRecoilValue } from "recoil";
+
 import {
-  Details,
   userDetailsAtom,
   workCountAtom,
   workExperienceAtom,
@@ -18,11 +18,13 @@ import ProjectsInput from "./InputComponents/ProjectsInput";
 import SkillsInput from "./InputComponents/SkillsInput";
 import WorkExperienceInput from "./InputComponents/WorkExperienceInput";
 import { TextField, Button } from "@mui/material";
+import axios, { Axios } from "axios";
+import queryString from "query-string";
 
 function CVInputBox() {
   //Main State
   const [userDetails, setUserDetails] = useRecoilState(userDetailsAtom);
-  const [fullDetails, setfullDetails] = useRecoilState(Details);
+  const [fullDetails, setfullDetails] = useState();
   //Variables
   //--------------------------------
   const [_companyname, setCompanyname] = useState("");
@@ -135,6 +137,25 @@ function CVInputBox() {
     setAchievementObj(tempobj);
     console.log(achievementObj);
   };
+  const sendDataToServer = (tempobj) => {
+    const stringy = JSON.stringify(tempobj);
+    const encodedData = queryString.stringify(stringy, null, null, {
+      encodeURIComponent: queryString.unescape,
+      allowDots: true,
+    });
+    axios
+      .post("http://localhost:3001/", encodedData, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then(function (res) {
+        console.log("Data Sent");
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  };
   const handleFormSubmit = (e) => {
     tempobj = {};
     tempobj = {
@@ -143,19 +164,46 @@ function CVInputBox() {
       Education: educationObj,
       Project: projectObj,
       Achievement: achievementObj,
-      Skills: skills,
       Language: language,
       Interest: interests,
+      Skills: skills,
     };
     setfullDetails(tempobj);
-    console.log(fullDetails);
+
+    tempobj.UserDetails = JSON.stringify(userDetails);
+    tempobj.WorkExperience = JSON.stringify(workExperienceObj);
+    tempobj.Education = JSON.stringify(educationObj);
+    tempobj.Project = JSON.stringify(projectObj);
+    tempobj.Achievement = JSON.stringify(achievementObj);
+    // tempobj.Skills = skills.toString();
+    // tempobj.Language = language.toString();
+    // tempobj.Interest = interests.toString();
+
+    var jsonString = JSON.stringify(tempobj);
+    //jsonString = JSON.stringify(jsonString);
+    console.log(queryString.stringify(tempobj));
+    //console.log(jsonString);
+    sendDataToServer(tempobj);
+    // const option = {
+    //   method: "POST",
+    //   headers: { "Content-Type": "applicaiton/json" },
+    //   body: jsonString,
+    //   data: jsonString,
+    // };
+    // fetch("http://localhost:3001/", option)
+    //   .then((res) => {
+    //     if (res.ok) console.log("Okay");
+    //     res.json();
+    //   })
+    //   .then((data) => console.log(data));
+    //console.log(fullDetails);
   };
 
   //Render function
   return (
     <div className="input_box">
       <div className="input_heading">Fill in the details</div>
-      <form action="" className="cvinputform">
+      <form action="/" className="cvinputform" method="post">
         <span className="formrow2c">
           <input
             id="outlined-basic"
