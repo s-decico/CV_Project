@@ -177,28 +177,6 @@ function CVInputBox() {
     tempobj.Project = JSON.stringify(projectObj);
     tempobj.Achievement = JSON.stringify(achievementObj);
     sendDataToServer(tempobj);
-    // tempobj.Skills = skills.toString();
-    // tempobj.Language = language.toString();
-    // tempobj.Interest = interests.toString();
-
-    // var jsonString = JSON.stringify(tempobj);
-    // jsonString = JSON.stringify(jsonString);
-    // console.log(queryString.stringify(tempobj));
-    //console.log(jsonString);
-
-    // const option = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "applicaiton/json" },
-    //   body: jsonString,
-    //   data: jsonString,
-    // };
-    // fetch("http://localhost:3001/", option)
-    //   .then((res) => {
-    //     if (res.ok) console.log("Okay");
-    //     res.json();
-    //   })
-    //   .then((data) => console.log(data));
-    //console.log(fullDetails);
   };
 
   //Render function
