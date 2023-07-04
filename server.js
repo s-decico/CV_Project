@@ -79,19 +79,6 @@ const userSchema = new mongoose.Schema({
 
 const Details = mongoose.model("UserModel", userSchema);
 
-// const ModelM = mongoose.model("Achievement", achievementSchema);
-// var abc = new ModelM();
-// abc.title = "ABC";
-// abc.subtitle = "ABCsub";
-// abc
-//   .save()
-//   .then(() => {
-//     console.log("Successful");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
 //API routes
 app.get("/", function (req, res) {
   res.send("Hello");
