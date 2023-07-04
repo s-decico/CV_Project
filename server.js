@@ -6,6 +6,7 @@ const request = require("request");
 const https = require("https");
 const querystring = require("querystring");
 require("dotenv").config();
+const UserDetails = require("./src/Schemas");
 
 const app = express();
 
@@ -23,7 +24,7 @@ const dbConnectionURI =
   username +
   ":" +
   password +
-  "@cvdetails.igloppb.mongodb.net/?retryWrites=true&w=majority";
+  "@cvdetails.igloppb.mongodb.net/Details?retryWrites=true&w=majority";
 
 mongoose
   .connect(dbConnectionURI, { useNewUrlParser: true })
@@ -33,51 +34,6 @@ mongoose
   .catch((err) => {
     console.log("Error:" + err);
   });
-
-//Schemas
-const userDetailsSchema = new mongoose.Schema({
-  fullname: String,
-  email: String,
-  phno: String,
-  address: String,
-  github: String,
-  linkedin: String,
-});
-
-const workExperienceSchema = new mongoose.Schema({
-  companyname: String,
-  designation: String,
-});
-
-const educationSchema = new mongoose.Schema({
-  qualification: String,
-  school: String,
-  doj: String,
-});
-
-const projectSchema = new mongoose.Schema({
-  projectname: String,
-  projectyear: String,
-  details: [String],
-});
-
-const achievementSchema = new mongoose.Schema({
-  title: String,
-  subtitle: String,
-});
-
-const userSchema = new mongoose.Schema({
-  UserDetails: userDetailsSchema,
-  WorkExperience: [workExperienceSchema],
-  Education: [educationSchema],
-  Project: [projectSchema],
-  Achievement: [achievementSchema],
-  Language: [String],
-  Interest: [String],
-  Skills: [String],
-});
-
-const Details = mongoose.model("UserModel", userSchema);
 
 //API routes
 app.get("/", function (req, res) {
@@ -99,8 +55,8 @@ app.post("/", function (req, res) {
       parsedObject.Education = JSON.parse(parsedObject.Education);
       parsedObject.Project = JSON.parse(parsedObject.Project);
       parsedObject.Achievement = JSON.parse(parsedObject.Achievement);
-      console.log(parsedObject.Project[1]);
-      Details.insertMany(parsedObject)
+      console.log(parsedObject);
+      UserDetails.insertMany(parsedObject)
         .then(() => {
           console.log("Data inserted successfully");
         })

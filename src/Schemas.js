@@ -1,26 +1,3 @@
-export const UserDetailsSchema = {
-  fullname: String,
-  email: String,
-  phno: String,
-  address: String,
-  github: String,
-  linkedin: String,
-};
-
-export const CVDetailsSchema = {
-  UserDetails: {
-    fullname: String,
-    email: String,
-    phno: String,
-    address: String,
-    github: String,
-    linkedin: String,
-  },
-  WorkExperience: [{ companyname: String, designation: String }],
-  Education: { degree: String, school: String, doj: String },
-  Project: {},
-};
-
 const mongoose = require("mongoose");
 
 const userDetailsSchema = new mongoose.Schema({
@@ -65,4 +42,5 @@ const userSchema = new mongoose.Schema({
   Skills: [String],
 });
 
-const UserModel = mongoose.model("UserModel", userSchema);
+const UserDetails = mongoose.model("UserDetails", userSchema);
+module.exports = UserDetails;

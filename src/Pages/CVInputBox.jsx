@@ -185,7 +185,7 @@ function CVInputBox() {
       <div className="input_heading">Fill in the details</div>
       <form action="/" className="cvinputform" method="post">
         <span className="formrow2c">
-          <input
+          <TextField
             id="outlined-basic"
             label="Full Name"
             variant="outlined"
