@@ -30,7 +30,6 @@ function WorkExperienceInput({ handleWorkExpChange, index }) {
           handleWorkExpChange(event, index);
         }}
       />
-      <p></p>
     </>
   );
 }

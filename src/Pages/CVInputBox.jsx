@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createElement } from "react";
 import { RecoilState, useRecoilState, useRecoilValue } from "recoil";
 
@@ -80,70 +80,85 @@ function CVInputBox() {
     let fieldName = e.target.name;
     let fieldValue = e.target.value;
     setUserDetails({ ...userDetails, [fieldName]: fieldValue });
-    console.log(userDetails);
   };
 
   const handleWorkExpChange = (event, index) => {
-    if (event.target.name == "companyname") setCompanyname(event.target.value);
-    else if (event.target.name == "designation")
-      setDesignation(event.target.value);
+    const { name, value } = event.target;
+    let fieldName = name;
+    tempobj = {};
     tempobj = { ...workExperienceObj };
-    tempobj[index] = {
-      companyname: _companyname,
-      designation: _designation,
-    };
+    switch (name) {
+      case "companyname":
+        setCompanyname(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
+        break;
+      case "designation":
+        setDesignation(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
+        break;
+    }
+
     setworkExperienceObj(tempobj);
   };
 
   const handleEducationChange = (event, index) => {
-    switch (event.target.name) {
-      case "qualification":
-        setQualification(event.target.value);
-        break;
-      case "school":
-        setSchool(event.target.value);
-        break;
-      case "doj":
-        setDoj(event.target.value);
-        break;
-    }
+    const { name, value } = event.target;
+    let fieldName = name;
     tempobj = {};
     tempobj = { ...educationObj };
-    tempobj[index] = {
-      qualification: _qualification,
-      school: _school,
-      doj: _doj,
-    };
+    switch (name) {
+      case "qualification":
+        setQualification(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
+        break;
+      case "school":
+        setSchool(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
+        break;
+      case "doj":
+        setDoj(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
+        break;
+    }
     setEducationObj(tempobj);
-    //console.log(educationObj);
+    // tempobj[index] = {
+    //   qualification: _qualification,
+    //   school: _school,
+    //   doj: _doj,
   };
+
   const handleAchievementChange = (event, index) => {
-    switch (event.target.name) {
+    const { name, value } = event.target;
+    let fieldName = name;
+    tempobj = {};
+    tempobj = { ...achievementObj };
+    switch (name) {
       case "title":
-        setTitle(event.target.value);
+        setTitle(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
         break;
       case "subtitle":
-        setSubtitle(event.target.value);
+        setSubtitle(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
         break;
       default:
         break;
     }
-    tempobj = {};
-    tempobj = { ...achievementObj };
-    tempobj[index] = {
-      title: _title,
-      subtitle: _subtitle,
-    };
     setAchievementObj(tempobj);
-    console.log(achievementObj);
+    // tempobj[index] = {
+    //   title: _title,
+    //   subtitle: _subtitle,
   };
+
+  //console.log(achievementObj);
+
   const sendDataToServer = (tempobj) => {
     const stringy = JSON.stringify(tempobj);
     const encodedData = queryString.stringify(stringy, null, null, {
       encodeURIComponent: queryString.unescape,
       allowDots: true,
     });
-    console.log(stringy);
+    //console.log(stringy);
     axios
       .post("http://localhost:3001/", encodedData, {
         headers: {
@@ -170,6 +185,7 @@ function CVInputBox() {
       Skills: skills,
     };
     setfullDetails(tempobj);
+    //console.log(tempobj);
 
     tempobj.UserDetails = JSON.stringify(userDetails);
     tempobj.WorkExperience = JSON.stringify(workExperienceObj);
@@ -318,5 +334,4 @@ function CVInputBox() {
     </div>
   );
 }
-
 export default CVInputBox;

@@ -6,38 +6,52 @@ function ProjectsInput({ index, setProjectObj, projectObj }) {
   const [_projectyear, setProjectyear] = useState("");
   let tempobj = {};
   let _tempdetails = {};
-  const [details, setDetails] = useState([]);
+  const [_details, setDetails] = useState([]);
   const [detailsComponent, setDetailsComponent] = useState([]);
   let detailsarr = [];
-  const handleProjectChange = (event, _details) => {
-    switch (event.target.name) {
+
+  const handleProjectChange = (event, __details) => {
+    const { name, value } = event.target;
+    let fieldName = name;
+    tempobj = {};
+    tempobj = { ...projectObj };
+
+    switch (name) {
       case "projectname":
-        setProjectname(event.target.value);
+        setProjectname(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
         break;
       case "projectyear":
-        setProjectyear(event.target.value);
+        setProjectyear(value);
+        tempobj[index] = { ...tempobj[index], [fieldName]: value };
+        break;
+      case "details":
+        tempobj[index] = { ...tempobj[index], [fieldName]: __details };
         break;
     }
 
-    tempobj = {};
-    tempobj = { ...projectObj };
-    tempobj[index] = {
-      projectname: _projectname,
-      projectyear: _projectyear,
-      details: _details,
-    };
+    // tempobj = {};
+
+    // tempobj[index] = {
+    //   projectname: _projectname,
+    //   projectyear: _projectyear,
+    //   details: __details,
+
     setProjectObj(tempobj);
-    console.log(projectObj);
+    console.log(tempobj);
   };
+
   const handleAdd = () => {
     let temp = [...detailsComponent, []];
     setDetailsComponent(temp);
   };
+
   const handleDetailsChange = (e, index) => {
-    let tempdetails = [...details];
+    let tempdetails = [..._details];
     tempdetails[index] = e.target.value;
+    // console.log(tempdetails);
     setDetails(tempdetails);
-    handleProjectChange(e, details);
+    handleProjectChange(e, tempdetails);
   };
 
   return (

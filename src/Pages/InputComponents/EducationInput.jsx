@@ -6,10 +6,10 @@ function EducationInput({ handleEducationChange, index }) {
     <>
       <TextField
         id="outlined-basic"
-        label="Degree"
+        label="Qualification"
         variant="outlined"
         type="text"
-        name="degree"
+        name="qualification"
         onChange={(event) => {
           handleEducationChange(event, index);
         }}
