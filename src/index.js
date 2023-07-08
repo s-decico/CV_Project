@@ -6,12 +6,14 @@ import CV from "./Pages/CV";
 import Home from "./Pages/Home";
 import { ThemeProvider } from "@mui/system";
 import { MuiThemeContext } from "./MuiThemeContext";
+import Login from "./Pages/LoginForms/Login";
+import Registration from "./Pages/LoginForms/Registration";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={MuiThemeContext}>
-      <CV />
+      <Login />
     </ThemeProvider>
   </React.StrictMode>
 );

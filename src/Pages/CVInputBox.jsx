@@ -121,10 +121,6 @@ function CVInputBox() {
         break;
     }
     setEducationObj(tempobj);
-    // tempobj[index] = {
-    //   qualification: _qualification,
-    //   school: _school,
-    //   doj: _doj,
   };
 
   const handleAchievementChange = (event, index) => {
@@ -145,12 +141,7 @@ function CVInputBox() {
         break;
     }
     setAchievementObj(tempobj);
-    // tempobj[index] = {
-    //   title: _title,
-    //   subtitle: _subtitle,
   };
-
-  //console.log(achievementObj);
 
   const sendDataToServer = (tempobj) => {
     const stringy = JSON.stringify(tempobj);
@@ -158,7 +149,7 @@ function CVInputBox() {
       encodeURIComponent: queryString.unescape,
       allowDots: true,
     });
-    //console.log(stringy);
+
     axios
       .post("http://localhost:3001/", encodedData, {
         headers: {
@@ -185,7 +176,6 @@ function CVInputBox() {
       Skills: skills,
     };
     setfullDetails(tempobj);
-    //console.log(tempobj);
 
     tempobj.UserDetails = JSON.stringify(userDetails);
     tempobj.WorkExperience = JSON.stringify(workExperienceObj);

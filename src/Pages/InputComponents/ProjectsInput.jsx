@@ -30,13 +30,6 @@ function ProjectsInput({ index, setProjectObj, projectObj }) {
         break;
     }
 
-    // tempobj = {};
-
-    // tempobj[index] = {
-    //   projectname: _projectname,
-    //   projectyear: _projectyear,
-    //   details: __details,
-
     setProjectObj(tempobj);
     console.log(tempobj);
   };
