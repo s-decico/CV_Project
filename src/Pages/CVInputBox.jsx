@@ -151,7 +151,7 @@ function CVInputBox() {
     });
 
     axios
-      .post("http://localhost:3001/", encodedData, {
+      .post("http://localhost:3001/cvinput", encodedData, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },

@@ -2,33 +2,38 @@ const express = require("express");
 const mongoose = require("mongoose");
 var cors = require("cors");
 const bodyParser = require("body-parser");
-const request = require("request");
-const https = require("https");
-const querystring = require("querystring");
 require("dotenv").config();
 const UserDetails = require("./src/Schemas");
 const UserCred = require("./src/Schemas");
-const session = require("express-session");
-const passport = require("passport");
-const passportLocalMongoose = require("passport-local-mongoose");
+var jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 const app = express();
+const request = require("request");
+const https = require("https");
+const querystring = require("querystring");
 
 app.use(cors());
 app.use("/public", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(cookieParser());
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); // Replace with the appropriate origin (client URL)
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 //Database connections
 const username = process.env.DB_USERNAME;
@@ -48,26 +53,33 @@ mongoose
   .catch((err) => {
     console.log("Error:" + err);
   });
+const secretKey = process.env.JWT_SECRET_KEY;
+function generateToken(username, password) {
+  const userData = {
+    username: username,
+    password: password,
+  };
+  const token = jwt.sign(userData, secretKey);
+  return token;
+}
 
-passport.use(new LocalStrategy(UserCred.authenticate()));
-passport.serializeUser(UserCred.serializeUser());
-passport.deserializeUser(UserCred.deserializeUser());
-
-//API routes
+//API endpoints
 app
-
-  .route("/")
+  .route("/cvinput")
   .get((req, res) => {
+    console.log(req.user);
     res.send("Hello");
   })
   .post((req, res) => {
     try {
+      console.log(req.user);
       if (req) {
         const obj = req.body;
         let jsonString = "";
         for (const key in obj) {
           jsonString += obj[key];
         }
+
         const parsedObject = JSON.parse(jsonString);
 
         parsedObject.UserDetails = JSON.parse(parsedObject.UserDetails);
@@ -101,12 +113,19 @@ app.route("/register").post((req, res) => {
 });
 
 app.route("/login").post((req, res) => {
-  const credObj = req.body;
-
-  UserCred.findOne({ email: req.body.email })
+  const { email, password } = req.body;
+  UserCred.findOne({ email: email })
     .then((result) => {
-      if (result.password === credObj.password) {
-        res.sendFile(__dirname + "/src/Pages/LoginForms/landing.html");
+      if (result) {
+        if (result.password === password) {
+          const token = generateToken(email, password);
+          res.cookie("token", token, { httpOnly: true }).json({ token: token });
+          //console.log(token);
+        } else {
+          res.status(401).json({ error: "Incorrect password" });
+        }
+      } else {
+        res.status(404).json({ error: "User not found" });
       }
     })
     .catch((err) => {
@@ -114,6 +133,6 @@ app.route("/login").post((req, res) => {
     });
 });
 
-app.listen(3001, function () {
+app.listen(3001, () => {
   console.log("Server started at port 3001");
 });

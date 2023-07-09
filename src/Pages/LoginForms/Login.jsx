@@ -1,8 +1,9 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import axios from "axios";
 import md5 from "md5";
+import Cookies from "universal-cookie";
 
 function Login() {
   const emailRef = useRef(null);
@@ -17,10 +18,15 @@ function Login() {
       .post("http://localhost:3001/login", UserData, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
+          // "Access-Control-Allow-Credentials": true,
         },
+        withCredentials: true,
       })
       .then(function (res) {
         console.log("Login Data Sent");
+        if (res.status === 200) {
+          console.log("You are logged in now");
+        }
       })
       .catch(function (err) {
         console.log(err);
