@@ -1,13 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-var cors = require("cors");
 const bodyParser = require("body-parser");
-require("dotenv").config();
 const UserDetails = require("./src/Schemas");
 const UserCred = require("./src/Schemas");
-var jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-
+var jwt = require("jsonwebtoken");
+var cors = require("cors");
+require("dotenv").config();
 const app = express();
 const request = require("request");
 const https = require("https");
@@ -54,11 +53,12 @@ mongoose
     console.log("Error:" + err);
   });
 const secretKey = process.env.JWT_SECRET_KEY;
-function generateToken(username, password) {
+function generateToken(username, id) {
   const userData = {
+    id: id,
     username: username,
-    password: password,
   };
+  console.log(userData);
   const token = jwt.sign(userData, secretKey);
   return token;
 }
@@ -118,9 +118,8 @@ app.route("/login").post((req, res) => {
     .then((result) => {
       if (result) {
         if (result.password === password) {
-          const token = generateToken(email, password);
+          const token = generateToken(result.email, result._id);
           res.cookie("token", token, { httpOnly: true }).json({ token: token });
-          //console.log(token);
         } else {
           res.status(401).json({ error: "Incorrect password" });
         }
@@ -131,6 +130,28 @@ app.route("/login").post((req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+const verifyToken = (token, secret) => {
+  try {
+    const decoded = jwt.verify(token, secret);
+    return decoded;
+  } catch (error) {
+    // Token verification failed
+    return null;
+  }
+};
+app.route("/hello").get((req, res) => {
+  //console.log(req.cookies.token);
+  const receivedToken = req.cookies.token;
+  const decodedToken = verifyToken(receivedToken, process.env.JWT_SECRET_KEY);
+  if (decodedToken) {
+    res.status(201).send("Access granted");
+    //The decodedToken contains username and id
+  } else {
+    // Token is invalid or expired
+    res.status(401).send("Access denied");
+  }
 });
 
 app.listen(3001, () => {
