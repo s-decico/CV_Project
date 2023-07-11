@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const passportLocalMongoose = require("passport-local-mongoose");
 
-const userDetailsSchema = new mongoose.Schema({
+const BasicDetailsSchema = new mongoose.Schema({
   fullname: String,
   email: String,
   phno: String,
@@ -33,7 +32,7 @@ const achievementSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-  UserDetails: userDetailsSchema,
+  BasicDetails: BasicDetailsSchema,
   WorkExperience: { type: Map, of: workExperienceSchema },
   Education: { type: Map, of: educationSchema },
   Project: { type: Map, of: projectSchema },
@@ -41,17 +40,16 @@ const userSchema = new mongoose.Schema({
   Language: [String],
   Interest: [String],
   Skills: [String],
+  UserID: String,
 });
 
 const UserDetails = mongoose.model("UserDetails", userSchema);
-module.exports = UserDetails;
 
 const userCredSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
 });
-userCredSchema.plugin(passportLocalMongoose);
 
 const UserCred = mongoose.model("UserCred", userCredSchema);
-module.exports = UserCred;
+module.exports = { UserCred, UserDetails };

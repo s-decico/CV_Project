@@ -155,6 +155,7 @@ function CVInputBox() {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
+        withCredentials: true,
       })
       .then(function (res) {
         console.log("Data Sent");
@@ -166,7 +167,7 @@ function CVInputBox() {
   const handleFormSubmit = (e) => {
     tempobj = {};
     tempobj = {
-      UserDetails: userDetails,
+      BasicDetails: userDetails,
       WorkExperience: workExperienceObj,
       Education: educationObj,
       Project: projectObj,
@@ -177,7 +178,7 @@ function CVInputBox() {
     };
     setfullDetails(tempobj);
 
-    tempobj.UserDetails = JSON.stringify(userDetails);
+    tempobj.BasicDetails = JSON.stringify(userDetails);
     tempobj.WorkExperience = JSON.stringify(workExperienceObj);
     tempobj.Education = JSON.stringify(educationObj);
     tempobj.Project = JSON.stringify(projectObj);

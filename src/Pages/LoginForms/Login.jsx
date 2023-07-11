@@ -3,7 +3,6 @@ import { TextField, Button } from "@mui/material";
 import { useRef, useEffect } from "react";
 import axios from "axios";
 import md5 from "md5";
-import Cookies from "universal-cookie";
 
 function Login() {
   const emailRef = useRef(null);
