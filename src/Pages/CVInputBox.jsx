@@ -1,15 +1,13 @@
 import { render } from "@testing-library/react";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { createElement } from "react";
-import { RecoilState, useRecoilState, useRecoilValue } from "recoil";
-
 import {
   userDetailsAtom,
   workCountAtom,
   workExperienceAtom,
 } from "../Atoms/CVAtoms";
 import "./cv.css";
-
 import AchievementInput from "./InputComponents/AchievementInput";
 import EducationInput from "./InputComponents/EducationInput";
 import InterestsInput from "./InputComponents/InterestsInput";
@@ -20,10 +18,26 @@ import WorkExperienceInput from "./InputComponents/WorkExperienceInput";
 import { TextField, Button } from "@mui/material";
 import axios, { Axios } from "axios";
 import queryString from "query-string";
+import cookie from "js-cookie";
 
 function CVInputBox() {
+  const navigate = useNavigate();
+  const token = cookie.get("token");
+  useEffect(() => {
+    if (token == null || token == undefined) {
+      console.log(token);
+      setTimeout(() => {
+        navigate("/login");
+      }, 0);
+    } else {
+      setTimeout(() => {
+        navigate("/cvinput");
+      }, 0);
+    }
+  }, [token]);
+
   //Main State
-  const [userDetails, setUserDetails] = useRecoilState(userDetailsAtom);
+  const [userDetails, setUserDetails] = useState();
   const [fullDetails, setfullDetails] = useState();
   //Variables
   //--------------------------------
@@ -158,7 +172,10 @@ function CVInputBox() {
         withCredentials: true,
       })
       .then(function (res) {
-        console.log("Data Sent");
+        if (res.status === 200) {
+          console.log("Data Saved");
+          navigate("/cv");
+        }
       })
       .catch(function (err) {
         console.log(err);

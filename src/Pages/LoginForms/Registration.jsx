@@ -3,19 +3,20 @@ import { TextField, Button } from "@mui/material";
 import { useRef } from "react";
 import axios from "axios";
 import md5 from "md5";
+import { useNavigate } from "react-router-dom";
 
 function Registration() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
 
+  const navigate = useNavigate();
+
   const handleRegistration = () => {
     const _email = emailRef.current.value;
     const _password = passwordRef.current.value;
     const _name = nameRef.current.value;
     let UserData = { name: _name, email: _email, password: md5(_password) };
-
-    console.log(UserData);
 
     axios
       .post("http://localhost:3001/register", UserData, {
@@ -24,7 +25,10 @@ function Registration() {
         },
       })
       .then(function (res) {
-        console.log("Registration Data Sent");
+        if (res.status === 200) {
+          console.log("Registration Data Sent");
+          navigate("/cvinput");
+        } else navigate("/register");
       })
       .catch(function (err) {
         console.log(err);
@@ -60,6 +64,14 @@ function Registration() {
         <Button variant="contained" type="button" onClick={handleRegistration}>
           Submit
         </Button>
+        Already have an account?
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Login
+        </button>
       </div>
     </>
   );

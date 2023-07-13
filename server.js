@@ -78,8 +78,18 @@ const verifyToken = (token, secret) => {
   }
 };
 
+app.route("/").get((req, res) => {
+  let decodedToken = 0;
+  if (req.cookies.token) {
+    const receivedToken = req.cookies.token;
+    decodedToken = verifyToken(receivedToken, process.env.JWT_SECRET_KEY);
+  }
+  if (decodedToken) res.sendStatus(200);
+  else res.sendStatus(401);
+});
 //API endpoints
 app.route("/cvinput").post((req, res) => {
+  let decodedToken = "";
   try {
     if (req) {
       const obj = req.body;
@@ -87,13 +97,12 @@ app.route("/cvinput").post((req, res) => {
       for (const key in obj) {
         jsonString += obj[key];
       }
+      if (req.cookies.token) {
+        const receivedToken = req.cookies.token;
+        decodedToken = verifyToken(receivedToken, process.env.JWT_SECRET_KEY);
+      }
 
-      const receivedToken = req.cookies.token;
-      const decodedToken = verifyToken(
-        receivedToken,
-        process.env.JWT_SECRET_KEY
-      );
-      console.log(decodedToken.id);
+      //console.log(decodedToken.id);
 
       const parsedObject = JSON.parse(jsonString);
       parsedObject.BasicDetails = JSON.parse(parsedObject.BasicDetails);
@@ -101,8 +110,8 @@ app.route("/cvinput").post((req, res) => {
       parsedObject.Education = JSON.parse(parsedObject.Education);
       parsedObject.Project = JSON.parse(parsedObject.Project);
       parsedObject.Achievement = JSON.parse(parsedObject.Achievement);
-      parsedObject["UserID"] = decodedToken.id;
-      console.log(parsedObject);
+      parsedObject["UserID"] = decodedToken.id != null ? decodedToken.id : "";
+      //console.log(parsedObject);
       UserDetails.insertMany(parsedObject)
         .then(() => {
           console.log("Data inserted successfully+");
@@ -139,7 +148,8 @@ app.route("/login").post((req, res) => {
       if (result) {
         if (result.password === password) {
           const token = generateToken(result.email, result._id);
-          res.cookie("token", token, { httpOnly: true }).json({ token: token });
+          //res.cookie("token", token, { httpOnly: true }).json({ token: token });
+          res.cookie("token", token).json({ token: token });
         } else {
           res.sendStatus(401).json({ error: "Incorrect password" });
         }
@@ -151,20 +161,6 @@ app.route("/login").post((req, res) => {
       console.log(err);
     });
 });
-
-//Testing route
-// app.route("/hello").get((req, res) => {
-//   //console.log(req.cookies.token);
-//   const receivedToken = req.cookies.token;
-//   const decodedToken = verifyToken(receivedToken, process.env.JWT_SECRET_KEY);
-//   if (decodedToken) {
-//     res.status(201).send("Access granted");
-//     //The decodedToken contains username and id
-//   } else {
-//     // Token is invalid or expired
-//     res.status(401).send("Access denied");
-//   }
-// });
 
 app.listen(3001, () => {
   console.log("Server started at port 3001");

@@ -3,8 +3,10 @@ import { TextField, Button } from "@mui/material";
 import { useRef, useEffect } from "react";
 import axios from "axios";
 import md5 from "md5";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -25,6 +27,7 @@ function Login() {
         console.log("Login Data Sent");
         if (res.status === 200) {
           console.log("You are logged in now");
+          navigate("/cvinput");
         }
       })
       .catch(function (err) {
@@ -52,6 +55,14 @@ function Login() {
         <Button variant="contained" type="button" onClick={handleLogin}>
           Submit
         </Button>
+        New to us? Create an account
+        <button
+          onClick={() => {
+            navigate("/register");
+          }}
+        >
+          Create Account
+        </button>
       </div>
     </>
   );

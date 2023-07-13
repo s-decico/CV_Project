@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useRecoilState, atom, RecoilState, RecoilRoot } from "recoil";
 import Header from "../Component/Header";
 import Navbar from "../Component/Navbar";
 import "./cv.css";
@@ -11,10 +10,8 @@ function CV() {
     <div>
       <Header />
       <div className="cv_area">
-        <RecoilRoot>
-          <CVInputBox />
-          <CVBox />
-        </RecoilRoot>
+        <CVInputBox />
+        <CVBox />
       </div>
     </div>
   );
