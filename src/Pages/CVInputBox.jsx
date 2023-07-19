@@ -21,17 +21,66 @@ import queryString from "query-string";
 import cookie from "js-cookie";
 
 function CVInputBox() {
+  let jsonData = {};
   const navigate = useNavigate();
   const token = cookie.get("token");
   useEffect(() => {
     if (token == null || token == undefined) {
-      console.log(token);
       setTimeout(() => {
         navigate("/login");
       }, 0);
     } else {
       setTimeout(() => {
         navigate("/cvinput");
+        const fetchData = async () => {
+          axios
+            .get("http://localhost:3001/fetchform", {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              withCredentials: true,
+            })
+            .then(function (res) {
+              if (res.status === 200) {
+                console.log("Received Data from Database");
+                //console.log(res);
+                jsonData = res.data;
+                console.log(jsonData);
+
+                if (jsonData != {}) {
+                  setUserDetails(jsonData.BasicDetails);
+                  setworkExperienceObj(jsonData.WorkExperience);
+                  setEducationObj(jsonData.Education);
+                  setProjectObj(jsonData.Project);
+                  setAchievementObj(jsonData.Achievement);
+                  setSkills(jsonData.Skills);
+                  setLanguage(jsonData.Language);
+                  setInterests(jsonData.Interest);
+                }
+                try {
+                  let workExpLength;
+                  if (jsonData.WorkExperience)
+                    workExpLength = Object.keys(jsonData.WorkExperience).length;
+                  // let educationLength = Object.keys(jsonData.Education).length;
+                  // let projectLength = Object.keys(jsonData.Project).length;
+                  // let achievementLength = Object.keys(
+                  //   jsonData.Achievement
+                  // ).length;
+                  for (let i = 0; i < workExpLength; i++) {}
+                } catch (err) {
+                  console.log(err);
+                }
+              }
+              //console.log(jsonData);
+            })
+            .catch(function (err) {
+              console.log(err);
+            });
+
+          //Set the fetched JSON values to the corresponding state variables
+        };
+
+        fetchData();
       }, 0);
     }
   }, [token]);
@@ -87,6 +136,41 @@ function CVInputBox() {
   const renderAchievement = (e) => {
     setAchievementComponent([...achievementComponent, {}]);
   };
+
+  // useEffect(() => {
+  //   if (token) {
+  //   }
+  //   const fetchData = async () => {
+  //     axios
+  //       .get("http://localhost:3001/fetchform", {
+  //         headers: {
+  //           "Content-Type": "application/x-www-form-urlencoded",
+  //         },
+  //         withCredentials: true,
+  //       })
+  //       .then(function (res) {
+  //         if (res.status === 200) {
+  //           console.log("Received Data from Database");
+  //           navigate("/cv");
+  //         }
+  //       })
+  //       .catch(function (err) {
+  //         console.log(err);
+  //       });
+
+  //     // Set the fetched JSON values to the corresponding state variables
+  //     setUserDetails(jsonData.BasicDetails);
+  //     setworkExperienceObj(JSON.parse(jsonData.WorkExperience));
+  //     setEducationObj(JSON.parse(jsonData.Education));
+  //     setProjectObj(JSON.parse(jsonData.Project));
+  //     setAchievementObj(JSON.parse(jsonData.Achievement));
+  //     setSkills(jsonData.Skills);
+  //     setLanguage(jsonData.Language);
+  //     setInterests(jsonData.Interest);
+  //   };
+
+  //   fetchData();
+  // }, [token]);
 
   //Handler functions
   //--------------------------------
@@ -215,6 +299,7 @@ function CVInputBox() {
             variant="outlined"
             type="text"
             name="fullname"
+            value={userDetails ? userDetails.fullname : ""}
             onChange={handleUserDetails}
           />
           <TextField
@@ -223,6 +308,7 @@ function CVInputBox() {
             variant="outlined"
             type="text"
             name="email"
+            value={userDetails ? userDetails.email : ""}
             onChange={handleUserDetails}
           />
         </span>
@@ -233,6 +319,7 @@ function CVInputBox() {
             variant="outlined"
             type="text"
             name="phno"
+            value={userDetails ? userDetails.phno : ""}
             onChange={handleUserDetails}
           />
 
@@ -242,6 +329,7 @@ function CVInputBox() {
             variant="outlined"
             type="text"
             name="address"
+            value={userDetails ? userDetails.address : ""}
             onChange={handleUserDetails}
           />
         </span>
@@ -252,6 +340,7 @@ function CVInputBox() {
             variant="outlined"
             type="text"
             name="linkedin"
+            value={userDetails ? userDetails.linkedin : ""}
             onChange={handleUserDetails}
           />
 
@@ -261,16 +350,19 @@ function CVInputBox() {
             variant="outlined"
             type="text"
             name="github"
+            value={userDetails ? userDetails.github : ""}
             onChange={handleUserDetails}
           />
         </span>
         <div className="formrow1c">
           Work Experience
-          {workExpComponent.map((obj, index) => {
+          {workExpComponent.map((handleWorkExpChange, index, value) => {
             return (
               <WorkExperienceInput
+                key={index}
                 handleWorkExpChange={handleWorkExpChange}
                 index={index}
+                value={workExperienceObj[index]}
               />
             );
           })}

@@ -3,10 +3,9 @@ import { useState } from "react";
 import { workExperienceAtom } from "../../Atoms/CVAtoms";
 import "../cv.css";
 import { TextField, Button } from "@mui/material";
-
-function WorkExperienceInput({ handleWorkExpChange, index }) {
-  const [workExperience, setWorkExperience] = useState([]);
-
+//handleWorkExpChange, index, value
+function WorkExperienceInput({ handleWorkExpChange, index, value }) {
+  console.log(value);
   return (
     <>
       <TextField
@@ -15,6 +14,7 @@ function WorkExperienceInput({ handleWorkExpChange, index }) {
         variant="outlined"
         type="text"
         name="designation"
+        value={value ? value.designation : ""}
         onChange={(event) => {
           handleWorkExpChange(event, index);
         }}
@@ -26,6 +26,7 @@ function WorkExperienceInput({ handleWorkExpChange, index }) {
         variant="outlined"
         type="text"
         name="companyname"
+        value={value ? value.companyname : ""}
         onChange={(event) => {
           handleWorkExpChange(event, index);
         }}

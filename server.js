@@ -10,6 +10,7 @@ const app = express();
 const request = require("request");
 const https = require("https");
 const querystring = require("querystring");
+const { decode } = require("punycode");
 
 app.use(cors());
 app.use("/public", express.static("public"));
@@ -63,7 +64,7 @@ function generateToken(username, id) {
     id: id,
     username: username,
   };
-  console.log(userData);
+  //console.log(userData);
   const token = jwt.sign(userData, secretKey);
   return token;
 }
@@ -111,16 +112,38 @@ app.route("/cvinput").post((req, res) => {
       parsedObject.Project = JSON.parse(parsedObject.Project);
       parsedObject.Achievement = JSON.parse(parsedObject.Achievement);
       parsedObject["UserID"] = decodedToken.id != null ? decodedToken.id : "";
-      //console.log(parsedObject);
-      UserDetails.insertMany(parsedObject)
-        .then(() => {
-          console.log("Data inserted successfully+");
-          res.sendStatus(200);
-        })
-        .catch((err) => {
-          console.log("Error while inserting:" + err);
-          res.sendStatus(500);
-        });
+
+      if (decodedToken) {
+        UserDetails.findOne({ UserID: decodedToken.id })
+          .then(
+            (response = {
+              if(response) {
+                UserDetails.UpdateOne({ UserID: decodedToken.id }, parsedObject)
+                  .then((res) => {
+                    res.sendStatus(200);
+                    console.log("Successfully updated existing data");
+                  })
+                  .catch((err) => {
+                    console.log(err + ":User not found");
+                    res.sendStatus(500);
+                  });
+              },
+            })
+          )
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        UserDetails.insertMany(parsedObject)
+          .then(() => {
+            console.log("Data inserted successfully+");
+            res.sendStatus(200);
+          })
+          .catch((err) => {
+            console.log("Error while inserting:" + err);
+            res.sendStatus(500);
+          });
+      }
     } else res.send("Success");
   } catch (err) {
     console.log(err);
@@ -142,7 +165,7 @@ app.route("/register").post((req, res) => {
 
 app.route("/login").post((req, res) => {
   const { email, password } = req.body;
-  console.log(req.cookies.token);
+  //console.log(req.cookies.token);
   UserCred.findOne({ email: email })
     .then((result) => {
       if (result) {
@@ -160,6 +183,22 @@ app.route("/login").post((req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+app.route("/fetchform").get((req, res) => {
+  const token = req.cookies.token;
+  if (token) {
+    console.log(token);
+    decodedToken = verifyToken(token, process.env.JWT_SECRET_KEY);
+    UserDetails.findOne({ UserID: decodedToken.id })
+      .then((result) => {
+        console.log("Found User");
+        res.json(result);
+      })
+      .catch((err) => {
+        console.log("No details found:" + err);
+      });
+  }
 });
 
 app.listen(3001, () => {
