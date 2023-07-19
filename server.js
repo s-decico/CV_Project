@@ -112,7 +112,7 @@ app.route("/cvinput").post((req, res) => {
       parsedObject.Project = JSON.parse(parsedObject.Project);
       parsedObject.Achievement = JSON.parse(parsedObject.Achievement);
       parsedObject["UserID"] = decodedToken.id != null ? decodedToken.id : "";
-
+      console.log(decodedToken);
       if (decodedToken) {
         UserDetails.findOne({ UserID: decodedToken.id })
           .then(
@@ -144,6 +144,15 @@ app.route("/cvinput").post((req, res) => {
             res.sendStatus(500);
           });
       }
+      UserDetails.insertMany(parsedObject)
+        .then(() => {
+          console.log("Data inserted successfully+");
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log("Error while inserting:" + err);
+          res.sendStatus(500);
+        });
     } else res.send("Success");
   } catch (err) {
     console.log(err);
