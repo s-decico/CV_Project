@@ -16,7 +16,7 @@ import ProjectsInput from "./InputComponents/ProjectsInput";
 import SkillsInput from "./InputComponents/SkillsInput";
 import WorkExperienceInput from "./InputComponents/WorkExperienceInput";
 import { TextField, Button } from "@mui/material";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import queryString from "query-string";
 import cookie from "js-cookie";
 
@@ -136,41 +136,6 @@ function CVInputBox() {
   const renderAchievement = (e) => {
     setAchievementComponent([...achievementComponent, {}]);
   };
-
-  // useEffect(() => {
-  //   if (token) {
-  //   }
-  //   const fetchData = async () => {
-  //     axios
-  //       .get("http://localhost:3001/fetchform", {
-  //         headers: {
-  //           "Content-Type": "application/x-www-form-urlencoded",
-  //         },
-  //         withCredentials: true,
-  //       })
-  //       .then(function (res) {
-  //         if (res.status === 200) {
-  //           console.log("Received Data from Database");
-  //           navigate("/cv");
-  //         }
-  //       })
-  //       .catch(function (err) {
-  //         console.log(err);
-  //       });
-
-  //     // Set the fetched JSON values to the corresponding state variables
-  //     setUserDetails(jsonData.BasicDetails);
-  //     setworkExperienceObj(JSON.parse(jsonData.WorkExperience));
-  //     setEducationObj(JSON.parse(jsonData.Education));
-  //     setProjectObj(JSON.parse(jsonData.Project));
-  //     setAchievementObj(JSON.parse(jsonData.Achievement));
-  //     setSkills(jsonData.Skills);
-  //     setLanguage(jsonData.Language);
-  //     setInterests(jsonData.Interest);
-  //   };
-
-  //   fetchData();
-  // }, [token]);
 
   //Handler functions
   //--------------------------------
@@ -356,7 +321,7 @@ function CVInputBox() {
         </span>
         <div className="formrow1c">
           Work Experience
-          {workExpComponent.map((handleWorkExpChange, index, value) => {
+          {workExpComponent.map((obj, index) => {
             return (
               <WorkExperienceInput
                 key={index}
@@ -379,8 +344,10 @@ function CVInputBox() {
           {educationComponent.map((obj, index) => {
             return (
               <EducationInput
+                key={index}
                 handleEducationChange={handleEducationChange}
                 index={index}
+                value={educationObj[index]}
               />
             );
           })}
@@ -405,6 +372,7 @@ function CVInputBox() {
                 index={index}
                 setProjectObj={setProjectObj}
                 projectObj={projectObj}
+                value={projectObj[index]}
               />
             );
           })}
@@ -419,6 +387,7 @@ function CVInputBox() {
               <AchievementInput
                 handleAchievementChange={handleAchievementChange}
                 index={index}
+                value={achievementObj[index]}
               />
             );
           })}
