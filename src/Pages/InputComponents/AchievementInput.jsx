@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 
-function AchievementInput({ handleAchievementChange, index }) {
+function AchievementInput({ handleAchievementChange, index, value }) {
   return (
     <>
       <TextField
@@ -10,6 +10,7 @@ function AchievementInput({ handleAchievementChange, index }) {
         variant="outlined"
         type="text"
         name="title"
+        value={value ? value.title : ""}
         onChange={(event) => {
           handleAchievementChange(event, index);
         }}
@@ -21,6 +22,7 @@ function AchievementInput({ handleAchievementChange, index }) {
         variant="outlined"
         type="text"
         name="subtitle"
+        value={value ? value.subtitle : ""}
         onChange={(event) => {
           handleAchievementChange(event, index);
         }}

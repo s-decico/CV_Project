@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 
-function ProjectsInput({ index, setProjectObj, projectObj }) {
+function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const [_projectname, setProjectname] = useState("");
   const [_projectyear, setProjectyear] = useState("");
   let tempobj = {};
@@ -56,6 +56,7 @@ function ProjectsInput({ index, setProjectObj, projectObj }) {
         variant="outlined"
         type="text"
         name="projectname"
+        value={value ? value.projectname : ""}
         onChange={(event) => {
           handleProjectChange(event);
         }}
@@ -67,6 +68,7 @@ function ProjectsInput({ index, setProjectObj, projectObj }) {
         variant="outlined"
         type="text"
         name="projectyear"
+        value={value ? value.projectyear : ""}
         onChange={(event) => {
           handleProjectChange(event);
         }}
@@ -84,6 +86,7 @@ function ProjectsInput({ index, setProjectObj, projectObj }) {
             variant="standard"
             type="text"
             name="details"
+            value={value ? value.details[index] : ""}
             onChange={(e) => {
               handleDetailsChange(e, index);
             }}

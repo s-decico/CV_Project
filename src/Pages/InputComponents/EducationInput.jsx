@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
 
-function EducationInput({ handleEducationChange, index }) {
+function EducationInput({ handleEducationChange, index, value }) {
   return (
     <>
       <TextField
@@ -10,6 +10,7 @@ function EducationInput({ handleEducationChange, index }) {
         variant="outlined"
         type="text"
         name="qualification"
+        value={value ? value.qualification : ""}
         onChange={(event) => {
           handleEducationChange(event, index);
         }}
@@ -21,6 +22,7 @@ function EducationInput({ handleEducationChange, index }) {
         variant="outlined"
         type="text"
         name="school"
+        value={value ? value.school : ""}
         onChange={(event) => {
           handleEducationChange(event, index);
         }}
@@ -32,6 +34,7 @@ function EducationInput({ handleEducationChange, index }) {
         variant="outlined"
         type="text"
         name="doj"
+        value={value ? value.doj : ""}
         onChange={(event) => {
           handleEducationChange(event, index);
         }}

@@ -3,9 +3,8 @@ import { useState } from "react";
 import { workExperienceAtom } from "../../Atoms/CVAtoms";
 import "../cv.css";
 import { TextField, Button } from "@mui/material";
-//handleWorkExpChange, index, value
+
 function WorkExperienceInput({ handleWorkExpChange, index, value }) {
-  console.log(value);
   return (
     <>
       <TextField

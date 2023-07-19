@@ -10,7 +10,6 @@ const app = express();
 const request = require("request");
 const https = require("https");
 const querystring = require("querystring");
-const { decode } = require("punycode");
 
 app.use(cors());
 app.use("/public", express.static("public"));
@@ -106,6 +105,7 @@ app.route("/cvinput").post((req, res) => {
       //console.log(decodedToken.id);
 
       const parsedObject = JSON.parse(jsonString);
+      console.log(parsedObject);
       parsedObject.BasicDetails = JSON.parse(parsedObject.BasicDetails);
       parsedObject.WorkExperience = JSON.parse(parsedObject.WorkExperience);
       parsedObject.Education = JSON.parse(parsedObject.Education);
