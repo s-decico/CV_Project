@@ -9,7 +9,7 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const [_details, setDetails] = useState([]);
   const [detailsComponent, setDetailsComponent] = useState([]);
   let detailsarr = [];
-
+  console.log(value);
   const handleProjectChange = (event, __details) => {
     const { name, value } = event.target;
     let fieldName = name;
@@ -31,11 +31,10 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
     }
 
     setProjectObj(tempobj);
-    console.log(tempobj);
   };
 
   const handleAdd = () => {
-    let temp = [...detailsComponent, []];
+    let temp = [...detailsComponent, ""];
     setDetailsComponent(temp);
   };
 

@@ -59,16 +59,33 @@ function CVInputBox() {
                 }
                 try {
                   let workExpLength;
+                  let educationLength;
+                  let projectLength;
+                  let achievementLength;
                   if (jsonData.WorkExperience)
                     workExpLength = Object.keys(jsonData.WorkExperience).length;
-                  // let educationLength = Object.keys(jsonData.Education).length;
-                  // let projectLength = Object.keys(jsonData.Project).length;
-                  // let achievementLength = Object.keys(
-                  //   jsonData.Achievement
-                  // ).length;
-                  for (let i = 0; i < workExpLength; i++) {}
+                  if (jsonData.Education)
+                    educationLength = Object.keys(jsonData.Education).length;
+                  if (jsonData.Project)
+                    projectLength = Object.keys(jsonData.Project).length;
+                  if (jsonData.Achievement)
+                    achievementLength = Object.keys(
+                      jsonData.Achievement
+                    ).length;
+                  for (let i = 0; i < workExpLength; i++) {
+                    renderWorkExperience();
+                  }
+                  for (let i = 0; i < educationLength; i++) {
+                    renderEducation();
+                  }
+                  for (let i = 0; i < projectLength; i++) {
+                    renderProjects();
+                  }
+                  for (let i = 0; i < achievementLength; i++) {
+                    renderAchievement();
+                  }
                 } catch (err) {
-                  console.log(err);
+                  console.log("Error in autorendering: " + err);
                 }
               }
               //console.log(jsonData);

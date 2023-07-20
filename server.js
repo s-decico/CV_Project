@@ -114,29 +114,28 @@ app.route("/cvinput").post((req, res) => {
       parsedObject["UserID"] = decodedToken.id != null ? decodedToken.id : "";
       console.log(decodedToken);
       if (decodedToken) {
+        console.log(parsedObject["UserID"] + ":" + decodedToken.id);
         UserDetails.findOne({ UserID: decodedToken.id })
-          .then(
-            (response = {
-              if(response) {
-                UserDetails.UpdateOne({ UserID: decodedToken.id }, parsedObject)
-                  .then((res) => {
-                    res.sendStatus(200);
-                    console.log("Successfully updated existing data");
-                  })
-                  .catch((err) => {
-                    console.log(err + ":User not found");
-                    res.sendStatus(500);
-                  });
-              },
-            })
-          )
+          .then((response) => {
+            if (response) {
+              UserDetails.updateOne({ UserID: decodedToken.id }, parsedObject)
+                .then((result) => {
+                  res.status(200).send("Okay");
+                  console.log("Successfully updated existing data");
+                })
+                .catch((err) => {
+                  console.log("Error in updateOne function:" + err);
+                  res.status(500).send("Server error");
+                });
+            }
+          })
           .catch((err) => {
             console.log(err);
           });
       } else {
         UserDetails.insertMany(parsedObject)
           .then(() => {
-            console.log("Data inserted successfully+");
+            console.log("Data inserted successfully");
             res.sendStatus(200);
           })
           .catch((err) => {
@@ -144,15 +143,6 @@ app.route("/cvinput").post((req, res) => {
             res.sendStatus(500);
           });
       }
-      UserDetails.insertMany(parsedObject)
-        .then(() => {
-          console.log("Data inserted successfully+");
-          res.sendStatus(200);
-        })
-        .catch((err) => {
-          console.log("Error while inserting:" + err);
-          res.sendStatus(500);
-        });
     } else res.send("Success");
   } catch (err) {
     console.log(err);
