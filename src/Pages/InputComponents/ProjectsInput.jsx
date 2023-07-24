@@ -85,7 +85,7 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
             variant="standard"
             type="text"
             name="details"
-            value={value ? value.details[index] : ""}
+            value={value && value.details ? value.details[index] : ""}
             onChange={(e) => {
               handleDetailsChange(e, index);
             }}

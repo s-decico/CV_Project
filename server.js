@@ -11,7 +11,7 @@ const request = require("request");
 const https = require("https");
 const querystring = require("querystring");
 
-app.use(cors());
+//app.use(cors());
 app.use("/public", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -92,11 +92,11 @@ app.route("/cvinput").post((req, res) => {
   let decodedToken = "";
   try {
     if (req) {
-      const obj = req.body;
-      let jsonString = "";
-      for (const key in obj) {
-        jsonString += obj[key];
-      }
+      // const obj = req.body;
+      // let jsonString = "";
+      // for (const key in obj) {
+      //   jsonString += obj[key];
+      // }
       if (req.cookies.token) {
         const receivedToken = req.cookies.token;
         decodedToken = verifyToken(receivedToken, process.env.JWT_SECRET_KEY);
@@ -104,20 +104,23 @@ app.route("/cvinput").post((req, res) => {
 
       //console.log(decodedToken.id);
 
-      const parsedObject = JSON.parse(jsonString);
+      const parsedObject = req.body;
       console.log(parsedObject);
-      parsedObject.BasicDetails = JSON.parse(parsedObject.BasicDetails);
-      parsedObject.WorkExperience = JSON.parse(parsedObject.WorkExperience);
-      parsedObject.Education = JSON.parse(parsedObject.Education);
-      parsedObject.Project = JSON.parse(parsedObject.Project);
-      parsedObject.Achievement = JSON.parse(parsedObject.Achievement);
+      // console.log(parsedObject);
+      // parsedObject.BasicDetails = JSON.parse(parsedObject.BasicDetails);
+      // parsedObject.WorkExperience = JSON.parse(parsedObject.WorkExperience);
+      // parsedObject.Education = JSON.parse(parsedObject.Education);
+      // parsedObject.Project = JSON.parse(parsedObject.Project);
+      // parsedObject.Achievement = JSON.parse(parsedObject.Achievement);
       parsedObject["UserID"] = decodedToken.id != null ? decodedToken.id : "";
-      console.log(decodedToken);
+      console.log("token:" + decodedToken.id);
       if (decodedToken) {
         console.log(parsedObject["UserID"] + ":" + decodedToken.id);
         UserDetails.findOne({ UserID: decodedToken.id })
           .then((response) => {
+            console.log(response);
             if (response) {
+              console.log("I'm in");
               UserDetails.updateOne({ UserID: decodedToken.id }, parsedObject)
                 .then((result) => {
                   res.status(200).send("Okay");

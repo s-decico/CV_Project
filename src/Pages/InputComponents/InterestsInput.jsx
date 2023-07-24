@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 
 function InterestsInput({ interests, setInterests }) {
-  let tempinterests = "";
+  const [inputValue, setInputValue] = useState("");
   return (
     <>
       Interests
@@ -16,15 +16,17 @@ function InterestsInput({ interests, setInterests }) {
         label="Type your interests"
         variant="outlined"
         type="text"
+        value={inputValue}
         onChange={(e) => {
-          tempinterests = e.target.value;
+          setInputValue(e.target.value);
         }}
       />
       <Button
         variant="outlined"
         type="button"
         onClick={() => {
-          setInterests([...interests, tempinterests]);
+          setInterests([...interests, inputValue]);
+          setInputValue("");
         }}
       >
         +

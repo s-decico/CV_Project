@@ -224,16 +224,10 @@ function CVInputBox() {
   };
 
   const sendDataToServer = (tempobj) => {
-    const stringy = JSON.stringify(tempobj);
-    const encodedData = queryString.stringify(stringy, null, null, {
-      encodeURIComponent: queryString.unescape,
-      allowDots: true,
-    });
-
     axios
-      .post("http://localhost:3001/cvinput", encodedData, {
+      .post("http://localhost:3001/cvinput", tempobj, {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
         },
         withCredentials: true,
       })
@@ -261,11 +255,6 @@ function CVInputBox() {
     };
     setfullDetails(tempobj);
 
-    tempobj.BasicDetails = JSON.stringify(userDetails);
-    tempobj.WorkExperience = JSON.stringify(workExperienceObj);
-    tempobj.Education = JSON.stringify(educationObj);
-    tempobj.Project = JSON.stringify(projectObj);
-    tempobj.Achievement = JSON.stringify(achievementObj);
     sendDataToServer(tempobj);
   };
 

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 
 function LanguageInput({ language, setLanguage }) {
-  let templanguage = "";
+  const [inputValue, setInputValue] = useState("");
+
   return (
     <>
       Languages
@@ -16,15 +17,17 @@ function LanguageInput({ language, setLanguage }) {
         label="Language"
         variant="outlined"
         type="text"
+        value={inputValue}
         onChange={(e) => {
-          templanguage = e.target.value;
+          setInputValue(e.target.value);
         }}
       />
       <Button
         variant="outlined"
         type="button"
         onClick={() => {
-          setLanguage([...language, templanguage]);
+          setLanguage([...language, inputValue]);
+          setInputValue("");
         }}
       >
         +
