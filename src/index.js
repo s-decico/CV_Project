@@ -17,12 +17,12 @@ import {
 import CVInputBox from "./Pages/CVInputBox";
 import { dividerClasses } from "@mui/material";
 import CVBox from "./Pages/CVBox";
-import { AuthContext } from "./AuthContext";
+import { AuthContext, AuthProvider } from "./AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContext.Provider>
+    <AuthProvider>
       <Router>
         <ThemeProvider theme={MuiThemeContext}>
           <Routes>
@@ -34,6 +34,6 @@ root.render(
           </Routes>
         </ThemeProvider>
       </Router>
-    </AuthContext.Provider>
+    </AuthProvider>
   </React.StrictMode>
 );

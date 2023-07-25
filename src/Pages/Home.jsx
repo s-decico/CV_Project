@@ -16,7 +16,6 @@ import Typography from "@mui/material/Typography";
 import { AuthContext } from "../AuthContext";
 
 function Home() {
-  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   return (
     <div className="home">
@@ -25,7 +24,7 @@ function Home() {
         <p>
           WANT TO CREATE A <span>NEW CV</span>
           <br />
-          <div>THAT GETS YOU YOUR</div>
+          THAT GETS YOU YOUR
           <br />
           <span>DREAM JOB?</span>
         </p>

@@ -1,22 +1,27 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 import axios from "axios";
 import md5 from "md5";
 import { useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
+import { styled } from "@mui/material/styles";
+import { AuthProvider, AuthContext } from "../../AuthContext";
+import Navbar from "../../Component/Navbar";
+import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function Login() {
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const token = cookie.get("token");
+  const { isAuthenticated } = useContext(AuthContext);
+
   useEffect(() => {
-    if (!(token == null || token == undefined)) {
+    if (isAuthenticated) {
       navigate("/cvinput");
     }
-  }, [token]);
+  }, []);
 
   const handleLogin = () => {
     const _email = emailRef.current.value;
@@ -45,32 +50,40 @@ function Login() {
 
   return (
     <>
-      <div>
-        <TextField
+      <Navbar />
+      <div className="login_container">
+        <WhiteTextField
           label="Email"
           variant="outlined"
           type="text"
           name="email"
           inputRef={emailRef}
+          sx={{ width: "100%" }}
         />
-        <TextField
+        <WhiteTextField
           label="Password"
           variant="outlined"
           type="password"
           name="password"
           inputRef={passwordRef}
+          sx={{ width: "100%" }}
         />
-        <Button variant="contained" type="button" onClick={handleLogin}>
+        <GradientButton
+          variant="contained"
+          type="button"
+          onClick={handleLogin}
+          sx={{ width: "100%" }}
+        >
           Submit
-        </Button>
+        </GradientButton>
         New to us? Create an account
-        <button
+        <GradientButton
           onClick={() => {
             navigate("/register");
           }}
         >
           Create Account
-        </button>
+        </GradientButton>
       </div>
     </>
   );
