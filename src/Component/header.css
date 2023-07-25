@@ -1,10 +1,18 @@
 /*
 Colour Palette
-FFF1DC: Background
-EEEEEE : Secondary
-E8D5C4
-Accent: 3A98B9
+#F6F4EB: Background
+#91C8E4 : Secondary
+Elements: #749BC2
+Accent: #4682A9
 */
+
+.colour_scheme{
+    color:#F6F4EB
+#91C8E4
+#749BC2
+#4682A9
+}
+
 
 *{
     box-sizing: border-box;

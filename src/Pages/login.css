@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+input:-webkit-autofill {
+    color: white !important;
+    background-color: transparent !important;
+  }
+
+.reg_container{
+  padding: 2rem 4rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;  
+    width: 30%;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 1rem;
+    margin-top: 5rem;
+    backdrop-filter: blur(10px);
+    background-color: rgba(116, 155, 194, 0.3);
+    color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3)
+}
+
+

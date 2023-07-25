@@ -17,20 +17,23 @@ import {
 import CVInputBox from "./Pages/CVInputBox";
 import { dividerClasses } from "@mui/material";
 import CVBox from "./Pages/CVBox";
+import { AuthContext } from "./AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router>
-      <ThemeProvider theme={MuiThemeContext}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cvinput" element={<CVInputBox />} />
-          <Route path="/cv" element={<CVBox />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
-        </Routes>
-      </ThemeProvider>
-    </Router>
+    <AuthContext.Provider>
+      <Router>
+        <ThemeProvider theme={MuiThemeContext}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cvinput" element={<CVInputBox />} />
+            <Route path="/cv" element={<CVBox />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Registration />} />
+          </Routes>
+        </ThemeProvider>
+      </Router>
+    </AuthContext.Provider>
   </React.StrictMode>
 );
