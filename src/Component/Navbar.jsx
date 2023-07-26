@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,12 +18,15 @@ import ListItem from "@mui/material/ListItem";
 import { AuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { GradientButton } from "../MUIStyledComponents";
+import cookie from "js-cookie";
 
 const pages = ["Home", "My CV", "Tips", "Contact Us"];
 const settings = ["My CV", "Logout"];
 
 function Navbar() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -42,6 +45,13 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = () => {
+    console.log("Logout");
+    cookie.remove("token");
+    setIsAuthenticated(false);
+    navigate("/");
   };
 
   const navbarSwitch = (key) => {
@@ -210,7 +220,13 @@ function Navbar() {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem
+                      key={setting}
+                      onClick={() => {
+                        handleCloseUserMenu();
+                        if (setting === "Logout") handleLogout();
+                      }}
+                    >
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}

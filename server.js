@@ -180,13 +180,12 @@ app.route("/login").post((req, res) => {
       if (result) {
         if (result.password === password) {
           const token = generateToken(result.email, result._id);
-          //res.cookie("token", token, { httpOnly: true }).json({ token: token });
-          res.cookie("token", token).json({ token: token });
+          res.status(200).cookie("token", token).json({ token: token });
         } else {
-          res.sendStatus(401).json({ error: "Incorrect password" });
+          res.status(401).json({ error: "Incorrect password" });
         }
       } else {
-        res.sendStatus(404).json({ error: "User not found" });
+        res.status(404).json({ error: "User not found" });
       }
     })
     .catch((err) => {

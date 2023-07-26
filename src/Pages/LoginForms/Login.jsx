@@ -1,6 +1,6 @@
 import React from "react";
-import { TextField, Button } from "@mui/material";
-import { useRef, useEffect, useContext } from "react";
+import { TextField, Button, CircularProgress } from "@mui/material";
+import { useRef, useEffect, useContext, useState } from "react";
 import axios from "axios";
 import md5 from "md5";
 import { useNavigate } from "react-router-dom";
@@ -12,42 +12,78 @@ import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function Login() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useContext(AuthContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-
-  const { isAuthenticated } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
+  const [userNotFound, setUserNotFound] = useState(false);
+  const [emptyEmail, setEmptyEmail] = useState(false);
+  const [emptyPassword, setEmptyPassword] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/cvinput");
     }
-  }, []);
+  }, [isAuthenticated]);
 
   const handleLogin = () => {
+    setPasswordIncorrect(false);
+    setUserNotFound(false);
+    setEmptyEmail(false);
+    setEmptyPassword(false);
+
     const _email = emailRef.current.value;
     const _password = passwordRef.current.value;
-    let UserData = { email: _email, password: md5(_password) };
 
-    axios
-      .post("http://localhost:3001/login", UserData, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          // "Access-Control-Allow-Credentials": true,
-        },
-        withCredentials: true,
-      })
-      .then(function (res) {
-        console.log("Login Data Sent");
-        if (res.status === 200) {
-          console.log("You are logged in now");
-          navigate("/cvinput");
-        }
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
+    if (_email && _password) {
+      setLoading(true);
+      let UserData = { email: _email, password: md5(_password) };
+
+      axios
+        .post("http://localhost:3001/login", UserData, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          withCredentials: true,
+        })
+        .then(function (res) {
+          console.log(res.status);
+          console.log("Login Data Sent");
+          switch (res.status) {
+            case 200:
+              console.log("You are logged in now");
+              navigate("/cvinput");
+              break;
+            default:
+              console.log("Unexpected response");
+              break;
+          }
+        })
+        .catch(function (err) {
+          console.log(err.response.status);
+          switch (err.response.status) {
+            case 401:
+              console.log("Incorrect Password");
+              setPasswordIncorrect(true);
+              break;
+            case 404:
+              console.log("User not found");
+              setUserNotFound(true);
+              break;
+            default:
+              console.log("Unexpected response");
+              break;
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      if (!_email) setEmptyEmail(true);
+      if (!_password) setEmptyPassword(true);
+    }
   };
-
   return (
     <>
       <Navbar />
@@ -55,9 +91,17 @@ function Login() {
         <WhiteTextField
           label="Email"
           variant="outlined"
-          type="text"
+          type="email"
           name="email"
           inputRef={emailRef}
+          error={userNotFound || emptyEmail}
+          helperText={
+            userNotFound
+              ? "User not found, incorrect email"
+              : emptyEmail
+              ? "Email cannot be empty"
+              : ""
+          }
           sx={{ width: "100%" }}
         />
         <WhiteTextField
@@ -66,6 +110,14 @@ function Login() {
           type="password"
           name="password"
           inputRef={passwordRef}
+          error={userNotFound || passwordIncorrect || emptyPassword}
+          helperText={
+            passwordIncorrect
+              ? "Incorrect password"
+              : emptyPassword
+              ? "Password cannot be empty"
+              : ""
+          }
           sx={{ width: "100%" }}
         />
         <GradientButton
@@ -74,7 +126,11 @@ function Login() {
           onClick={handleLogin}
           sx={{ width: "100%" }}
         >
-          Submit
+          {loading ? (
+            <CircularProgress size={24} sx={{ color: "#FFF" }} />
+          ) : (
+            "Submit"
+          )}
         </GradientButton>
         New to us? Create an account
         <GradientButton

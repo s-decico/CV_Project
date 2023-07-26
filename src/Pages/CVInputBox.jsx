@@ -19,6 +19,7 @@ import { TextField, Button } from "@mui/material";
 import axios from "axios";
 import queryString from "query-string";
 import cookie from "js-cookie";
+import Navbar from "../Component/Navbar";
 
 function CVInputBox() {
   let jsonData = {};
@@ -260,153 +261,160 @@ function CVInputBox() {
 
   //Render function
   return (
-    <div className="input_box">
-      <div className="input_heading">Fill in the details</div>
-      <form action="/" className="cvinputform" method="post">
-        <span className="formrow2c">
-          <TextField
-            id="outlined-basic"
-            label="Full Name"
-            variant="outlined"
-            type="text"
-            name="fullname"
-            value={userDetails ? userDetails.fullname : ""}
-            onChange={handleUserDetails}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            type="text"
-            name="email"
-            value={userDetails ? userDetails.email : ""}
-            onChange={handleUserDetails}
-          />
-        </span>
-        <span className="formrow2c">
-          <TextField
-            id="outlined-basic"
-            label="Phone no"
-            variant="outlined"
-            type="text"
-            name="phno"
-            value={userDetails ? userDetails.phno : ""}
-            onChange={handleUserDetails}
-          />
+    <>
+      <Navbar />
+      <div className="input_box">
+        <div className="input_heading">Fill in the details</div>
+        <form action="/" className="cvinputform" method="post">
+          <span className="formrow2c">
+            <TextField
+              id="outlined-basic"
+              label="Full Name"
+              variant="outlined"
+              type="text"
+              name="fullname"
+              value={userDetails ? userDetails.fullname : ""}
+              onChange={handleUserDetails}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              type="text"
+              name="email"
+              value={userDetails ? userDetails.email : ""}
+              onChange={handleUserDetails}
+            />
+          </span>
+          <span className="formrow2c">
+            <TextField
+              id="outlined-basic"
+              label="Phone no"
+              variant="outlined"
+              type="text"
+              name="phno"
+              value={userDetails ? userDetails.phno : ""}
+              onChange={handleUserDetails}
+            />
 
-          <TextField
-            id="outlined-basic"
-            label="Address"
-            variant="outlined"
-            type="text"
-            name="address"
-            value={userDetails ? userDetails.address : ""}
-            onChange={handleUserDetails}
-          />
-        </span>
-        <span className="formrow2c">
-          <TextField
-            id="outlined-basic"
-            label="LinkedIn"
-            variant="outlined"
-            type="text"
-            name="linkedin"
-            value={userDetails ? userDetails.linkedin : ""}
-            onChange={handleUserDetails}
-          />
+            <TextField
+              id="outlined-basic"
+              label="Address"
+              variant="outlined"
+              type="text"
+              name="address"
+              value={userDetails ? userDetails.address : ""}
+              onChange={handleUserDetails}
+            />
+          </span>
+          <span className="formrow2c">
+            <TextField
+              id="outlined-basic"
+              label="LinkedIn"
+              variant="outlined"
+              type="text"
+              name="linkedin"
+              value={userDetails ? userDetails.linkedin : ""}
+              onChange={handleUserDetails}
+            />
 
-          <TextField
-            id="outlined-basic"
-            label="Github"
-            variant="outlined"
-            type="text"
-            name="github"
-            value={userDetails ? userDetails.github : ""}
-            onChange={handleUserDetails}
-          />
-        </span>
-        <div className="formrow1c">
-          Work Experience
-          {workExpComponent.map((obj, index) => {
-            return (
-              <WorkExperienceInput
-                key={index}
-                handleWorkExpChange={handleWorkExpChange}
-                index={index}
-                value={workExperienceObj[index]}
-              />
-            );
-          })}
-          <Button
-            variant="outlined"
-            type="button"
-            onClick={renderWorkExperience}
-          >
-            +
-          </Button>
-        </div>
-        <div className="formrow1c">
-          Education
-          {educationComponent.map((obj, index) => {
-            return (
-              <EducationInput
-                key={index}
-                handleEducationChange={handleEducationChange}
-                index={index}
-                value={educationObj[index]}
-              />
-            );
-          })}
-          <Button variant="outlined" type="button" onClick={renderEducation}>
-            +
-          </Button>
-        </div>
-        <div className="formrow1c">
-          <SkillsInput skills={skills} setSkills={setSkills} />
-        </div>
-        <div className="formrow1c">
-          <LanguageInput language={language} setLanguage={setLanguage} />
-        </div>
-        <div className="formrow1c">
-          <InterestsInput interests={interests} setInterests={setInterests} />
-        </div>
-        <div className="formrow1c">
-          Projects
-          {projectsComponent.map((obj, index) => {
-            return (
-              <ProjectsInput
-                index={index}
-                setProjectObj={setProjectObj}
-                projectObj={projectObj}
-                value={projectObj[index]}
-              />
-            );
-          })}
-          <Button variant="outlined" type="button" onClick={renderProjects}>
-            +
-          </Button>
-        </div>
-        <div className="formrow1c">
-          Achievement
-          {achievementComponent.map((obj, index) => {
-            return (
-              <AchievementInput
-                handleAchievementChange={handleAchievementChange}
-                index={index}
-                value={achievementObj[index]}
-              />
-            );
-          })}
-          <Button variant="outlined" type="button" onClick={renderAchievement}>
-            +
-          </Button>
-        </div>
+            <TextField
+              id="outlined-basic"
+              label="Github"
+              variant="outlined"
+              type="text"
+              name="github"
+              value={userDetails ? userDetails.github : ""}
+              onChange={handleUserDetails}
+            />
+          </span>
+          <div className="formrow1c">
+            Work Experience
+            {workExpComponent.map((obj, index) => {
+              return (
+                <WorkExperienceInput
+                  key={index}
+                  handleWorkExpChange={handleWorkExpChange}
+                  index={index}
+                  value={workExperienceObj[index]}
+                />
+              );
+            })}
+            <Button
+              variant="outlined"
+              type="button"
+              onClick={renderWorkExperience}
+            >
+              +
+            </Button>
+          </div>
+          <div className="formrow1c">
+            Education
+            {educationComponent.map((obj, index) => {
+              return (
+                <EducationInput
+                  key={index}
+                  handleEducationChange={handleEducationChange}
+                  index={index}
+                  value={educationObj[index]}
+                />
+              );
+            })}
+            <Button variant="outlined" type="button" onClick={renderEducation}>
+              +
+            </Button>
+          </div>
+          <div className="formrow1c">
+            <SkillsInput skills={skills} setSkills={setSkills} />
+          </div>
+          <div className="formrow1c">
+            <LanguageInput language={language} setLanguage={setLanguage} />
+          </div>
+          <div className="formrow1c">
+            <InterestsInput interests={interests} setInterests={setInterests} />
+          </div>
+          <div className="formrow1c">
+            Projects
+            {projectsComponent.map((obj, index) => {
+              return (
+                <ProjectsInput
+                  index={index}
+                  setProjectObj={setProjectObj}
+                  projectObj={projectObj}
+                  value={projectObj[index]}
+                />
+              );
+            })}
+            <Button variant="outlined" type="button" onClick={renderProjects}>
+              +
+            </Button>
+          </div>
+          <div className="formrow1c">
+            Achievement
+            {achievementComponent.map((obj, index) => {
+              return (
+                <AchievementInput
+                  handleAchievementChange={handleAchievementChange}
+                  index={index}
+                  value={achievementObj[index]}
+                />
+              );
+            })}
+            <Button
+              variant="outlined"
+              type="button"
+              onClick={renderAchievement}
+            >
+              +
+            </Button>
+          </div>
 
-        <Button variant="contained" type="button" onClick={handleFormSubmit}>
-          Submit
-        </Button>
-      </form>
-    </div>
+          <Button variant="contained" type="button" onClick={handleFormSubmit}>
+            Submit
+          </Button>
+        </form>
+      </div>
+    </>
   );
 }
 export default CVInputBox;

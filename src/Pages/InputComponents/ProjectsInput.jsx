@@ -9,7 +9,7 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const [_details, setDetails] = useState([]);
   const [detailsComponent, setDetailsComponent] = useState([]);
   let detailsarr = [];
-  console.log(value);
+
   const handleProjectChange = (event, __details) => {
     const { name, value } = event.target;
     let fieldName = name;
@@ -41,7 +41,6 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const handleDetailsChange = (e, index) => {
     let tempdetails = [..._details];
     tempdetails[index] = e.target.value;
-    // console.log(tempdetails);
     setDetails(tempdetails);
     handleProjectChange(e, tempdetails);
   };
