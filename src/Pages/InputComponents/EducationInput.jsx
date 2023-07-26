@@ -1,10 +1,11 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
+import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function EducationInput({ handleEducationChange, index, value }) {
   return (
     <>
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Qualification"
         variant="outlined"
@@ -16,7 +17,7 @@ function EducationInput({ handleEducationChange, index, value }) {
         }}
       />
 
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="School/College"
         variant="outlined"
@@ -28,7 +29,7 @@ function EducationInput({ handleEducationChange, index, value }) {
         }}
       />
 
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Date of joining"
         variant="outlined"

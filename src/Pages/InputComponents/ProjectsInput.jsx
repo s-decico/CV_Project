@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
+import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const [_projectname, setProjectname] = useState("");
@@ -48,7 +49,7 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   return (
     <>
       <label htmlFor="projectname">Project Name</label>
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Project Name"
         variant="outlined"
@@ -60,7 +61,7 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
         }}
       />
       <label htmlFor="projectyear">Year</label>
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Year"
         variant="outlined"
@@ -72,13 +73,17 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
         }}
       />
       <label htmlFor="projectdetails">Details</label>
-      <Button variant="contained" type="button" onClick={() => handleAdd()}>
+      <GradientButton
+        variant="contained"
+        type="button"
+        onClick={() => handleAdd()}
+      >
         Add details
-      </Button>
+      </GradientButton>
 
       {detailsComponent.map((obj, index) => {
         return (
-          <TextField
+          <WhiteTextField
             id="outlined-basic"
             label="Details"
             variant="standard"

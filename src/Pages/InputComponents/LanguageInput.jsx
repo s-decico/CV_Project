@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
+import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function LanguageInput({ language, setLanguage }) {
   const [inputValue, setInputValue] = useState("");
@@ -22,7 +23,7 @@ function LanguageInput({ language, setLanguage }) {
           setInputValue(e.target.value);
         }}
       />
-      <Button
+      <GradientButton
         variant="outlined"
         type="button"
         onClick={() => {
@@ -31,7 +32,7 @@ function LanguageInput({ language, setLanguage }) {
         }}
       >
         +
-      </Button>
+      </GradientButton>
     </>
   );
 }

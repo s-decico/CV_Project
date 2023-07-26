@@ -1,10 +1,11 @@
 import React from "react";
 import { TextField } from "@mui/material";
+import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function AchievementInput({ handleAchievementChange, index, value }) {
   return (
     <>
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Achievement Title"
         variant="outlined"
@@ -16,7 +17,7 @@ function AchievementInput({ handleAchievementChange, index, value }) {
         }}
       />
 
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Achievement Subtitle"
         variant="outlined"

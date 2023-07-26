@@ -2,33 +2,15 @@
     box-sizing: border-box;
 }
 
-.cv_area{
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: auto;
-    /*background-color: bisque;*/
-}
 .input_box{
-    background-color: darkseagreen;
-    width: 50vw;
+    background-color: transparent;
+    width: "70%";
+    margin: "0 auto";
+    border-radius: 1rem;
+    margin-top: 1rem;
+    backdrop-filter: blur(14px);
+    background-color: rgba(35, 35, 35, 0.3);
     height: 100%;
-    
-}
-.cv_box{
-    background-color: cadetblue;
-    width: 50vw;
-    height: 100vh;
 }
 
-.cvinputform{
-    display: flex;
-    flex-direction: column;
-    
-}
-.formrow2c{
-    width: 100%;
-    
-}

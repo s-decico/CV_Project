@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
+import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function SkillsInput({ skills, setSkills }) {
   const [inputValue, setInputValue] = useState("");
@@ -11,7 +12,7 @@ function SkillsInput({ skills, setSkills }) {
           return <div>{x}</div>;
         })}
       </div>
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Type your skill"
         variant="outlined"
@@ -21,7 +22,7 @@ function SkillsInput({ skills, setSkills }) {
           setInputValue(e.target.value);
         }}
       />
-      <Button
+      <GradientButton
         variant="outlined"
         type="button"
         onClick={() => {
@@ -30,7 +31,7 @@ function SkillsInput({ skills, setSkills }) {
         }}
       >
         +
-      </Button>
+      </GradientButton>
     </>
   );
 }

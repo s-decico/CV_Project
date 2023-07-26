@@ -195,7 +195,13 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             {isAuthenticated ? (
               <>
-                <Tooltip title="Open settings">
+                <Tooltip
+                  title="Open settings"
+                  sx={{
+                    backdropFilter: "blur(14px)",
+                    backgroundColor: "rgba(35, 35, 35, 0.3)",
+                  }}
+                >
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                       alt="Remy Sharp"
@@ -204,7 +210,9 @@ function Navbar() {
                   </IconButton>
                 </Tooltip>
                 <Menu
-                  sx={{ mt: "45px" }}
+                  sx={{
+                    mt: "45px",
+                  }}
                   id="menu-appbar"
                   anchorEl={anchorElUser}
                   anchorOrigin={{

@@ -20,6 +20,7 @@ import axios from "axios";
 import queryString from "query-string";
 import cookie from "js-cookie";
 import Navbar from "../Component/Navbar";
+import { WhiteTextField, GradientButton } from "../MUIStyledComponents";
 
 function CVInputBox() {
   let jsonData = {};
@@ -44,7 +45,6 @@ function CVInputBox() {
             .then(function (res) {
               if (res.status === 200) {
                 console.log("Received Data from Database");
-                //console.log(res);
                 jsonData = res.data;
                 console.log(jsonData);
 
@@ -267,7 +267,7 @@ function CVInputBox() {
         <div className="input_heading">Fill in the details</div>
         <form action="/" className="cvinputform" method="post">
           <span className="formrow2c">
-            <TextField
+            <WhiteTextField
               id="outlined-basic"
               label="Full Name"
               variant="outlined"
@@ -276,7 +276,7 @@ function CVInputBox() {
               value={userDetails ? userDetails.fullname : ""}
               onChange={handleUserDetails}
             />
-            <TextField
+            <WhiteTextField
               id="outlined-basic"
               label="Email"
               variant="outlined"
@@ -287,7 +287,7 @@ function CVInputBox() {
             />
           </span>
           <span className="formrow2c">
-            <TextField
+            <WhiteTextField
               id="outlined-basic"
               label="Phone no"
               variant="outlined"
@@ -297,7 +297,7 @@ function CVInputBox() {
               onChange={handleUserDetails}
             />
 
-            <TextField
+            <WhiteTextField
               id="outlined-basic"
               label="Address"
               variant="outlined"
@@ -308,7 +308,7 @@ function CVInputBox() {
             />
           </span>
           <span className="formrow2c">
-            <TextField
+            <WhiteTextField
               id="outlined-basic"
               label="LinkedIn"
               variant="outlined"
@@ -318,7 +318,7 @@ function CVInputBox() {
               onChange={handleUserDetails}
             />
 
-            <TextField
+            <WhiteTextField
               id="outlined-basic"
               label="Github"
               variant="outlined"
@@ -340,13 +340,13 @@ function CVInputBox() {
                 />
               );
             })}
-            <Button
+            <GradientButton
               variant="outlined"
               type="button"
               onClick={renderWorkExperience}
             >
               +
-            </Button>
+            </GradientButton>
           </div>
           <div className="formrow1c">
             Education
@@ -360,9 +360,13 @@ function CVInputBox() {
                 />
               );
             })}
-            <Button variant="outlined" type="button" onClick={renderEducation}>
+            <GradientButton
+              variant="outlined"
+              type="button"
+              onClick={renderEducation}
+            >
               +
-            </Button>
+            </GradientButton>
           </div>
           <div className="formrow1c">
             <SkillsInput skills={skills} setSkills={setSkills} />
@@ -385,9 +389,13 @@ function CVInputBox() {
                 />
               );
             })}
-            <Button variant="outlined" type="button" onClick={renderProjects}>
+            <GradientButton
+              variant="outlined"
+              type="button"
+              onClick={renderProjects}
+            >
               +
-            </Button>
+            </GradientButton>
           </div>
           <div className="formrow1c">
             Achievement
@@ -400,18 +408,22 @@ function CVInputBox() {
                 />
               );
             })}
-            <Button
+            <GradientButton
               variant="outlined"
               type="button"
               onClick={renderAchievement}
             >
               +
-            </Button>
+            </GradientButton>
           </div>
 
-          <Button variant="contained" type="button" onClick={handleFormSubmit}>
+          <GradientButton
+            variant="contained"
+            type="button"
+            onClick={handleFormSubmit}
+          >
             Submit
-          </Button>
+          </GradientButton>
         </form>
       </div>
     </>

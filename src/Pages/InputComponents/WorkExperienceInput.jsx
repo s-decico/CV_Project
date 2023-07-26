@@ -3,11 +3,12 @@ import { useState } from "react";
 import { workExperienceAtom } from "../../Atoms/CVAtoms";
 import "../cv.css";
 import { TextField, Button } from "@mui/material";
+import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function WorkExperienceInput({ handleWorkExpChange, index, value }) {
   return (
     <>
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Designation"
         variant="outlined"
@@ -19,7 +20,7 @@ function WorkExperienceInput({ handleWorkExpChange, index, value }) {
         }}
       />
 
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Company Name"
         variant="outlined"
