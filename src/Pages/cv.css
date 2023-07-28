@@ -2,15 +2,31 @@
     box-sizing: border-box;
 }
 
-
-.input_box{
-    background-color: transparent;
-    width: "70%";
-    margin: "0 auto";
+/* .cvinputform{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows  :  auto 3rem 3rem; 
+} */
+.cvinput_box{
+    
+    width: 70%;
+    margin: 0 auto;
     border-radius: 1rem;
-    margin-top: 1rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    background-color: transparent;
     backdrop-filter: blur(14px);
     background-color: rgba(35, 35, 35, 0.3);
-    height: 100%;
 }
 
+.userDetails{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.pagination{
+    margin: 1rem 0rem 1rem 0rem;
+}

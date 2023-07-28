@@ -9,10 +9,10 @@ import Navbar from "../../Component/Navbar";
 import { Google } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
-import { AuthProvider, AuthContext } from "../../AuthContext";
+import cookie from "js-cookie";
 
 function Registration() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const isAuthenticated = cookie.get("isAuthenticated");
 
   useEffect(() => {
     if (isAuthenticated) {

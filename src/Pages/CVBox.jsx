@@ -1,7 +1,13 @@
 import React from "react";
+import Navbar from "../Component/Navbar";
 
 function CVBox() {
-  return <div className="cv_box">CVBox</div>;
+  return (
+    <>
+      <Navbar />
+      CVBox
+    </>
+  );
 }
 
 export default CVBox;

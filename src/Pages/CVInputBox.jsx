@@ -16,11 +16,17 @@ import ProjectsInput from "./InputComponents/ProjectsInput";
 import SkillsInput from "./InputComponents/SkillsInput";
 import WorkExperienceInput from "./InputComponents/WorkExperienceInput";
 import { TextField, Button } from "@mui/material";
+
 import axios from "axios";
 import queryString from "query-string";
 import cookie from "js-cookie";
 import Navbar from "../Component/Navbar";
 import { WhiteTextField, GradientButton } from "../MUIStyledComponents";
+import UserDetailsInput from "./InputComponents/UserDetailsinput";
+
+import LinearProgress from "@mui/joy/LinearProgress";
+import Typography from "@mui/joy/Typography";
+import LinearWithValueLabel from "../MUIComponents/LinearProgressBar";
 
 function CVInputBox() {
   let jsonData = {};
@@ -46,10 +52,11 @@ function CVInputBox() {
               if (res.status === 200) {
                 console.log("Received Data from Database");
                 jsonData = res.data;
-                console.log(jsonData);
 
                 if (jsonData != {}) {
-                  setUserDetails(jsonData.BasicDetails);
+                  if (jsonData.BasicDetails != {}) {
+                    setUserDetails(jsonData.BasicDetails);
+                  }
                   setworkExperienceObj(jsonData.WorkExperience);
                   setEducationObj(jsonData.Education);
                   setProjectObj(jsonData.Project);
@@ -225,6 +232,7 @@ function CVInputBox() {
   };
 
   const sendDataToServer = (tempobj) => {
+    console.log("data send call");
     axios
       .post("http://localhost:3001/cvinput", tempobj, {
         headers: {
@@ -255,140 +263,93 @@ function CVInputBox() {
       Skills: skills,
     };
     setfullDetails(tempobj);
-
+    console.log("Submit called");
     sendDataToServer(tempobj);
   };
+  const [currentPage, setCurrentPage] = useState(1);
+  // Handler to navigate to the next page
+  const nextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
-  //Render function
-  return (
-    <>
-      <Navbar />
-      <div className="input_box">
-        <div className="input_heading">Fill in the details</div>
-        <form action="/" className="cvinputform" method="post">
-          <span className="formrow2c">
-            <WhiteTextField
-              id="outlined-basic"
-              label="Full Name"
-              variant="outlined"
-              type="text"
-              name="fullname"
-              value={userDetails ? userDetails.fullname : ""}
-              onChange={handleUserDetails}
-            />
-            <WhiteTextField
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
-              type="text"
-              name="email"
-              value={userDetails ? userDetails.email : ""}
-              onChange={handleUserDetails}
-            />
-          </span>
-          <span className="formrow2c">
-            <WhiteTextField
-              id="outlined-basic"
-              label="Phone no"
-              variant="outlined"
-              type="text"
-              name="phno"
-              value={userDetails ? userDetails.phno : ""}
-              onChange={handleUserDetails}
-            />
+  // Handler to navigate to the previous page
+  const prevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
 
-            <WhiteTextField
-              id="outlined-basic"
-              label="Address"
-              variant="outlined"
-              type="text"
-              name="address"
-              value={userDetails ? userDetails.address : ""}
-              onChange={handleUserDetails}
-            />
-          </span>
-          <span className="formrow2c">
-            <WhiteTextField
-              id="outlined-basic"
-              label="LinkedIn"
-              variant="outlined"
-              type="text"
-              name="linkedin"
-              value={userDetails ? userDetails.linkedin : ""}
-              onChange={handleUserDetails}
-            />
+  let currentPageComponent;
 
-            <WhiteTextField
-              id="outlined-basic"
-              label="Github"
-              variant="outlined"
-              type="text"
-              name="github"
-              value={userDetails ? userDetails.github : ""}
-              onChange={handleUserDetails}
+  switch (currentPage) {
+    case 1:
+      currentPageComponent = (
+        <UserDetailsInput
+          handleUserDetails={handleUserDetails}
+          userDetails={userDetails}
+        />
+      );
+      break;
+    case 2:
+      currentPageComponent = (
+        <>
+          {workExpComponent.map((obj, index) => {
+            return (
+              <WorkExperienceInput
+                key={index}
+                handleWorkExpChange={handleWorkExpChange}
+                index={index}
+                value={workExperienceObj[index]}
+              />
+            );
+          })}
+          <GradientButton
+            variant="outlined"
+            type="button"
+            onClick={renderWorkExperience}
+          >
+            +
+          </GradientButton>
+        </>
+      );
+
+      break;
+    case 3:
+      currentPageComponent = (
+        <>
+          {educationComponent.map((obj, index) => {
+            return (
+              <EducationInput
+                key={index}
+                handleEducationChange={handleEducationChange}
+                index={index}
+                value={educationObj[index]}
+              />
+            );
+          })}
+          <GradientButton
+            variant="outlined"
+            type="button"
+            onClick={renderEducation}
+          >
+            +
+          </GradientButton>
+        </>
+      );
+      break;
+    case 4:
+      currentPageComponent = (
+        <SkillsInput skills={skills} setSkills={setSkills} />
+      );
+      break;
+    case 5:
+      currentPageComponent = projectsComponent.map((obj, index) => {
+        return (
+          <>
+            <ProjectsInput
+              index={index}
+              setProjectObj={setProjectObj}
+              projectObj={projectObj}
+              value={projectObj[index]}
             />
-          </span>
-          <div className="formrow1c">
-            Work Experience
-            {workExpComponent.map((obj, index) => {
-              return (
-                <WorkExperienceInput
-                  key={index}
-                  handleWorkExpChange={handleWorkExpChange}
-                  index={index}
-                  value={workExperienceObj[index]}
-                />
-              );
-            })}
-            <GradientButton
-              variant="outlined"
-              type="button"
-              onClick={renderWorkExperience}
-            >
-              +
-            </GradientButton>
-          </div>
-          <div className="formrow1c">
-            Education
-            {educationComponent.map((obj, index) => {
-              return (
-                <EducationInput
-                  key={index}
-                  handleEducationChange={handleEducationChange}
-                  index={index}
-                  value={educationObj[index]}
-                />
-              );
-            })}
-            <GradientButton
-              variant="outlined"
-              type="button"
-              onClick={renderEducation}
-            >
-              +
-            </GradientButton>
-          </div>
-          <div className="formrow1c">
-            <SkillsInput skills={skills} setSkills={setSkills} />
-          </div>
-          <div className="formrow1c">
-            <LanguageInput language={language} setLanguage={setLanguage} />
-          </div>
-          <div className="formrow1c">
-            <InterestsInput interests={interests} setInterests={setInterests} />
-          </div>
-          <div className="formrow1c">
-            Projects
-            {projectsComponent.map((obj, index) => {
-              return (
-                <ProjectsInput
-                  index={index}
-                  setProjectObj={setProjectObj}
-                  projectObj={projectObj}
-                  value={projectObj[index]}
-                />
-              );
-            })}
             <GradientButton
               variant="outlined"
               type="button"
@@ -396,34 +357,76 @@ function CVInputBox() {
             >
               +
             </GradientButton>
-          </div>
-          <div className="formrow1c">
-            Achievement
-            {achievementComponent.map((obj, index) => {
-              return (
-                <AchievementInput
-                  handleAchievementChange={handleAchievementChange}
-                  index={index}
-                  value={achievementObj[index]}
-                />
-              );
-            })}
-            <GradientButton
-              variant="outlined"
-              type="button"
-              onClick={renderAchievement}
-            >
-              +
-            </GradientButton>
-          </div>
-
+          </>
+        );
+      });
+      break;
+    case 6:
+      currentPageComponent = (
+        <>
+          {achievementComponent.map((obj, index) => {
+            return (
+              <AchievementInput
+                handleAchievementChange={handleAchievementChange}
+                index={index}
+                value={achievementObj[index]}
+              />
+            );
+          })}
           <GradientButton
-            variant="contained"
+            variant="outlined"
             type="button"
-            onClick={handleFormSubmit}
+            onClick={renderAchievement}
           >
-            Submit
+            +
           </GradientButton>
+        </>
+      );
+      break;
+    case 7:
+      currentPageComponent = (
+        <LanguageInput language={language} setLanguage={setLanguage} />
+      );
+      break;
+    case 8:
+      currentPageComponent = (
+        <InterestsInput interests={interests} setInterests={setInterests} />
+      );
+    default:
+      currentPageComponent = null;
+  }
+  //Render function
+  return (
+    <>
+      <Navbar />
+      <div className="cvinput_box">
+        <form action="/" className="cvinputform" method="post">
+          {currentPageComponent}
+
+          {/* Pagination buttons */}
+          <div className="pagination">
+            {currentPage !== 1 && (
+              <GradientButton variant="outlined" onClick={prevPage}>
+                Previous
+              </GradientButton>
+            )}
+            {currentPage !== 9 ? (
+              <GradientButton variant="outlined" onClick={nextPage}>
+                Next
+              </GradientButton>
+            ) : (
+              <GradientButton
+                variant="contained"
+                type="button"
+                onClick={handleFormSubmit}
+              >
+                Submit
+              </GradientButton>
+            )}
+          </div>
+          <div className="linearprogress">
+            <LinearWithValueLabel currentPage={currentPage} />
+          </div>
         </form>
       </div>
     </>

@@ -1,18 +1,24 @@
 import React from "react";
 import { TextField, Button, CircularProgress } from "@mui/material";
+
+// import Box from "@mui/joy/Box";
+// import Button from "@mui/joy/Button";
+// import Link from "@mui/joy/Link";
+// import IconButton from "@mui/joy/IconButton";
+// import CircularProgress from "@mui/joy/CircularProgress";
+
 import { useRef, useEffect, useContext, useState } from "react";
 import axios from "axios";
 import md5 from "md5";
 import { useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 import { styled } from "@mui/material/styles";
-import { AuthProvider, AuthContext } from "../../AuthContext";
+
 import Navbar from "../../Component/Navbar";
 import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
 
 function Login() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useContext(AuthContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -20,6 +26,7 @@ function Login() {
   const [userNotFound, setUserNotFound] = useState(false);
   const [emptyEmail, setEmptyEmail] = useState(false);
   const [emptyPassword, setEmptyPassword] = useState(false);
+  const isAuthenticated = cookie.get("isAuthenticated");
 
   useEffect(() => {
     if (isAuthenticated) {

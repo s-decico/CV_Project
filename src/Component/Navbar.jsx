@@ -15,7 +15,6 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Login, Work } from "@mui/icons-material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import { AuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { GradientButton } from "../MUIStyledComponents";
 import cookie from "js-cookie";
@@ -24,7 +23,7 @@ const pages = ["Home", "My CV", "Tips", "Contact Us"];
 const settings = ["My CV", "Logout"];
 
 function Navbar() {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const isAuthenticated = cookie.get("isAuthenticated");
   const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
@@ -50,7 +49,7 @@ function Navbar() {
   const handleLogout = () => {
     console.log("Logout");
     cookie.remove("token");
-    setIsAuthenticated(false);
+    cookie.remove("isAuthenticated");
     navigate("/");
   };
 

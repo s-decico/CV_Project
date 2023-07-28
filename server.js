@@ -63,7 +63,6 @@ function generateToken(username, id) {
     id: id,
     username: username,
   };
-  //console.log(userData);
   const token = jwt.sign(userData, secretKey);
   return token;
 }
@@ -109,25 +108,13 @@ app.route("/cvinput").post((req, res) => {
         decodedToken = verifyToken(receivedToken, process.env.JWT_SECRET_KEY);
       }
 
-      //console.log(decodedToken.id);
-
       const parsedObject = req.body;
-      console.log(parsedObject);
-      // console.log(parsedObject);
-      // parsedObject.BasicDetails = JSON.parse(parsedObject.BasicDetails);
-      // parsedObject.WorkExperience = JSON.parse(parsedObject.WorkExperience);
-      // parsedObject.Education = JSON.parse(parsedObject.Education);
-      // parsedObject.Project = JSON.parse(parsedObject.Project);
-      // parsedObject.Achievement = JSON.parse(parsedObject.Achievement);
       parsedObject["UserID"] = decodedToken.id != null ? decodedToken.id : "";
-      console.log("token:" + decodedToken.id);
+
       if (decodedToken) {
-        console.log(parsedObject["UserID"] + ":" + decodedToken.id);
         UserDetails.findOne({ UserID: decodedToken.id })
           .then((response) => {
-            console.log(response);
             if (response) {
-              console.log("I'm in");
               UserDetails.updateOne({ UserID: decodedToken.id }, parsedObject)
                 .then((result) => {
                   res.status(200).send("Okay");
@@ -174,12 +161,12 @@ app.route("/register").post((req, res) => {
 
 app.route("/login").post((req, res) => {
   const { email, password } = req.body;
-  //console.log(req.cookies.token);
   UserCred.findOne({ email: email })
     .then((result) => {
       if (result) {
         if (result.password === password) {
           const token = generateToken(result.email, result._id);
+          res.cookie("isAuthenticated", true);
           res.status(200).cookie("token", token).json({ token: token });
         } else {
           res.status(401).json({ error: "Incorrect password" });
@@ -196,7 +183,6 @@ app.route("/login").post((req, res) => {
 app.route("/fetchform").get((req, res) => {
   const token = req.cookies.token;
   if (token) {
-    console.log(token);
     decodedToken = verifyToken(token, process.env.JWT_SECRET_KEY);
     UserDetails.findOne({ UserID: decodedToken.id })
       .then((result) => {

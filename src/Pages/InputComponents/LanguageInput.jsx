@@ -13,7 +13,7 @@ function LanguageInput({ language, setLanguage }) {
           return <div>{x}</div>;
         })}
       </div>
-      <TextField
+      <WhiteTextField
         id="outlined-basic"
         label="Language"
         variant="outlined"
