@@ -1,5 +1,7 @@
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* .cvinputform{
@@ -7,8 +9,7 @@
     grid-template-columns: 1fr;
     grid-template-rows  :  auto 3rem 3rem; 
 } */
-.cvinput_box{
-    
+.cvinput_box{  
     width: 70%;
     margin: 0 auto;
     border-radius: 1rem;
@@ -30,3 +31,65 @@
 .pagination{
     margin: 1rem 0rem 1rem 0rem;
 }
+
+.workExperienceProjMain{
+    display: grid;
+    grid-template-columns: 1fr ;
+    grid-gap: 1rem;
+}
+.workExperienceProjTitle {
+    display: flex;
+    flex-direction: column;
+}
+
+.workExperienceProjSub{
+    display: grid;
+    grid-template-columns: 4fr 4fr 1fr;
+    /* background-color: black; */
+    padding: 1rem;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    justify-content: space-between;
+    grid-gap: 2.5rem;
+}
+
+.detailUnit{
+    display: flex;
+}
+
+.workexpprojdelete{
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: rgba(196, 53, 53, 0.791) ;
+border-radius: 10px;
+}
+.workexpprojdelete:hover{background-color: rgb(196, 53, 53) ;cursor: pointer;}
+
+.educationSub{
+    display: grid;
+    grid-template-columns: 6fr 6fr 6fr 1fr;
+    grid-gap: 1rem;
+    justify-content: space-between;
+    margin: 1rem 0rem 1rem 0rem;
+}
+
+.skillLang{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.skillLangIntdisplayunit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between  ;
+    gap: 0.5rem;
+}
+
+
+.achivementsub{display: grid;
+    grid-template-columns: 8fr 8fr 1fr;
+    grid-gap: 1rem;
+    justify-content: space-between;
+    margin: 1rem 0rem 1rem 0rem;}

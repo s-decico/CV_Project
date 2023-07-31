@@ -15,7 +15,11 @@ import cookie from "js-cookie";
 import { styled } from "@mui/material/styles";
 
 import Navbar from "../../Component/Navbar";
-import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
+import {
+  WhiteTextField,
+  GradientButton,
+  WhiteDeleteIcon,
+} from "../../MUIStyledComponents";
 
 function Login() {
   const navigate = useNavigate();

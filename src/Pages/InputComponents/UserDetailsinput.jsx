@@ -1,6 +1,10 @@
 import React from "react";
 import { TextField } from "@mui/material";
-import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
+import {
+  WhiteTextField,
+  GradientButton,
+  WhiteDeleteIcon,
+} from "../../MUIStyledComponents";
 import "../cv.css";
 
 function UserDetailsInput({ handleUserDetails, userDetails }) {

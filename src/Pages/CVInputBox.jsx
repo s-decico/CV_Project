@@ -21,7 +21,11 @@ import axios from "axios";
 import queryString from "query-string";
 import cookie from "js-cookie";
 import Navbar from "../Component/Navbar";
-import { WhiteTextField, GradientButton } from "../MUIStyledComponents";
+import {
+  WhiteTextField,
+  GradientButton,
+  WhiteDeleteIcon,
+} from "../MUIStyledComponents";
 import UserDetailsInput from "./InputComponents/UserDetailsinput";
 
 import LinearProgress from "@mui/joy/LinearProgress";
@@ -115,8 +119,8 @@ function CVInputBox() {
   const [fullDetails, setfullDetails] = useState();
   //Variables
   //--------------------------------
-  const [_companyname, setCompanyname] = useState("");
-  const [_designation, setDesignation] = useState("");
+  // const [_companyname, setCompanyname] = useState("");
+  // const [_designation, setDesignation] = useState("");
   const [_qualification, setQualification] = useState("");
   const [_school, setSchool] = useState("");
   const [_doj, setDoj] = useState("");
@@ -170,24 +174,24 @@ function CVInputBox() {
     setUserDetails({ ...userDetails, [fieldName]: fieldValue });
   };
 
-  const handleWorkExpChange = (event, index) => {
-    const { name, value } = event.target;
-    let fieldName = name;
-    tempobj = {};
-    tempobj = { ...workExperienceObj };
-    switch (name) {
-      case "companyname":
-        setCompanyname(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-      case "designation":
-        setDesignation(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-    }
+  // const handleWorkExpChange = (event, index) => {
+  //   const { name, value } = event.target;
+  //   let fieldName = name;
+  //   tempobj = {};
+  //   tempobj = { ...workExperienceObj };
+  //   switch (name) {
+  //     case "companyname":
+  //       setCompanyname(value);
+  //       tempobj[index] = { ...tempobj[index], [fieldName]: value };
+  //       break;
+  //     case "designation":
+  //       setDesignation(value);
+  //       tempobj[index] = { ...tempobj[index], [fieldName]: value };
+  //       break;
+  //   }
 
-    setworkExperienceObj(tempobj);
-  };
+  //   setworkExperienceObj(tempobj);
+  // };
 
   const handleEducationChange = (event, index) => {
     const { name, value } = event.target;
@@ -291,23 +295,26 @@ function CVInputBox() {
     case 2:
       currentPageComponent = (
         <>
-          {workExpComponent.map((obj, index) => {
-            return (
-              <WorkExperienceInput
-                key={index}
-                handleWorkExpChange={handleWorkExpChange}
-                index={index}
-                value={workExperienceObj[index]}
-              />
-            );
-          })}
-          <GradientButton
-            variant="outlined"
-            type="button"
-            onClick={renderWorkExperience}
-          >
-            +
-          </GradientButton>
+          <div className="workExperienceProjMain">
+            {workExpComponent.map((obj, index) => {
+              return (
+                <WorkExperienceInput
+                  key={index}
+                  index={index}
+                  value={workExperienceObj[index]}
+                  setworkExperienceObj={setworkExperienceObj}
+                  workExperienceObj={workExperienceObj}
+                />
+              );
+            })}
+            <GradientButton
+              variant="outlined"
+              type="button"
+              onClick={renderWorkExperience}
+            >
+              +
+            </GradientButton>
+          </div>
         </>
       );
 
@@ -315,41 +322,56 @@ function CVInputBox() {
     case 3:
       currentPageComponent = (
         <>
-          {educationComponent.map((obj, index) => {
-            return (
-              <EducationInput
-                key={index}
-                handleEducationChange={handleEducationChange}
-                index={index}
-                value={educationObj[index]}
-              />
-            );
-          })}
-          <GradientButton
-            variant="outlined"
-            type="button"
-            onClick={renderEducation}
-          >
-            +
-          </GradientButton>
+          <div className="educationMain">
+            {educationComponent.map((obj, index) => {
+              return (
+                <EducationInput
+                  key={index}
+                  handleEducationChange={handleEducationChange}
+                  index={index}
+                  value={educationObj[index]}
+                />
+              );
+            })}
+            <GradientButton
+              variant="outlined"
+              type="button"
+              onClick={renderEducation}
+              // sx={{ width: "1rem", height: "1rem", borderRadius: "50%" }}
+            >
+              +
+            </GradientButton>
+          </div>
         </>
       );
       break;
     case 4:
       currentPageComponent = (
-        <SkillsInput skills={skills} setSkills={setSkills} />
+        <>
+          <div className="skillLang">
+            <SkillsInput skills={skills} setSkills={setSkills} />
+            <LanguageInput language={language} setLanguage={setLanguage} />
+            <InterestsInput interests={interests} setInterests={setInterests} />
+          </div>
+        </>
       );
       break;
     case 5:
-      currentPageComponent = projectsComponent.map((obj, index) => {
-        return (
-          <>
-            <ProjectsInput
-              index={index}
-              setProjectObj={setProjectObj}
-              projectObj={projectObj}
-              value={projectObj[index]}
-            />
+      currentPageComponent = (
+        <>
+          <div className="workExperienceProjMain">
+            {projectsComponent.map((obj, index) => {
+              return (
+                <>
+                  <ProjectsInput
+                    index={index}
+                    setProjectObj={setProjectObj}
+                    projectObj={projectObj}
+                    value={projectObj[index]}
+                  />
+                </>
+              );
+            })}
             <GradientButton
               variant="outlined"
               type="button"
@@ -357,41 +379,36 @@ function CVInputBox() {
             >
               +
             </GradientButton>
-          </>
-        );
-      });
+          </div>
+        </>
+      );
+
       break;
     case 6:
       currentPageComponent = (
         <>
-          {achievementComponent.map((obj, index) => {
-            return (
-              <AchievementInput
-                handleAchievementChange={handleAchievementChange}
-                index={index}
-                value={achievementObj[index]}
-              />
-            );
-          })}
-          <GradientButton
-            variant="outlined"
-            type="button"
-            onClick={renderAchievement}
-          >
-            +
-          </GradientButton>
+          <div className="achievementMain">
+            {achievementComponent.map((obj, index) => {
+              return (
+                <AchievementInput
+                  handleAchievementChange={handleAchievementChange}
+                  index={index}
+                  value={achievementObj[index]}
+                />
+              );
+            })}
+            <GradientButton
+              variant="outlined"
+              type="button"
+              onClick={renderAchievement}
+            >
+              +
+            </GradientButton>
+          </div>
         </>
       );
       break;
-    case 7:
-      currentPageComponent = (
-        <LanguageInput language={language} setLanguage={setLanguage} />
-      );
-      break;
-    case 8:
-      currentPageComponent = (
-        <InterestsInput interests={interests} setInterests={setInterests} />
-      );
+
     default:
       currentPageComponent = null;
   }
@@ -410,7 +427,7 @@ function CVInputBox() {
                 Previous
               </GradientButton>
             )}
-            {currentPage !== 9 ? (
+            {currentPage !== 6 ? (
               <GradientButton variant="outlined" onClick={nextPage}>
                 Next
               </GradientButton>

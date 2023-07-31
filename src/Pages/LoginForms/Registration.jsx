@@ -8,7 +8,11 @@ import "../login.css";
 import Navbar from "../../Component/Navbar";
 import { Google } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
-import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
+import {
+  WhiteTextField,
+  GradientButton,
+  WhiteDeleteIcon,
+} from "../../MUIStyledComponents";
 import cookie from "js-cookie";
 
 function Registration() {

@@ -12,6 +12,7 @@ const BasicDetailsSchema = new mongoose.Schema({
 const workExperienceSchema = new mongoose.Schema({
   companyname: String,
   designation: String,
+  details: [String],
 });
 
 const educationSchema = new mongoose.Schema({

@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
-import { WhiteTextField, GradientButton } from "../../MUIStyledComponents";
+import {
+  WhiteTextField,
+  GradientButton,
+  WhiteDeleteIcon,
+} from "../../MUIStyledComponents";
+import IconButton from "@mui/material/IconButton";
+import { Add } from "@mui/icons-material";
 
 function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const [_projectname, setProjectname] = useState("");
@@ -48,54 +54,69 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
 
   return (
     <>
-      <label htmlFor="projectname">Project Name</label>
-      <WhiteTextField
-        id="outlined-basic"
-        label="Project Name"
-        variant="outlined"
-        type="text"
-        name="projectname"
-        value={value ? value.projectname : ""}
-        onChange={(event) => {
-          handleProjectChange(event);
-        }}
-      />
-      <label htmlFor="projectyear">Year</label>
-      <WhiteTextField
-        id="outlined-basic"
-        label="Year"
-        variant="outlined"
-        type="text"
-        name="projectyear"
-        value={value ? value.projectyear : ""}
-        onChange={(event) => {
-          handleProjectChange(event);
-        }}
-      />
-      <label htmlFor="projectdetails">Details</label>
-      <GradientButton
-        variant="contained"
-        type="button"
-        onClick={() => handleAdd()}
-      >
-        Add details
-      </GradientButton>
-
-      {detailsComponent.map((obj, index) => {
-        return (
+      <div className="workExperienceProjSub">
+        <div className="workExperienceProjTitle">
           <WhiteTextField
             id="outlined-basic"
-            label="Details"
-            variant="standard"
+            label="Project Name"
+            variant="outlined"
             type="text"
-            name="details"
-            value={value && value.details ? value.details[index] : ""}
-            onChange={(e) => {
-              handleDetailsChange(e, index);
+            name="projectname"
+            value={value ? value.projectname : ""}
+            onChange={(event) => {
+              handleProjectChange(event);
             }}
           />
-        );
-      })}
+          <WhiteTextField
+            id="outlined-basic"
+            label="Year"
+            variant="outlined"
+            type="text"
+            name="projectyear"
+            value={value ? value.projectyear : ""}
+            onChange={(event) => {
+              handleProjectChange(event);
+            }}
+            sx={{ marginTop: "1rem" }}
+          />
+        </div>
+        <div className="detailsMain">
+          <div className="detailsHead">
+            Details
+            <IconButton aria-label="add" onClick={() => handleAdd()}>
+              <Add />
+            </IconButton>
+          </div>
+          {detailsComponent.map((obj, index) => {
+            return (
+              <>
+                <div className="detailUnit">
+                  <WhiteTextField
+                    id="outlined-basic"
+                    label="Details"
+                    variant="standard"
+                    type="text"
+                    name="details"
+                    value={value && value.details ? value.details[index] : ""}
+                    onChange={(e) => {
+                      handleDetailsChange(e, index);
+                    }}
+                    sx={{ width: "100%" }}
+                  />
+                  <IconButton aria-label="delete">
+                    <WhiteDeleteIcon />
+                  </IconButton>
+                </div>
+              </>
+            );
+          })}
+        </div>
+        <div className="workexpprojdelete">
+          <IconButton aria-label="delete">
+            <WhiteDeleteIcon />
+          </IconButton>
+        </div>
+      </div>
     </>
   );
 }

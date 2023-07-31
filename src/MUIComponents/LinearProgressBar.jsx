@@ -11,7 +11,6 @@ function LinearProgressWithLabel(props) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // margin: "2rem 3rem 2rem 3rem",
       }}
     >
       <Box sx={{ width: "100%" }}>
@@ -36,10 +35,9 @@ LinearProgressWithLabel.propTypes = {
 
 export default function LinearWithValueLabel({ currentPage }) {
   const [progress, setProgress] = React.useState(1);
-  console.log(currentPage);
+
   React.useEffect(() => {
-    setProgress(Math.round((currentPage / 8) * 100));
-    console.log((currentPage / 8) * 100);
+    setProgress(Math.round((currentPage / 6) * 100));
   }, [currentPage]);
 
   return (
