@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import {
   WhiteTextField,
@@ -22,7 +22,14 @@ function WorkExperienceInput({
   const [_details, setDetails] = useState([]);
   const [detailsComponent, setDetailsComponent] = useState([]);
 
-  let detailsarr = [];
+  useEffect(() => {
+    console.log(value.details);
+    if (value && value.details && Array.isArray(value.details)) {
+      setDetails([...value.details]);
+    } else {
+      setDetails([]);
+    }
+  }, [value, index]);
 
   const handleWorkExpChange = (event, __details) => {
     const { name, value } = event.target;
@@ -48,8 +55,8 @@ function WorkExperienceInput({
   };
 
   const handleAdd = () => {
-    let temp = [...detailsComponent, ""];
-    setDetailsComponent(temp);
+    let temp = [..._details, ""];
+    setDetails(temp);
   };
 
   const handleDetailsChange = (e, index) => {
@@ -59,14 +66,12 @@ function WorkExperienceInput({
     handleWorkExpChange(e, tempdetails);
   };
 
-  const handleDetailsDelete = (e, index) => {
-    console.log("called");
-    let tempdetails = [..._details];
-    tempdetails = tempdetails.filter((e, _index) => {
-      return _index !== index;
-    });
-    setDetails(tempdetails);
-    handleWorkExpChange(e, tempdetails);
+  const handleDetailsDelete = (detailIndex) => {
+    console.log("v:" + detailIndex);
+    const temp = [..._details];
+    temp.splice(detailIndex, 1);
+    console.log("temp:", temp);
+    setDetails(temp);
   };
 
   return (
@@ -105,32 +110,31 @@ function WorkExperienceInput({
               <Add />
             </IconButton>
           </div>
-          {detailsComponent.map((obj, index) => {
+          {_details.map((obj, index) => {
             return (
-              <>
-                <div className="detailUnit">
-                  <WhiteTextField
-                    id="outlined-basic"
-                    label="Details"
-                    variant="standard"
-                    type="text"
-                    name="details"
-                    value={value && value.details ? value.details[index] : ""}
-                    onChange={(e) => {
-                      handleDetailsChange(e, index);
-                    }}
-                    sx={{ width: "100%" }}
-                  />
-                  <IconButton
-                    aria-label="delete"
-                    onClick={(e) => {
-                      handleDetailsDelete(e, index);
-                    }}
-                  >
-                    <WhiteDeleteIcon />
-                  </IconButton>
-                </div>
-              </>
+              <div key={index} className="detailUnit">
+                <WhiteTextField
+                  id="outlined-basic"
+                  label="Details"
+                  variant="standard"
+                  type="text"
+                  name="details"
+                  // value={value && value.details ? value.details[index] : ""}
+                  value={_details[index] || ""}
+                  onChange={(e) => {
+                    handleDetailsChange(e, index);
+                  }}
+                  sx={{ width: "100%" }}
+                />
+                <IconButton
+                  aria-label="delete"
+                  onClick={(e) => {
+                    handleDetailsDelete(index);
+                  }}
+                >
+                  <WhiteDeleteIcon />
+                </IconButton>
+              </div>
             );
           })}
         </div>

@@ -17,6 +17,14 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const [detailsComponent, setDetailsComponent] = useState([]);
   let detailsarr = [];
 
+  useEffect(() => {
+    if (value && value.details && Array.isArray(value.details)) {
+      setDetails([...value.details]);
+    } else {
+      setDetails([]);
+    }
+  }, [value, index]);
+
   const handleProjectChange = (event, __details) => {
     const { name, value } = event.target;
     let fieldName = name;
@@ -41,8 +49,8 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   };
 
   const handleAdd = () => {
-    let temp = [...detailsComponent, ""];
-    setDetailsComponent(temp);
+    let temp = [..._details, ""];
+    setDetails(temp);
   };
 
   const handleDetailsChange = (e, index) => {
@@ -50,6 +58,14 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
     tempdetails[index] = e.target.value;
     setDetails(tempdetails);
     handleProjectChange(e, tempdetails);
+  };
+
+  const handleDetailsDelete = (detailIndex) => {
+    console.log("v:" + detailIndex);
+    const temp = [..._details];
+    temp.splice(detailIndex, 1);
+    console.log("temp:", temp);
+    setDetails(temp);
   };
 
   return (
@@ -87,7 +103,7 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
               <Add />
             </IconButton>
           </div>
-          {detailsComponent.map((obj, index) => {
+          {_details.map((obj, index) => {
             return (
               <>
                 <div className="detailUnit">
@@ -97,13 +113,19 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
                     variant="standard"
                     type="text"
                     name="details"
-                    value={value && value.details ? value.details[index] : ""}
+                    // value={value && value.details ? value.details[index] : ""}
+                    value={_details[index] || ""}
                     onChange={(e) => {
                       handleDetailsChange(e, index);
                     }}
                     sx={{ width: "100%" }}
                   />
-                  <IconButton aria-label="delete">
+                  <IconButton
+                    aria-label="delete"
+                    onClick={(e) => {
+                      handleDetailsDelete(index);
+                    }}
+                  >
                     <WhiteDeleteIcon />
                   </IconButton>
                 </div>

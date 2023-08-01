@@ -4,11 +4,16 @@
     padding: 0;
 }
 
-/* .cvinputform{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows  :  auto 3rem 3rem; 
-} */
+.colour_scheme{
+    color:#F6F4EB
+#91C8E4
+#749BC2
+#4682A9
+#4977ce
+#7c50b1
+
+}
+
 .cvinput_box{  
     width: 70%;
     margin: 0 auto;
@@ -20,6 +25,10 @@
     background-color: transparent;
     backdrop-filter: blur(14px);
     background-color: rgba(35, 35, 35, 0.3);
+}
+.pagination{
+    display: flex;
+    gap: 0.5rem;
 }
 
 .userDetails{
@@ -36,6 +45,7 @@
     display: grid;
     grid-template-columns: 1fr ;
     grid-gap: 1rem;
+    
 }
 .workExperienceProjTitle {
     display: flex;
@@ -45,7 +55,8 @@
 .workExperienceProjSub{
     display: grid;
     grid-template-columns: 4fr 4fr 1fr;
-    /* background-color: black; */
+    /* backdrop-filter: blur(50px); */
+    background-color: #00000068; 
     padding: 1rem;
     border: 1px solid #fff;
     border-radius: 10px;

@@ -376,6 +376,7 @@ function CVInputBox() {
               variant="outlined"
               type="button"
               onClick={renderProjects}
+              sx={{ borderRadius: "30px" }}
             >
               +
             </GradientButton>
@@ -423,12 +424,20 @@ function CVInputBox() {
           {/* Pagination buttons */}
           <div className="pagination">
             {currentPage !== 1 && (
-              <GradientButton variant="outlined" onClick={prevPage}>
+              <GradientButton
+                variant="outlined"
+                onClick={prevPage}
+                sx={{ borderRadius: "30px" }}
+              >
                 Previous
               </GradientButton>
             )}
             {currentPage !== 6 ? (
-              <GradientButton variant="outlined" onClick={nextPage}>
+              <GradientButton
+                variant="outlined"
+                onClick={nextPage}
+                sx={{ borderRadius: "30px" }}
+              >
                 Next
               </GradientButton>
             ) : (
@@ -436,6 +445,7 @@ function CVInputBox() {
                 variant="contained"
                 type="button"
                 onClick={handleFormSubmit}
+                sx={{ borderRadius: "30px", backgroundColor: "" }}
               >
                 Submit
               </GradientButton>
