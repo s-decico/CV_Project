@@ -15,7 +15,7 @@ import LanguageInput from "./InputComponents/LanguageInput";
 import ProjectsInput from "./InputComponents/ProjectsInput";
 import SkillsInput from "./InputComponents/SkillsInput";
 import WorkExperienceInput from "./InputComponents/WorkExperienceInput";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, IconButton } from "@mui/material";
 
 import axios from "axios";
 import queryString from "query-string";
@@ -31,6 +31,8 @@ import UserDetailsInput from "./InputComponents/UserDetailsinput";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
 import LinearWithValueLabel from "../MUIComponents/LinearProgressBar";
+
+import { v4 as uuidv4 } from "uuid";
 
 function CVInputBox() {
   let jsonData = {};
@@ -235,6 +237,61 @@ function CVInputBox() {
     setAchievementObj(tempobj);
   };
 
+  const handleWorkExpDelete = (index) => {
+    //Working
+    let temp = { ...workExperienceObj };
+    delete temp[index];
+    setworkExperienceObj(temp);
+    setWorkExpComponent((prevComponent) =>
+      prevComponent.filter((item, idx) => idx !== index)
+    );
+    //--------------------
+
+    // setworkExperienceObj((prevObj) => {
+    //   const newObj = { ...prevObj };
+    //   delete newObj[index];
+    //   return newObj;
+    // });
+
+    // setWorkExpComponent((prevComponent) =>
+    //   prevComponent.filter((item) => item.index !== index)
+    // );
+
+    // let tempcomp = workExpComponent;
+    // delete tempcomp[index];
+    // setWorkExpComponent(tempcomp);
+
+    // setworkExperienceObj((prevObj) =>
+    //   Object.keys(prevObj)
+    //     .filter((key) => parseInt(key) !== index)
+    //     .reduce((acc, key) => {
+    //       acc[key] = prevObj[key];
+    //       return acc;
+    //     }, {})
+    // );
+
+    // setworkExperienceObj((prevObj) => {
+    //   const newObj = { ...prevObj };
+    //   delete newObj[index];
+    //   return newObj;
+    // });
+  };
+
+  const handleEducationDelete = (id) => {
+    console.log("Ed delete:" + id);
+    let temp = { ...educationObj };
+    delete temp[id];
+    setEducationObj(temp);
+    console.log(temp);
+    setEducationComponent((prevComponent) =>
+      prevComponent.filter((item, idx) => idx !== id)
+    );
+  };
+
+  useEffect(() => {
+    console.log(educationObj);
+  }, [educationObj]);
+
   const sendDataToServer = (tempobj) => {
     console.log("data send call");
     axios
@@ -298,15 +355,29 @@ function CVInputBox() {
           <div className="workExperienceProjMain">
             {workExpComponent.map((obj, index) => {
               return (
-                <WorkExperienceInput
-                  key={index}
-                  index={index}
-                  value={workExperienceObj[index]}
-                  setworkExperienceObj={setworkExperienceObj}
-                  workExperienceObj={workExperienceObj}
-                />
+                <>
+                  <WorkExperienceInput
+                    key={index}
+                    index={index}
+                    value={workExperienceObj[index]}
+                    setworkExperienceObj={setworkExperienceObj}
+                    workExperienceObj={workExperienceObj}
+                    handleWorkExpDelete={handleWorkExpDelete}
+                  />
+                  <div
+                    className="workexpprojdelete"
+                    onClick={() => {
+                      handleWorkExpDelete(index);
+                    }}
+                  >
+                    <IconButton aria-label="delete">
+                      <WhiteDeleteIcon />
+                    </IconButton>
+                  </div>
+                </>
               );
             })}
+
             <GradientButton
               variant="outlined"
               type="button"
@@ -330,6 +401,7 @@ function CVInputBox() {
                   handleEducationChange={handleEducationChange}
                   index={index}
                   value={educationObj[index]}
+                  handleEducationDelete={handleEducationDelete}
                 />
               );
             })}

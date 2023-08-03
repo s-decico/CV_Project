@@ -43,7 +43,7 @@
 
 .workExperienceProjMain{
     display: grid;
-    grid-template-columns: 1fr ;
+    grid-template-columns: 9fr 1fr ;
     grid-gap: 1rem;
     
 }
@@ -54,7 +54,7 @@
 
 .workExperienceProjSub{
     display: grid;
-    grid-template-columns: 4fr 4fr 1fr;
+    grid-template-columns: 1fr 1fr;
     /* backdrop-filter: blur(50px); */
     background-color: #00000068; 
     padding: 1rem;
@@ -76,6 +76,7 @@ background-color: rgba(196, 53, 53, 0.791) ;
 border-radius: 10px;
 }
 .workexpprojdelete:hover{background-color: rgb(196, 53, 53) ;cursor: pointer;}
+
 
 .educationSub{
     display: grid;

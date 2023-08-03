@@ -14,16 +14,16 @@ function WorkExperienceInput({
   setworkExperienceObj,
   workExperienceObj,
   value,
+  handleWorkExpDelete,
 }) {
-  const [_companyname, setCompanyname] = useState("");
-  const [_designation, setDesignation] = useState("");
+  // const [_companyname, setCompanyname] = useState("");
+  // const [_designation, setDesignation] = useState("");
   let tempobj = {};
   let _tempdetails = {};
   const [_details, setDetails] = useState([]);
   const [detailsComponent, setDetailsComponent] = useState([]);
 
   useEffect(() => {
-    console.log(value.details);
     if (value && value.details && Array.isArray(value.details)) {
       setDetails([...value.details]);
     } else {
@@ -32,6 +32,27 @@ function WorkExperienceInput({
   }, [value, index]);
 
   const handleWorkExpChange = (event, __details) => {
+    // const { name, value } = event.target;
+    // let fieldName = name;
+    // tempobj = {};
+    // tempobj = { ...workExperienceObj };
+
+    // switch (name) {
+    //   case "companyname":
+    //     setCompanyname(value);
+    //     tempobj[index] = { ...tempobj[index], [fieldName]: value };
+    //     break;
+    //   case "designation":
+    //     setDesignation(value);
+    //     tempobj[index] = { ...tempobj[index], [fieldName]: value };
+    //     break;
+    //   case "details":
+    //     tempobj[index] = { ...tempobj[index], [fieldName]: __details };
+    //     break;
+    // }
+
+    // setworkExperienceObj(tempobj);
+
     const { name, value } = event.target;
     let fieldName = name;
     tempobj = {};
@@ -39,11 +60,7 @@ function WorkExperienceInput({
 
     switch (name) {
       case "companyname":
-        setCompanyname(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
       case "designation":
-        setDesignation(value);
         tempobj[index] = { ...tempobj[index], [fieldName]: value };
         break;
       case "details":
@@ -137,12 +154,6 @@ function WorkExperienceInput({
               </div>
             );
           })}
-        </div>
-
-        <div className="workexpprojdelete">
-          <IconButton aria-label="delete">
-            <WhiteDeleteIcon />
-          </IconButton>
         </div>
       </div>
     </>

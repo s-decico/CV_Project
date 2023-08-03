@@ -7,7 +7,12 @@ import {
 } from "../../MUIStyledComponents";
 import IconButton from "@mui/material/IconButton";
 
-function EducationInput({ handleEducationChange, index, value }) {
+function EducationInput({
+  handleEducationChange,
+  index,
+  value,
+  handleEducationDelete,
+}) {
   return (
     <>
       <div className="educationSub">
@@ -46,7 +51,10 @@ function EducationInput({ handleEducationChange, index, value }) {
             handleEducationChange(event, index);
           }}
         />
-        <IconButton aria-label="delete">
+        <IconButton
+          aria-label="delete"
+          onClick={() => handleEducationDelete(index)}
+        >
           <WhiteDeleteIcon />
         </IconButton>
       </div>
