@@ -60,16 +60,30 @@ function CVInputBox() {
                 jsonData = res.data;
 
                 if (jsonData != {}) {
-                  if (jsonData.BasicDetails != {}) {
+                  if (Object.keys(jsonData.BasicDetails).length > 0) {
                     setUserDetails(jsonData.BasicDetails);
                   }
-                  setworkExperienceObj(jsonData.WorkExperience);
-                  setEducationObj(jsonData.Education);
-                  setProjectObj(jsonData.Project);
-                  setAchievementObj(jsonData.Achievement);
-                  setSkills(jsonData.Skills);
-                  setLanguage(jsonData.Language);
-                  setInterests(jsonData.Interest);
+                  if (Object.keys(jsonData.WorkExperience).length > 0) {
+                    setworkExperienceObj(jsonData.WorkExperience);
+                  }
+                  if (Object.keys(jsonData.Education).length > 0) {
+                    setEducationObj(jsonData.Education);
+                  }
+                  if (Object.keys(jsonData.Project).length > 0) {
+                    setProjectObj(jsonData.Project);
+                  }
+                  if (jsonData.Achievement.length > 0) {
+                    setAchievementObj(jsonData.Achievement);
+                  }
+                  if (jsonData.Skills.length > 0) {
+                    setSkills(jsonData.Skills);
+                  }
+                  if (jsonData.Language.length > 0) {
+                    setLanguage(jsonData.Language);
+                  }
+                  if (jsonData.Interest.length > 0) {
+                    setInterests(jsonData.Interest);
+                  }
                 }
                 try {
                   let workExpLength;
@@ -137,13 +151,13 @@ function CVInputBox() {
   const [workExperienceObj, setworkExperienceObj] = useState({});
   //Education
   const [educationComponent, setEducationComponent] = useState([{}]);
-  const [educationObj, setEducationObj] = useState({});
+  const [educationObj, setEducationObj] = useState([]);
   //Projects
   const [projectsComponent, setProjectsComponent] = useState([{}]);
   const [projectObj, setProjectObj] = useState({});
   //Achievement
   const [achievementComponent, setAchievementComponent] = useState([{}]);
-  const [achievementObj, setAchievementObj] = useState({});
+  const [achievementObj, setAchievementObj] = useState([]);
   //Skills
   const [skills, setSkills] = useState([]);
   //Language
@@ -158,14 +172,26 @@ function CVInputBox() {
   };
 
   const renderEducation = (e) => {
-    setEducationComponent([...educationComponent, {}]);
+    console.log("Called");
+    setEducationObj([
+      ...educationObj,
+      { qualification: "", school: "", doj: "" },
+    ]);
   };
 
   const renderProjects = (e) => {
     setProjectsComponent([...projectsComponent, {}]);
   };
   const renderAchievement = (e) => {
-    setAchievementComponent([...achievementComponent, {}]);
+    //setAchievementObj([...achievementObj, ""]);
+    //setAchievementObj({ ...achievementObj, [uuidv4()]: {} });
+    // setAchievementObj((prevObj) => ({
+    //   ...prevObj,
+    //   [uuidv4()]: {},
+    // }));
+    //setAchievementComponent([...achievementComponent, {}]);
+    // setAchievementObj([...achievementObj, {}]);
+    setAchievementObj([...achievementObj, { title: "", subtitle: "" }]);
   };
 
   //Handler functions
@@ -198,43 +224,88 @@ function CVInputBox() {
   const handleEducationChange = (event, index) => {
     const { name, value } = event.target;
     let fieldName = name;
-    tempobj = {};
-    tempobj = { ...educationObj };
-    switch (name) {
-      case "qualification":
-        setQualification(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-      case "school":
-        setSchool(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-      case "doj":
-        setDoj(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-    }
-    setEducationObj(tempobj);
+
+    const updatedEducationObj = [...educationObj];
+
+    // Get the current object from the copied array or create a new object if not exists
+    const eduObjtemp = updatedEducationObj[index] || {};
+
+    // Update the specific field in the copied object
+    eduObjtemp[name] = value;
+
+    // Update the copied object back into the copied array
+    updatedEducationObj[index] = eduObjtemp;
+
+    // Update the state with the modified array
+    setEducationObj(updatedEducationObj);
+    console.log(updatedEducationObj);
   };
+
+  // const handleAchievementChange = (event, index) => {
+  //   const { name, value } = event.target;
+  //   let fieldName = name;
+
+  // let temparr = [...achievementObj];
+  // let tempobj = {};
+
+  // switch (name) {
+  //   case "title":
+  //     tempobj = { ...temparr[index], [fieldName]: value };
+  //     break;
+  //   case "subtitle":
+  //     tempobj = { ...temparr[index], [fieldName]: value };
+  //     break;
+  //   default:
+  //     break;
+  // }
+
+  //   // // Update the achievement object in the temparr array
+  //   // temparr[index] = tempobj;
+
+  //   // // Update the state with the updated temparr
+  //   // setAchievementObj(temparr);
+
+  //   // console.log(temparr);
+
+  //   setAchievementObj((prevObj) => ({
+  //     ...prevObj,
+  //     [index]: {
+  //       ...prevObj[index],
+  //       [fieldName]: value,
+  //     },
+  //   }));
+  // };
 
   const handleAchievementChange = (event, index) => {
     const { name, value } = event.target;
     let fieldName = name;
-    tempobj = {};
-    tempobj = { ...achievementObj };
-    switch (name) {
-      case "title":
-        setTitle(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-      case "subtitle":
-        setSubtitle(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-      default:
-        break;
-    }
-    setAchievementObj(tempobj);
+    // let achObjtemp = achievementObj[index];
+    // achObjtemp = { ...achObjtemp, [fieldName]: value };
+    // setAchievementObj(...achievementObj, achievementObj[index]);
+    // console.log(achObjtemp);
+
+    // Create a copy of the achievementObj array to modify
+    const updatedAchievementObj = [...achievementObj];
+
+    // Get the current object from the copied array or create a new object if not exists
+    const achObjtemp = updatedAchievementObj[index] || {};
+
+    // Update the specific field in the copied object
+    achObjtemp[name] = value;
+
+    // Update the copied object back into the copied array
+    updatedAchievementObj[index] = achObjtemp;
+
+    // Update the state with the modified array
+    setAchievementObj(updatedAchievementObj);
+  };
+
+  const handleAchievementDelete = (index) => {
+    console.log("Delete:", index);
+    let temp = [...achievementObj];
+    temp.splice(index, 1);
+    setAchievementObj(temp);
+    console.log(temp);
   };
 
   const handleWorkExpDelete = (index) => {
@@ -277,15 +348,10 @@ function CVInputBox() {
     // });
   };
 
-  const handleEducationDelete = (id) => {
-    console.log("Ed delete:" + id);
-    let temp = { ...educationObj };
-    delete temp[id];
+  const handleEducationDelete = (index) => {
+    let temp = [...educationObj];
+    temp.splice(index, 1);
     setEducationObj(temp);
-    console.log(temp);
-    setEducationComponent((prevComponent) =>
-      prevComponent.filter((item, idx) => idx !== id)
-    );
   };
 
   useEffect(() => {
@@ -394,17 +460,18 @@ function CVInputBox() {
       currentPageComponent = (
         <>
           <div className="educationMain">
-            {educationComponent.map((obj, index) => {
-              return (
-                <EducationInput
-                  key={index}
-                  handleEducationChange={handleEducationChange}
-                  index={index}
-                  value={educationObj[index]}
-                  handleEducationDelete={handleEducationDelete}
-                />
-              );
-            })}
+            {educationObj.length &&
+              educationObj.map((obj, index) => {
+                return (
+                  <EducationInput
+                    key={index}
+                    handleEducationChange={handleEducationChange}
+                    index={index}
+                    value={educationObj[index]}
+                    handleEducationDelete={handleEducationDelete}
+                  />
+                );
+              })}
             <GradientButton
               variant="outlined"
               type="button"
@@ -461,15 +528,18 @@ function CVInputBox() {
       currentPageComponent = (
         <>
           <div className="achievementMain">
-            {achievementComponent.map((obj, index) => {
-              return (
-                <AchievementInput
-                  handleAchievementChange={handleAchievementChange}
-                  index={index}
-                  value={achievementObj[index]}
-                />
-              );
-            })}
+            {achievementObj.length &&
+              achievementObj.map((obj, index) => {
+                return (
+                  <AchievementInput
+                    key={index}
+                    handleAchievementChange={handleAchievementChange}
+                    index={index}
+                    value={achievementObj[index]}
+                    handleAchievementDelete={handleAchievementDelete}
+                  />
+                );
+              })}
             <GradientButton
               variant="outlined"
               type="button"

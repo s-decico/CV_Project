@@ -6,7 +6,12 @@ import {
   WhiteDeleteIcon,
 } from "../../MUIStyledComponents";
 
-function AchievementInput({ handleAchievementChange, index, value }) {
+function AchievementInput({
+  handleAchievementChange,
+  index,
+  value,
+  handleAchievementDelete,
+}) {
   return (
     <>
       <div className="achivementsub">
@@ -33,7 +38,12 @@ function AchievementInput({ handleAchievementChange, index, value }) {
             handleAchievementChange(event, index);
           }}
         />
-        <IconButton aria-label="delete">
+        <IconButton
+          aria-label="delete"
+          onClick={() => {
+            handleAchievementDelete(index);
+          }}
+        >
           <WhiteDeleteIcon />
         </IconButton>
       </div>
