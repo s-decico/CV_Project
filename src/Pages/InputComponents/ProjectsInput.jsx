@@ -28,24 +28,21 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const handleProjectChange = (event, __details) => {
     const { name, value } = event.target;
     let fieldName = name;
-    tempobj = {};
-    tempobj = { ...projectObj };
+    const updatedProjObj = [...projectObj];
 
-    switch (name) {
-      case "projectname":
-        setProjectname(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-      case "projectyear":
-        setProjectyear(value);
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-      case "details":
-        tempobj[index] = { ...tempobj[index], [fieldName]: __details };
-        break;
-    }
+    // Get the current object from the copied array or create a new object if not exists
+    const projObjtemp = updatedProjObj[index] || {};
 
-    setProjectObj(tempobj);
+    // Update the specific field in the copied object
+    if (name === "details") projObjtemp[name] = __details;
+    else projObjtemp[name] = value;
+
+    // Update the copied object back into the copied array
+    updatedProjObj[index] = projObjtemp;
+
+    // Update the state with the modified array
+    setProjectObj(updatedProjObj);
+    console.log(updatedProjObj);
   };
 
   const handleAdd = () => {
@@ -132,11 +129,6 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
               </>
             );
           })}
-        </div>
-        <div className="workexpprojdelete">
-          <IconButton aria-label="delete">
-            <WhiteDeleteIcon />
-          </IconButton>
         </div>
       </div>
     </>

@@ -148,13 +148,13 @@ function CVInputBox() {
   //-------------------------------
   //Work Exp
   const [workExpComponent, setWorkExpComponent] = useState([{}]);
-  const [workExperienceObj, setworkExperienceObj] = useState({});
+  const [workExperienceObj, setworkExperienceObj] = useState([]);
   //Education
   const [educationComponent, setEducationComponent] = useState([{}]);
   const [educationObj, setEducationObj] = useState([]);
   //Projects
   const [projectsComponent, setProjectsComponent] = useState([{}]);
-  const [projectObj, setProjectObj] = useState({});
+  const [projectObj, setProjectObj] = useState([]);
   //Achievement
   const [achievementComponent, setAchievementComponent] = useState([{}]);
   const [achievementObj, setAchievementObj] = useState([]);
@@ -168,7 +168,10 @@ function CVInputBox() {
   //Component render function
   //--------------------------------
   const renderWorkExperience = (e) => {
-    setWorkExpComponent([...workExpComponent, {}]);
+    setworkExperienceObj([
+      ...workExperienceObj,
+      { designation: "", companyname: "", details: [] },
+    ]);
   };
 
   const renderEducation = (e) => {
@@ -180,7 +183,10 @@ function CVInputBox() {
   };
 
   const renderProjects = (e) => {
-    setProjectsComponent([...projectsComponent, {}]);
+    setProjectObj([
+      ...projectObj,
+      { projectname: "", projectyear: "", details: [] },
+    ]);
   };
   const renderAchievement = (e) => {
     //setAchievementObj([...achievementObj, ""]);
@@ -308,14 +314,20 @@ function CVInputBox() {
     console.log(temp);
   };
 
+  const handleProjDelete = (index) => {
+    //Working
+    let temp = [...projectObj];
+    temp.splice(index, 1);
+    setProjectObj(temp);
+    console.log(temp);
+  };
+
   const handleWorkExpDelete = (index) => {
     //Working
-    let temp = { ...workExperienceObj };
-    delete temp[index];
+    let temp = [...workExperienceObj];
+    temp.splice(index, 1);
     setworkExperienceObj(temp);
-    setWorkExpComponent((prevComponent) =>
-      prevComponent.filter((item, idx) => idx !== index)
-    );
+    console.log(temp);
     //--------------------
 
     // setworkExperienceObj((prevObj) => {
@@ -419,30 +431,31 @@ function CVInputBox() {
       currentPageComponent = (
         <>
           <div className="workExperienceProjMain">
-            {workExpComponent.map((obj, index) => {
-              return (
-                <>
-                  <WorkExperienceInput
-                    key={index}
-                    index={index}
-                    value={workExperienceObj[index]}
-                    setworkExperienceObj={setworkExperienceObj}
-                    workExperienceObj={workExperienceObj}
-                    handleWorkExpDelete={handleWorkExpDelete}
-                  />
-                  <div
-                    className="workexpprojdelete"
-                    onClick={() => {
-                      handleWorkExpDelete(index);
-                    }}
-                  >
-                    <IconButton aria-label="delete">
-                      <WhiteDeleteIcon />
-                    </IconButton>
-                  </div>
-                </>
-              );
-            })}
+            {workExperienceObj.length &&
+              workExperienceObj.map((obj, index) => {
+                return (
+                  <>
+                    <WorkExperienceInput
+                      key={index}
+                      index={index}
+                      value={workExperienceObj[index]}
+                      setworkExperienceObj={setworkExperienceObj}
+                      workExperienceObj={workExperienceObj}
+                      handleWorkExpDelete={handleWorkExpDelete}
+                    />
+                    <div
+                      className="workexpprojdelete"
+                      onClick={() => {
+                        handleWorkExpDelete(index);
+                      }}
+                    >
+                      <IconButton aria-label="delete">
+                        <WhiteDeleteIcon />
+                      </IconButton>
+                    </div>
+                  </>
+                );
+              })}
 
             <GradientButton
               variant="outlined"
@@ -499,18 +512,31 @@ function CVInputBox() {
       currentPageComponent = (
         <>
           <div className="workExperienceProjMain">
-            {projectsComponent.map((obj, index) => {
-              return (
-                <>
-                  <ProjectsInput
-                    index={index}
-                    setProjectObj={setProjectObj}
-                    projectObj={projectObj}
-                    value={projectObj[index]}
-                  />
-                </>
-              );
-            })}
+            {projectObj.length &&
+              projectObj.map((obj, index) => {
+                return (
+                  <>
+                    <ProjectsInput
+                      key={index}
+                      index={index}
+                      setProjectObj={setProjectObj}
+                      projectObj={projectObj}
+                      value={projectObj[index]}
+                      handleProjDelete={handleProjDelete}
+                    />
+                    <div
+                      className="workexpprojdelete"
+                      onClick={() => {
+                        handleProjDelete(index);
+                      }}
+                    >
+                      <IconButton aria-label="delete">
+                        <WhiteDeleteIcon />
+                      </IconButton>
+                    </div>
+                  </>
+                );
+              })}
             <GradientButton
               variant="outlined"
               type="button"

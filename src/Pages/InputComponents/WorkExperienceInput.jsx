@@ -55,20 +55,21 @@ function WorkExperienceInput({
 
     const { name, value } = event.target;
     let fieldName = name;
-    tempobj = {};
-    tempobj = { ...workExperienceObj };
+    const updatedWorkExpObj = [...workExperienceObj];
 
-    switch (name) {
-      case "companyname":
-      case "designation":
-        tempobj[index] = { ...tempobj[index], [fieldName]: value };
-        break;
-      case "details":
-        tempobj[index] = { ...tempobj[index], [fieldName]: __details };
-        break;
-    }
+    // Get the current object from the copied array or create a new object if not exists
+    const workexpObjtemp = updatedWorkExpObj[index] || {};
 
-    setworkExperienceObj(tempobj);
+    // Update the specific field in the copied object
+    if (name === "details") workexpObjtemp[name] = __details;
+    else workexpObjtemp[name] = value;
+
+    // Update the copied object back into the copied array
+    updatedWorkExpObj[index] = workexpObjtemp;
+
+    // Update the state with the modified array
+    setworkExperienceObj(updatedWorkExpObj);
+    console.log(updatedWorkExpObj);
   };
 
   const handleAdd = () => {

@@ -10,6 +10,14 @@ import IconButton from "@mui/material/IconButton";
 
 function SkillsInput({ skills, setSkills }) {
   const [inputValue, setInputValue] = useState("");
+
+  const handleSkillDelete = (index) => {
+    console.log(index);
+    let temp = [...skills];
+    temp.splice(index, 1);
+    setSkills(temp);
+    console.log(temp);
+  };
   return (
     <>
       <div className="skillLangIntMain">
@@ -35,12 +43,15 @@ function SkillsInput({ skills, setSkills }) {
           </IconButton>
         </div>
         <div className="skillLangIntdisplay">
-          {skills.map((x) => {
+          {skills.map((x, index) => {
             return (
               <>
                 <div className="skillLangIntdisplayunit">
                   {x}
-                  <IconButton aria-label="delete">
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleSkillDelete(index)}
+                  >
                     <WhiteDeleteIcon />
                   </IconButton>
                 </div>

@@ -11,6 +11,14 @@ import IconButton from "@mui/material/IconButton";
 function LanguageInput({ language, setLanguage }) {
   const [inputValue, setInputValue] = useState("");
 
+  const handlelangDelete = (index) => {
+    console.log(index);
+    let temp = [...language];
+    temp.splice(index, 1);
+    setLanguage(temp);
+    console.log(temp);
+  };
+
   return (
     <>
       <div className="skillLangIntMain">
@@ -37,12 +45,17 @@ function LanguageInput({ language, setLanguage }) {
           </IconButton>
         </div>
         <div className="skillLangIntdisplay">
-          {language.map((x) => {
+          {language.map((x, index) => {
             return (
               <>
                 <div className="skillLangIntdisplayunit">
                   {x}
-                  <IconButton aria-label="delete">
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => {
+                      handlelangDelete(index);
+                    }}
+                  >
                     <WhiteDeleteIcon />
                   </IconButton>
                 </div>

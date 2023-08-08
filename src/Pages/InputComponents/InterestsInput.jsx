@@ -11,6 +11,13 @@ import IconButton from "@mui/material/IconButton";
 
 function InterestsInput({ interests, setInterests }) {
   const [inputValue, setInputValue] = useState("");
+  const handleInterestDelete = (index) => {
+    console.log(index);
+    let temp = [...interests];
+    temp.splice(index, 1);
+    setInterests(temp);
+    console.log(temp);
+  };
   return (
     <>
       <div className="skillLangIntMain">
@@ -37,12 +44,15 @@ function InterestsInput({ interests, setInterests }) {
           </IconButton>
         </div>
         <div className="skillLangIntdisplay">
-          {interests.map((x) => {
+          {interests.map((x, index) => {
             return (
               <>
                 <div className="skillLangIntdisplayunit">
                   {x}
-                  <IconButton aria-label="delete">
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleInterestDelete(index)}
+                  >
                     <WhiteDeleteIcon />
                   </IconButton>
                 </div>
