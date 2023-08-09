@@ -58,7 +58,13 @@ function CVInputBox() {
               if (res.status === 200) {
                 console.log("Received Data from Database");
                 jsonData = res.data;
+                console.log(jsonData);
 
+                // setUserDetails(jsonData.BasicDetails);
+                // setworkExperienceObj(jsonData.WorkExperience);
+                // setEducationObj(jsonData.Education);
+                // setProjectObj(jsonData.Project);
+                // setAchievementObj(jsonData.Achievement);
                 if (jsonData != {}) {
                   if (Object.keys(jsonData.BasicDetails).length > 0) {
                     setUserDetails(jsonData.BasicDetails);
@@ -84,36 +90,6 @@ function CVInputBox() {
                   if (jsonData.Interest.length > 0) {
                     setInterests(jsonData.Interest);
                   }
-                }
-                try {
-                  let workExpLength;
-                  let educationLength;
-                  let projectLength;
-                  let achievementLength;
-                  if (jsonData.WorkExperience)
-                    workExpLength = Object.keys(jsonData.WorkExperience).length;
-                  if (jsonData.Education)
-                    educationLength = Object.keys(jsonData.Education).length;
-                  if (jsonData.Project)
-                    projectLength = Object.keys(jsonData.Project).length;
-                  if (jsonData.Achievement)
-                    achievementLength = Object.keys(
-                      jsonData.Achievement
-                    ).length;
-                  for (let i = 0; i < workExpLength; i++) {
-                    renderWorkExperience();
-                  }
-                  for (let i = 0; i < educationLength; i++) {
-                    renderEducation();
-                  }
-                  for (let i = 0; i < projectLength; i++) {
-                    renderProjects();
-                  }
-                  for (let i = 0; i < achievementLength; i++) {
-                    renderAchievement();
-                  }
-                } catch (err) {
-                  console.log("Error in autorendering: " + err);
                 }
               }
               //console.log(jsonData);
@@ -147,16 +123,12 @@ function CVInputBox() {
   //Component States
   //-------------------------------
   //Work Exp
-  const [workExpComponent, setWorkExpComponent] = useState([{}]);
   const [workExperienceObj, setworkExperienceObj] = useState([]);
   //Education
-  const [educationComponent, setEducationComponent] = useState([{}]);
   const [educationObj, setEducationObj] = useState([]);
   //Projects
-  const [projectsComponent, setProjectsComponent] = useState([{}]);
   const [projectObj, setProjectObj] = useState([]);
   //Achievement
-  const [achievementComponent, setAchievementComponent] = useState([{}]);
   const [achievementObj, setAchievementObj] = useState([]);
   //Skills
   const [skills, setSkills] = useState([]);
@@ -168,36 +140,34 @@ function CVInputBox() {
   //Component render function
   //--------------------------------
   const renderWorkExperience = (e) => {
-    setworkExperienceObj([
-      ...workExperienceObj,
+    console.log("Render Called renderWorkExperience");
+    setworkExperienceObj((prevState) => [
+      ...prevState,
       { designation: "", companyname: "", details: [] },
     ]);
+
+    console.log("Render", workExperienceObj);
   };
 
   const renderEducation = (e) => {
     console.log("Called");
-    setEducationObj([
-      ...educationObj,
+    setEducationObj((prevState) => [
+      ...prevState,
       { qualification: "", school: "", doj: "" },
     ]);
   };
 
   const renderProjects = (e) => {
-    setProjectObj([
-      ...projectObj,
+    setProjectObj((prevState) => [
+      ...prevState,
       { projectname: "", projectyear: "", details: [] },
     ]);
   };
   const renderAchievement = (e) => {
-    //setAchievementObj([...achievementObj, ""]);
-    //setAchievementObj({ ...achievementObj, [uuidv4()]: {} });
-    // setAchievementObj((prevObj) => ({
-    //   ...prevObj,
-    //   [uuidv4()]: {},
-    // }));
-    //setAchievementComponent([...achievementComponent, {}]);
-    // setAchievementObj([...achievementObj, {}]);
-    setAchievementObj([...achievementObj, { title: "", subtitle: "" }]);
+    setAchievementObj((prevState) => [
+      ...prevState,
+      { title: "", subtitle: "" },
+    ]);
   };
 
   //Handler functions
@@ -207,25 +177,6 @@ function CVInputBox() {
     let fieldValue = e.target.value;
     setUserDetails({ ...userDetails, [fieldName]: fieldValue });
   };
-
-  // const handleWorkExpChange = (event, index) => {
-  //   const { name, value } = event.target;
-  //   let fieldName = name;
-  //   tempobj = {};
-  //   tempobj = { ...workExperienceObj };
-  //   switch (name) {
-  //     case "companyname":
-  //       setCompanyname(value);
-  //       tempobj[index] = { ...tempobj[index], [fieldName]: value };
-  //       break;
-  //     case "designation":
-  //       setDesignation(value);
-  //       tempobj[index] = { ...tempobj[index], [fieldName]: value };
-  //       break;
-  //   }
-
-  //   setworkExperienceObj(tempobj);
-  // };
 
   const handleEducationChange = (event, index) => {
     const { name, value } = event.target;
@@ -246,41 +197,6 @@ function CVInputBox() {
     setEducationObj(updatedEducationObj);
     console.log(updatedEducationObj);
   };
-
-  // const handleAchievementChange = (event, index) => {
-  //   const { name, value } = event.target;
-  //   let fieldName = name;
-
-  // let temparr = [...achievementObj];
-  // let tempobj = {};
-
-  // switch (name) {
-  //   case "title":
-  //     tempobj = { ...temparr[index], [fieldName]: value };
-  //     break;
-  //   case "subtitle":
-  //     tempobj = { ...temparr[index], [fieldName]: value };
-  //     break;
-  //   default:
-  //     break;
-  // }
-
-  //   // // Update the achievement object in the temparr array
-  //   // temparr[index] = tempobj;
-
-  //   // // Update the state with the updated temparr
-  //   // setAchievementObj(temparr);
-
-  //   // console.log(temparr);
-
-  //   setAchievementObj((prevObj) => ({
-  //     ...prevObj,
-  //     [index]: {
-  //       ...prevObj[index],
-  //       [fieldName]: value,
-  //     },
-  //   }));
-  // };
 
   const handleAchievementChange = (event, index) => {
     const { name, value } = event.target;
@@ -315,7 +231,6 @@ function CVInputBox() {
   };
 
   const handleProjDelete = (index) => {
-    //Working
     let temp = [...projectObj];
     temp.splice(index, 1);
     setProjectObj(temp);
@@ -323,41 +238,10 @@ function CVInputBox() {
   };
 
   const handleWorkExpDelete = (index) => {
-    //Working
     let temp = [...workExperienceObj];
     temp.splice(index, 1);
     setworkExperienceObj(temp);
     console.log(temp);
-    //--------------------
-
-    // setworkExperienceObj((prevObj) => {
-    //   const newObj = { ...prevObj };
-    //   delete newObj[index];
-    //   return newObj;
-    // });
-
-    // setWorkExpComponent((prevComponent) =>
-    //   prevComponent.filter((item) => item.index !== index)
-    // );
-
-    // let tempcomp = workExpComponent;
-    // delete tempcomp[index];
-    // setWorkExpComponent(tempcomp);
-
-    // setworkExperienceObj((prevObj) =>
-    //   Object.keys(prevObj)
-    //     .filter((key) => parseInt(key) !== index)
-    //     .reduce((acc, key) => {
-    //       acc[key] = prevObj[key];
-    //       return acc;
-    //     }, {})
-    // );
-
-    // setworkExperienceObj((prevObj) => {
-    //   const newObj = { ...prevObj };
-    //   delete newObj[index];
-    //   return newObj;
-    // });
   };
 
   const handleEducationDelete = (index) => {
@@ -367,8 +251,8 @@ function CVInputBox() {
   };
 
   useEffect(() => {
-    console.log(educationObj);
-  }, [educationObj]);
+    console.log("WorkEx:", workExperienceObj);
+  }, [workExperienceObj]);
 
   const sendDataToServer = (tempobj) => {
     console.log("data send call");
@@ -421,10 +305,17 @@ function CVInputBox() {
   switch (currentPage) {
     case 1:
       currentPageComponent = (
-        <UserDetailsInput
-          handleUserDetails={handleUserDetails}
-          userDetails={userDetails}
-        />
+        <>
+          <div className="detailsBox">
+            <div className="heading">User Details</div>
+            <div className="detailsComponent">
+              <UserDetailsInput
+                handleUserDetails={handleUserDetails}
+                userDetails={userDetails}
+              />
+            </div>
+          </div>
+        </>
       );
       break;
     case 2:
@@ -432,30 +323,32 @@ function CVInputBox() {
         <>
           <div className="workExperienceProjMain">
             {workExperienceObj.length &&
-              workExperienceObj.map((obj, index) => {
-                return (
-                  <>
-                    <WorkExperienceInput
-                      key={index}
-                      index={index}
-                      value={workExperienceObj[index]}
-                      setworkExperienceObj={setworkExperienceObj}
-                      workExperienceObj={workExperienceObj}
-                      handleWorkExpDelete={handleWorkExpDelete}
-                    />
-                    <div
-                      className="workexpprojdelete"
-                      onClick={() => {
-                        handleWorkExpDelete(index);
-                      }}
-                    >
-                      <IconButton aria-label="delete">
-                        <WhiteDeleteIcon />
-                      </IconButton>
-                    </div>
-                  </>
-                );
-              })}
+              workExperienceObj
+                .filter((obj) => Object.keys(obj).length > 0)
+                .map((obj, index) => {
+                  return (
+                    <>
+                      <WorkExperienceInput
+                        key={index}
+                        index={index}
+                        value={workExperienceObj[index]}
+                        setworkExperienceObj={setworkExperienceObj}
+                        workExperienceObj={workExperienceObj}
+                        handleWorkExpDelete={handleWorkExpDelete}
+                      />
+                      <div
+                        className="workexpprojdelete"
+                        onClick={() => {
+                          handleWorkExpDelete(index);
+                        }}
+                      >
+                        <IconButton aria-label="delete">
+                          <WhiteDeleteIcon />
+                        </IconButton>
+                      </div>
+                    </>
+                  );
+                })}
 
             <GradientButton
               variant="outlined"
@@ -474,17 +367,19 @@ function CVInputBox() {
         <>
           <div className="educationMain">
             {educationObj.length &&
-              educationObj.map((obj, index) => {
-                return (
-                  <EducationInput
-                    key={index}
-                    handleEducationChange={handleEducationChange}
-                    index={index}
-                    value={educationObj[index]}
-                    handleEducationDelete={handleEducationDelete}
-                  />
-                );
-              })}
+              educationObj
+                .filter((obj) => Object.keys(obj).length > 0)
+                .map((obj, index) => {
+                  return (
+                    <EducationInput
+                      key={index}
+                      handleEducationChange={handleEducationChange}
+                      index={index}
+                      value={educationObj[index]}
+                      handleEducationDelete={handleEducationDelete}
+                    />
+                  );
+                })}
             <GradientButton
               variant="outlined"
               type="button"
@@ -513,30 +408,32 @@ function CVInputBox() {
         <>
           <div className="workExperienceProjMain">
             {projectObj.length &&
-              projectObj.map((obj, index) => {
-                return (
-                  <>
-                    <ProjectsInput
-                      key={index}
-                      index={index}
-                      setProjectObj={setProjectObj}
-                      projectObj={projectObj}
-                      value={projectObj[index]}
-                      handleProjDelete={handleProjDelete}
-                    />
-                    <div
-                      className="workexpprojdelete"
-                      onClick={() => {
-                        handleProjDelete(index);
-                      }}
-                    >
-                      <IconButton aria-label="delete">
-                        <WhiteDeleteIcon />
-                      </IconButton>
-                    </div>
-                  </>
-                );
-              })}
+              projectObj
+                .filter((obj) => Object.keys(obj).length > 0)
+                .map((obj, index) => {
+                  return (
+                    <>
+                      <ProjectsInput
+                        key={index}
+                        index={index}
+                        setProjectObj={setProjectObj}
+                        projectObj={projectObj}
+                        value={projectObj[index]}
+                        handleProjDelete={handleProjDelete}
+                      />
+                      <div
+                        className="workexpprojdelete"
+                        onClick={() => {
+                          handleProjDelete(index);
+                        }}
+                      >
+                        <IconButton aria-label="delete">
+                          <WhiteDeleteIcon />
+                        </IconButton>
+                      </div>
+                    </>
+                  );
+                })}
             <GradientButton
               variant="outlined"
               type="button"

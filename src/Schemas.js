@@ -34,10 +34,10 @@ const achievementSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   BasicDetails: BasicDetailsSchema,
-  WorkExperience: { type: Map, of: workExperienceSchema },
-  Education: { type: Map, of: educationSchema },
-  Project: { type: Map, of: projectSchema },
-  Achievement: { type: Map, of: achievementSchema },
+  WorkExperience: [workExperienceSchema],
+  Education: [educationSchema],
+  Project: [projectSchema],
+  Achievement: [achievementSchema],
   Language: [String],
   Interest: [String],
   Skills: [String],
