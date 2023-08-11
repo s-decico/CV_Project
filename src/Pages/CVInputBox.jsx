@@ -32,8 +32,6 @@ import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
 import LinearWithValueLabel from "../MUIComponents/LinearProgressBar";
 
-import { v4 as uuidv4 } from "uuid";
-
 function CVInputBox() {
   let jsonData = {};
   const navigate = useNavigate();
@@ -301,22 +299,16 @@ function CVInputBox() {
   };
 
   let currentPageComponent;
-
+  let headingTitle = "";
   switch (currentPage) {
     case 1:
       currentPageComponent = (
-        <>
-          <div className="detailsBox">
-            <div className="heading">User Details</div>
-            <div className="detailsComponent">
-              <UserDetailsInput
-                handleUserDetails={handleUserDetails}
-                userDetails={userDetails}
-              />
-            </div>
-          </div>
-        </>
+        <UserDetailsInput
+          handleUserDetails={handleUserDetails}
+          userDetails={userDetails}
+        />
       );
+      headingTitle = "User Details";
       break;
     case 2:
       currentPageComponent = (
@@ -360,7 +352,7 @@ function CVInputBox() {
           </div>
         </>
       );
-
+      headingTitle = "Work Experience";
       break;
     case 3:
       currentPageComponent = (
@@ -391,6 +383,7 @@ function CVInputBox() {
           </div>
         </>
       );
+      headingTitle = "Education";
       break;
     case 4:
       currentPageComponent = (
@@ -402,6 +395,7 @@ function CVInputBox() {
           </div>
         </>
       );
+      headingTitle = "Skills, Languages and Interests";
       break;
     case 5:
       currentPageComponent = (
@@ -445,6 +439,7 @@ function CVInputBox() {
           </div>
         </>
       );
+      headingTitle = "Projects";
 
       break;
     case 6:
@@ -473,6 +468,7 @@ function CVInputBox() {
           </div>
         </>
       );
+      headingTitle = "Achievements";
       break;
 
     default:
@@ -483,8 +479,10 @@ function CVInputBox() {
     <>
       <Navbar />
       <div className="cvinput_box">
+        <div className="heading">{headingTitle}</div>
+        {/* <div className="detailsBox"> */}
         <form action="/" className="cvinputform" method="post">
-          {currentPageComponent}
+          <div className="detailsComponent">{currentPageComponent}</div>
 
           {/* Pagination buttons */}
           <div className="pagination">
@@ -520,6 +518,7 @@ function CVInputBox() {
             <LinearWithValueLabel currentPage={currentPage} />
           </div>
         </form>
+        {/* </div> */}
       </div>
     </>
   );

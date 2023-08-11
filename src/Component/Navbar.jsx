@@ -232,6 +232,9 @@ function Navbar() {
                       onClick={() => {
                         handleCloseUserMenu();
                         if (setting === "Logout") handleLogout();
+                        if (setting === "My CV") {
+                          navigate("/cvinput");
+                        }
                       }}
                     >
                       <Typography textAlign="center">{setting}</Typography>

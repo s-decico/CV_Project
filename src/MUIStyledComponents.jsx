@@ -6,22 +6,22 @@ import { Add } from "@mui/icons-material";
 const WhiteTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "white", // Border color
+      borderColor: "black", // Border color
     },
     "&:hover fieldset": {
-      borderColor: "white", // Border color on hover
+      borderColor: "black", // Border color on hover
     },
     "&.Mui-focused fieldset": {
-      borderColor: "white", // Border color when focused
+      borderColor: "black", // Border color when focused
     },
   },
   "& .MuiInputLabel-root": {
-    color: "white", // Label color
+    color: "black", // Label color
   },
   "& .MuiInputLabel-root": {
-    color: "white", // Label color
+    color: "black", // Label color
     "&.Mui-focused": {
-      color: "white", // Label color when focused
+      color: "black", // Label color when focused
     },
   },
 });
@@ -29,7 +29,7 @@ const WhiteTextField = styled(TextField)({
 const GradientButton = styled(Button)(({ theme }) => ({
   background: "transparent",
   border: "2px solid white",
-  color: "white",
+  color: "black",
   "&:hover": {
     background: "linear-gradient(45deg, #4977ce 30%, #7c50b1 90%)",
     border: "2px solid white",
@@ -40,7 +40,7 @@ const GradientButton = styled(Button)(({ theme }) => ({
   },
   "&:not(:hover):not(:focus)": {
     background: "transparent",
-    border: "2px solid white",
+    border: "2px solid black",
   },
 }));
 
