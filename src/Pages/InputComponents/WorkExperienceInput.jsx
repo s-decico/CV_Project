@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Tooltip } from "@mui/material";
 import {
   WhiteTextField,
   GradientButton,
@@ -119,6 +119,34 @@ function WorkExperienceInput({
             }}
             sx={{ marginTop: "1rem" }}
           />
+          <div className="workExpDate">
+            <WhiteTextField
+              id="outlined-basic"
+              label="Date of Joining"
+              variant="outlined"
+              type="text"
+              name="startdate"
+              value={value ? value.startdate : ""}
+              onChange={(event) => {
+                handleWorkExpChange(event);
+              }}
+              sx={{ marginTop: "1rem" }}
+            />
+            <Tooltip title="Leave empty if still working" placement="top">
+              <WhiteTextField
+                id="outlined-basic"
+                label="End Date "
+                variant="outlined"
+                type="text"
+                name="enddate"
+                value={value ? value.enddate : ""}
+                onChange={(event) => {
+                  handleWorkExpChange(event);
+                }}
+                sx={{ marginTop: "1rem" }}
+              />
+            </Tooltip>
+          </div>
         </div>
 
         <div className="detailsMain">

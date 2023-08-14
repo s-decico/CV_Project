@@ -49,7 +49,7 @@ function UserDetailsInput({ handleUserDetails, userDetails }) {
         />
         <WhiteTextField
           id="outlined-basic"
-          label="LinkedIn"
+          label="LinkedIn URL"
           variant="outlined"
           type="text"
           name="linkedin"
@@ -58,7 +58,7 @@ function UserDetailsInput({ handleUserDetails, userDetails }) {
         />
         <WhiteTextField
           id="outlined-basic"
-          label="Github"
+          label="Github URL"
           variant="outlined"
           type="text"
           name="github"

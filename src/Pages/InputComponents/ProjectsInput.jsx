@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Tooltip } from "@mui/material";
 import {
   WhiteTextField,
   GradientButton,
@@ -92,6 +92,20 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
             }}
             sx={{ marginTop: "1rem" }}
           />
+          <Tooltip title="Enter the URL of the project" placement="top">
+            <WhiteTextField
+              id="outlined-basic"
+              label="Link to Project"
+              variant="outlined"
+              type="text"
+              name="projectlink"
+              value={value ? value.projectlink : ""}
+              onChange={(event) => {
+                handleProjectChange(event);
+              }}
+              sx={{ marginTop: "1rem" }}
+            />
+          </Tooltip>
         </div>
         <div className="detailsMain">
           <div className="detailsHead">

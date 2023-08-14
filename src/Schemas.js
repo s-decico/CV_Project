@@ -13,6 +13,8 @@ const workExperienceSchema = new mongoose.Schema({
   companyname: String,
   designation: String,
   details: [String],
+  startdate: String,
+  enddate: String,
 });
 
 const educationSchema = new mongoose.Schema({
@@ -25,6 +27,7 @@ const projectSchema = new mongoose.Schema({
   projectname: String,
   projectyear: String,
   details: [String],
+  projectlink: String,
 });
 
 const achievementSchema = new mongoose.Schema({
