@@ -5,6 +5,7 @@ import {
   GradientButton,
   WhiteDeleteIcon,
 } from "../../MUIStyledComponents";
+import { Delete } from "@mui/icons-material";
 
 function AchievementInput({
   handleAchievementChange,
@@ -44,7 +45,7 @@ function AchievementInput({
             handleAchievementDelete(index);
           }}
         >
-          <WhiteDeleteIcon />
+          <Delete />
         </IconButton>
       </div>
     </>

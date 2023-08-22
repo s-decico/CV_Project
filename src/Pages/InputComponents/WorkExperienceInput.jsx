@@ -178,7 +178,7 @@ function WorkExperienceInput({
                     handleDetailsDelete(index);
                   }}
                 >
-                  <WhiteDeleteIcon />
+                  <DeleteIcon />
                 </IconButton>
               </div>
             );

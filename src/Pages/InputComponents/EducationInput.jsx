@@ -6,6 +6,7 @@ import {
   WhiteDeleteIcon,
 } from "../../MUIStyledComponents";
 import IconButton from "@mui/material/IconButton";
+import { Delete } from "@mui/icons-material";
 
 function EducationInput({
   handleEducationChange,
@@ -55,7 +56,7 @@ function EducationInput({
           aria-label="delete"
           onClick={() => handleEducationDelete(index)}
         >
-          <WhiteDeleteIcon />
+          <Delete />
         </IconButton>
       </div>
     </>

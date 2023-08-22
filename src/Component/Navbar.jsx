@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Login, Work } from "@mui/icons-material";
+import { Login, Person, Work } from "@mui/icons-material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ function Navbar() {
         navigate("/");
         break;
       case "My CV":
-        navigate("/cvinput");
+        navigate("/cv");
         break;
       case "Tips":
         navigate("/");
@@ -82,7 +82,7 @@ function Navbar() {
         borderRadius: "1rem",
         marginTop: "1rem",
         backdropFilter: "blur(5px)",
-        backgroundColor: "rgba(116, 155, 194, 0.3)",
+        backgroundColor: "#e5e5cb58",
       }}
     >
       <Container maxWidth="xl">
@@ -92,7 +92,13 @@ function Navbar() {
             display: "flex",
           }}
         >
-          <Work sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Work
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              color: "#ce4949",
+            }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -104,7 +110,7 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".2rem",
-              color: "inherit",
+              color: "#ce4949",
               textDecoration: "none",
             }}
           >
@@ -165,8 +171,9 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#1a120b",
               textDecoration: "none",
+              fontSize: "1.3rem",
             }}
           >
             RESUMATE
@@ -184,7 +191,7 @@ function Navbar() {
                   handleCloseNavMenu();
                   navbarSwitch(page);
                 }}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "#1a120b", display: "block" }}
               >
                 {page}
               </Button>
@@ -202,10 +209,9 @@ function Navbar() {
                   }}
                 >
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
+                    <Avatar sx={{ bgcolor: "black" }}>
+                      <Person />
+                    </Avatar>
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -233,7 +239,7 @@ function Navbar() {
                         handleCloseUserMenu();
                         if (setting === "Logout") handleLogout();
                         if (setting === "My CV") {
-                          navigate("/cvinput");
+                          navigate("/cv");
                         }
                       }}
                     >

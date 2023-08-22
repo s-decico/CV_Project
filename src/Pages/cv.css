@@ -4,30 +4,49 @@
     padding: 0;
 }
 
+/* Hex codes: Peach #FCEDDA, Burnt Orange #EE4E34 */
+/* Hex codes: Scarlet #B85042, Light Olive #E7E8D1, Light Teal #A7BEAE */
+/* #45B5BA #BA4A45 */
+
+/* FFFAD7 FCDDB0 E97777 */
+
+/* #197C88 #FF9F9F #E97777 #FCDDB0 #FFFAD7 */
+/* Cream palette: #1A120B #3C2A21 #D5CEA3 #E5E5CB */
+
+/* Secondary: #3c2a215a Primary: #1a120b7a */
 .colour_scheme{
     color:#F6F4EB
 #91C8E4
 #749BC2
-#4682A9
+#4682A9 
 #4977ce
 #7c50b1
 
+#FFFAD7 #FCDDB0 #E97777
+#201a16
+#E5E5CB
+
+#1a120b7a #3c2a215a #D5CEA3 #e5e5cb58
+#b7b7b7
+#968200
 }
 
 .cvinput_box{
     width: 70%;
-    margin: 0 auto;
-    margin-top: 2rem;
+    margin: 2rem auto 2rem auto;
+    /* margin-top: 2rem; */
+    /* margin-bottom:100rem; */
     border-radius: 1rem;
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1.5rem;
     background-color: transparent;
     backdrop-filter: blur(14px);
-    background-color: rgba(35, 35, 35, 0.3);
+    background-color: #e5e5cb81;
+    box-sizing: border-box;
 }
-.cvinputform{  
-    /* width: 100%;
+/* .cvinputform{  
+     width: 100%;
     margin: 0 auto;
     border-radius: 1rem 1rem 1rem 1rem;
     padding: 2rem;
@@ -38,11 +57,11 @@
     backdrop-filter: blur(14px); 
      background-color: rgba(35, 35, 35, 0.3); 
     background-color: rgba(255, 255, 255, 0.3);
-    margin: 1rem; */
-}
+    margin: 1rem; 
+} */
 
 .heading{
-    background-color: white;
+    background-color: #f6eebe;
     color: black;
     height: 4rem;
     display: flex;
@@ -50,6 +69,7 @@
     align-items: center;
     border-radius: 1rem 1rem 0rem 0rem;
     font-size: 2rem;
+    
 }
 
 .detailsComponent{
@@ -61,8 +81,8 @@
     grid-template-columns: 1fr;
     grid-gap: 1rem;
     background-color: transparent;
-    margin: 1rem;
-    background-color: white;
+    margin: 0rem 1rem 1rem 1rem;
+    background-color: #E5E5CB;
     /* background: linear-gradient(45deg, #3a40e2, #7965de); */
     /* box-shadow: 
     8px 8px 16px rgba(0, 0, 0, 0.1),
@@ -79,13 +99,14 @@
 }
 
 .linearprogress{
-    padding: 0rem 1rem 2.5rem 1rem;
+    padding: 0rem 1rem 0rem 1rem;
 }
 
 .userDetails{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
+    
 }
 
 
@@ -112,7 +133,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     /* backdrop-filter: blur(50px); */
-    background-color: #00000068; 
+    /* background-color: #00000068;  */
+    background-color:#f6eebe;
     padding: 1rem;
     border: 1px solid #fff;
     border-radius: 10px;
@@ -162,18 +184,87 @@ border-radius: 10px;
     justify-content: space-between;
     margin: 1rem 0rem 1rem 0rem;}
 
-
-
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
 /* CV Main Document */
 /* ---------------------------------- */
-
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
 
 .CVBox{
     background-color: white;
     width: 70%;
-    margin: 0 auto;
-    pad: 1rem;
+    margin: 0 auto 2rem auto;
+    padding: 1rem;
+    border-radius: 1rem
+
 }
+
+.createCVBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+}
+.createCVText{
+    font-size: 1.5rem;
+}
+.cvboxButtonGroup{
+    margin: 2rem auto 2rem auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    
+}
+
+
+.cvpdfButtons{
+  width: 20rem;
+  padding: 2rem 2.5rem;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  letter-spacing: 4px;
+  transition: 0.2s;
+  cursor: pointer;
+  border: 3px solid #fff;
+  font-size: 1rem;
+  box-shadow:none;
+  transition: background-color 1s;
+  background: linear-gradient(90deg, #ce4949, transparent) #d47878;
+}
+
+.cvpdfButtons:hover{
+    color: #fff;
+    background-color: #D5CEA3;
+    /* box-shadow: 0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff; */
+     
+}
+
+/* .cvpdfButtons:focus{
+    color: #fff;
+    background:none;
+    background-color: #5c2121;
+    /* box-shadow: 0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff; */
+     
+
+
+/* .cvpdfButtons:not(:focus){
+    color: #fff;
+    background: linear-gradient(90deg, #ce4949, transparent) #d47878;
+} */
 
 .nameBox{
     display: flex;
@@ -217,6 +308,7 @@ border-radius: 10px;
     gap: 1rem;
     /* background-color: aquamarine; */
     padding: 1rem 4rem 1rem 4rem;
+    page-break-inside: avoid;
 
 }
 .workExpElement{
@@ -245,6 +337,7 @@ border-radius: 10px;
 }
 
 .educationBox{
+    page-break-inside: avoid;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -286,6 +379,7 @@ border-radius: 10px;
     /* background-color: #4682A9; */
     padding: 1rem 4rem 1rem 4rem;
     gap: 1rem;
+    page-break-inside: avoid;
 }
 
 .projectnameBox{
@@ -309,6 +403,7 @@ border-radius: 10px;
 }
 
 .achievementBox{
+    page-break-inside: avoid;
     display: flex;
     flex-direction: column;
     /* background-color: burlywood; */
@@ -325,6 +420,7 @@ border-radius: 10px;
 }
 
 .interestAndLangBox{
+    page-break-inside: avoid;
     display: flex;
     flex-direction: row;
     /* justify-content: space-around;
@@ -348,6 +444,7 @@ display: flex;
 flex-direction: row;
 gap: 1rem;
 align-items: center;
+justify-content: center;
 height: 2rem;
 }
 .interestElementBox{
@@ -357,4 +454,5 @@ height: 2rem;
     gap: 1rem;
     align-items: center;
     height: 2rem;
+    justify-content: center;
 }

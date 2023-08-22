@@ -6,8 +6,8 @@ import {
   WhiteDeleteIcon,
   WhiteAddIcon,
 } from "../../MUIStyledComponents";
-import { Add } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
+import { Add, Delete } from "@mui/icons-material";
 
 function InterestsInput({ interests, setInterests }) {
   const [inputValue, setInputValue] = useState("");
@@ -40,7 +40,7 @@ function InterestsInput({ interests, setInterests }) {
               setInputValue("");
             }}
           >
-            <WhiteAddIcon />
+            <Add />
           </IconButton>
         </div>
         <div className="skillLangIntdisplay">
@@ -53,7 +53,7 @@ function InterestsInput({ interests, setInterests }) {
                     aria-label="delete"
                     onClick={() => handleInterestDelete(index)}
                   >
-                    <WhiteDeleteIcon />
+                    <Delete />
                   </IconButton>
                 </div>
                 <Divider />

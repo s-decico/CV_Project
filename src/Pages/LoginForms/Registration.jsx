@@ -20,7 +20,7 @@ function Registration() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/cvinput");
+      navigate("/cv");
     }
   }, [isAuthenticated]);
 
@@ -64,7 +64,7 @@ function Registration() {
           .then((res) => {
             if (res.status === 200) {
               console.log("Registration Data Sent");
-              navigate("/cvinput");
+              navigate("/cv");
             } else navigate("/register");
           })
           .catch((err) => {
@@ -86,6 +86,7 @@ function Registration() {
     <>
       <Navbar />
       <div className="reg_container">
+        <div className="headingLogin">Register with us</div>
         <WhiteTextField
           id="outlined-basic"
           label="Name"
@@ -125,7 +126,11 @@ function Registration() {
           variant="contained"
           type="button"
           onClick={handleRegistration}
-          sx={{ width: "100%" }}
+          sx={{
+            width: "100%",
+            backgroundColor: "#ce4949",
+            border: "2px solid #ce4949",
+          }}
         >
           Submit
         </GradientButton>

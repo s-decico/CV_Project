@@ -20,7 +20,7 @@ Accent: #4682A9
 }
 .navbar{
     display: flex;
-    background-color: brown;
+    /* background-color: brown; */
     width:fit-content;
     color: white;
     /*margin: 1.5em;*/

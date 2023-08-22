@@ -346,6 +346,7 @@ function CVInputBox() {
               variant="outlined"
               type="button"
               onClick={renderWorkExperience}
+              sx={{ borderRadius: "30px" }}
             >
               +
             </GradientButton>
@@ -376,6 +377,7 @@ function CVInputBox() {
               variant="outlined"
               type="button"
               onClick={renderEducation}
+              sx={{ borderRadius: "30px" }}
               // sx={{ width: "1rem", height: "1rem", borderRadius: "50%" }}
             >
               +
@@ -462,6 +464,7 @@ function CVInputBox() {
               variant="outlined"
               type="button"
               onClick={renderAchievement}
+              sx={{ borderRadius: "30px" }}
             >
               +
             </GradientButton>
@@ -481,6 +484,9 @@ function CVInputBox() {
       <div className="cvinput_box">
         <div className="heading">{headingTitle}</div>
         {/* <div className="detailsBox"> */}
+        <div className="linearprogress">
+          <LinearWithValueLabel currentPage={currentPage} />
+        </div>
         <form action="/" className="cvinputform" method="post">
           <div className="detailsComponent">{currentPageComponent}</div>
 
@@ -490,7 +496,7 @@ function CVInputBox() {
               <GradientButton
                 variant="outlined"
                 onClick={prevPage}
-                sx={{ borderRadius: "30px" }}
+                sx={{ borderRadius: "30px", border: "2px solid #ce4949" }}
               >
                 Previous
               </GradientButton>
@@ -499,7 +505,7 @@ function CVInputBox() {
               <GradientButton
                 variant="outlined"
                 onClick={nextPage}
-                sx={{ borderRadius: "30px" }}
+                sx={{ borderRadius: "30px", border: "2px solid #ce4949" }}
               >
                 Next
               </GradientButton>
@@ -508,14 +514,17 @@ function CVInputBox() {
                 variant="contained"
                 type="button"
                 onClick={handleFormSubmit}
-                sx={{ borderRadius: "30px", backgroundColor: "" }}
+                sx={{
+                  borderRadius: "30px",
+                  backgroundColor: "",
+                  border: "2px solid #ce4949",
+                  background:
+                    "linear-gradient(90deg, #ce4949, transparent) #D5CEA3",
+                }}
               >
                 Submit
               </GradientButton>
             )}
-          </div>
-          <div className="linearprogress">
-            <LinearWithValueLabel currentPage={currentPage} />
           </div>
         </form>
         {/* </div> */}

@@ -13,14 +13,16 @@ function LinearProgressWithLabel(props) {
         justifyContent: "center",
       }}
     >
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "80%" }}>
         <LinearProgress
           variant="determinate"
           {...props}
           sx={{
             backgroundColor: "#fff",
+            height: "0.7rem",
+            borderRadius: "10px",
             "& .MuiLinearProgress-barColorPrimary": {
-              backgroundColor: "#7c50b1", // Set the color of the progress indicator
+              backgroundColor: "#ce4949", // Set the color of the progress indicator
             },
           }}
         />

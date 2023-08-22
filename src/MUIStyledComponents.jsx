@@ -31,17 +31,22 @@ const GradientButton = styled(Button)(({ theme }) => ({
   border: "2px solid white",
   color: "black",
   "&:hover": {
-    background: "linear-gradient(45deg, #4977ce 30%, #7c50b1 90%)",
+    // background: "linear-gradient(45deg, #4977ce 30%, #7c50b1 90%)",
+    // background: "linear-gradient(45deg, #ce4949 30%, #D5CEA3 90%)",
+    backgroundColor: "#ce4949",
     border: "2px solid white",
+    color: "white",
   },
   "&:focus": {
-    background: "linear-gradient(45deg, #4977ce 30%, #7c50b1 90%)",
+    // background: "linear-gradient(45deg, #4977ce 30%, #7c50b1 90%)",
+    backgroundColor: "#ce4949",
     border: "2px solid white",
+    color: "white",
   },
-  "&:not(:hover):not(:focus)": {
-    background: "transparent",
-    border: "2px solid black",
-  },
+  // "&:not(:hover):not(:focus)": {
+  //   background: "transparent",
+  //   border: "2px solid black",
+  // },
 }));
 
 const WhiteDeleteIcon = styled(DeleteIcon)({

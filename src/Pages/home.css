@@ -26,6 +26,9 @@ body, html {
 
 body{
     background-image: url(../Images/home_back.jpg);
+    /* background-repeat: no-repeat;
+    background-size: cover; 
+    background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -40,8 +43,8 @@ body{
     border-radius: 1rem;
     margin-top: 5rem;
     backdrop-filter: blur(10px);
-    background-color: rgba(116, 155, 194, 0.3);
-    color:white;
+    background-color: #e5e5cb58;
+    color:#1a120b;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,24 +60,29 @@ body{
     width: 14rem;
     height: 100%;
   padding: 25px 30px;
-  background-color: transparent;
-  color: white;
+  /* background-color: #ce4949; */
+  color: #fff;
   font-weight: bold;
   border-radius: 5px;
   letter-spacing: 4px;
   /* overflow: hidden; */
   transition: 0.2s;
   cursor: pointer;
-  border: 1px solid #fff;
+  border: 3px solid #fff;
   font-size: 1rem;
+  box-shadow:none;
+  transition: background-color 1s;
+  background: linear-gradient(90deg, #ce4949, transparent) #d47878;
 }
 
 .home_body button:hover{
-    color: #050801;
-    box-shadow: 0 0 7px #ffffff,
+    color: #fff;
+    /* background:linear-gradient(to right, #dc9d9d, #ce4949); */
+    background-color: #D5CEA3;
+    /* box-shadow: 0 0 7px #ffffff,
                 0 0 7px #ffffff,
                 0 0 7px #ffffff,
-                0 0 7px #ffffff;
+                0 0 7px #ffffff; */
      
 }
 

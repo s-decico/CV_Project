@@ -7,6 +7,7 @@ import {
   WhiteAddIcon,
 } from "../../MUIStyledComponents";
 import IconButton from "@mui/material/IconButton";
+import { Add, Delete } from "@mui/icons-material";
 
 function SkillsInput({ skills, setSkills }) {
   const [inputValue, setInputValue] = useState("");
@@ -39,7 +40,7 @@ function SkillsInput({ skills, setSkills }) {
               setInputValue("");
             }}
           >
-            <WhiteAddIcon />
+            <Add />
           </IconButton>
         </div>
         <div className="skillLangIntdisplay">
@@ -52,7 +53,7 @@ function SkillsInput({ skills, setSkills }) {
                     aria-label="delete"
                     onClick={() => handleSkillDelete(index)}
                   >
-                    <WhiteDeleteIcon />
+                    <Delete />
                   </IconButton>
                 </div>
                 <Divider />

@@ -34,7 +34,7 @@ function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/cvinput");
+      navigate("/cv");
     }
   }, [isAuthenticated]);
 
@@ -64,7 +64,7 @@ function Login() {
           switch (res.status) {
             case 200:
               console.log("You are logged in now");
-              navigate("/cvinput");
+              navigate("/cv");
               break;
             default:
               console.log("Unexpected response");
@@ -99,6 +99,7 @@ function Login() {
     <>
       <Navbar />
       <div className="login_container">
+        <div className="headingLogin">Login</div>
         <WhiteTextField
           label="Email"
           variant="outlined"
@@ -135,12 +136,16 @@ function Login() {
           variant="contained"
           type="button"
           onClick={handleLogin}
-          sx={{ width: "100%" }}
+          sx={{
+            width: "100%",
+            backgroundColor: "#ce4949",
+            border: "2px solid #ce4949",
+          }}
         >
           {loading ? (
             <CircularProgress size={24} sx={{ color: "#FFF" }} />
           ) : (
-            "Submit"
+            "Login"
           )}
         </GradientButton>
         New to us? Create an account

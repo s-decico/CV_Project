@@ -6,7 +6,7 @@ import {
   WhiteDeleteIcon,
 } from "../../MUIStyledComponents";
 import IconButton from "@mui/material/IconButton";
-import { Add } from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
 
 function ProjectsInput({ index, setProjectObj, projectObj, value }) {
   const [_projectname, setProjectname] = useState("");
@@ -137,7 +137,7 @@ function ProjectsInput({ index, setProjectObj, projectObj, value }) {
                       handleDetailsDelete(index);
                     }}
                   >
-                    <WhiteDeleteIcon />
+                    <Delete />
                   </IconButton>
                 </div>
               </>
