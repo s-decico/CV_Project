@@ -21,12 +21,16 @@ app.use((err, req, res, next) => {
   console.log("Error:" + err);
 });
 app.use((req, res, next) => {
-  let url =
-    process.env.ENVIRONMENT == "PRODUCTION"
-      ? "http://resumatebys.netlify.app"
-      : "http://localhost:3000";
+  const allowedOrigins = [
+    "http://localhost:3000",
+    "https://resumatebys.netlify.app",
+  ];
+  const origin = req.headers.origin;
 
-  res.setHeader("Access-Control-Allow-Origin", url);
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Methods",
