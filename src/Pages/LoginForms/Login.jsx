@@ -39,7 +39,8 @@ function Login() {
   }, [isAuthenticated]);
 
   const handleLogin = () => {
-    console.log(process.env.ENVIRONMENT);
+    let abc = process.env.REACT_APP_ENVIRONMENT;
+    console.log("ENV", abc);
     setPasswordIncorrect(false);
     setUserNotFound(false);
     setEmptyEmail(false);
