@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+.colour_scheme{
+    color:#F6F4EB
+#91C8E4
+#749BC2
+#4682A9
+#4977ce
+#7c50b1
+
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    /* overflow: hidden; */
+  }
+
+body{
+    background-image: url(../Images/home_back.jpg);
+    /* background-repeat: no-repeat;
+    background-size: cover; 
+    background-attachment: fixed; */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.home_body{
+    padding: 1rem;
+    width: 70%;
+    height: 50vh;
+    margin: 0 auto;
+    border-radius: 1rem;
+    margin-top: 5rem;
+    backdrop-filter: blur(10px);
+    background-color: #e5e5cb58;
+    color:#1a120b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    font-size: 2rem;
+}
+.home_body span{
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+.home_body button{
+    width: 14rem;
+    height: 100%;
+  padding: 25px 30px;
+  /* background-color: #ce4949; */
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  letter-spacing: 4px;
+  /* overflow: hidden; */
+  transition: 0.2s;
+  cursor: pointer;
+  border: 3px solid #fff;
+  font-size: 1rem;
+  box-shadow:none;
+  transition: background-color 1s;
+  background: linear-gradient(90deg, #ce4949, transparent) #d47878;
+}
+
+.home_body button:hover{
+    color: #fff;
+    /* background:linear-gradient(to right, #dc9d9d, #ce4949); */
+    background-color: #D5CEA3;
+    /* box-shadow: 0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff; */
+     
+}
+
+.reg_login{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

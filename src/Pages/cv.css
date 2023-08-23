@@ -1,0 +1,458 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hex codes: Peach #FCEDDA, Burnt Orange #EE4E34 */
+/* Hex codes: Scarlet #B85042, Light Olive #E7E8D1, Light Teal #A7BEAE */
+/* #45B5BA #BA4A45 */
+
+/* FFFAD7 FCDDB0 E97777 */
+
+/* #197C88 #FF9F9F #E97777 #FCDDB0 #FFFAD7 */
+/* Cream palette: #1A120B #3C2A21 #D5CEA3 #E5E5CB */
+
+/* Secondary: #3c2a215a Primary: #1a120b7a */
+.colour_scheme{
+    color:#F6F4EB
+#91C8E4
+#749BC2
+#4682A9 
+#4977ce
+#7c50b1
+
+#FFFAD7 #FCDDB0 #E97777
+#201a16
+#E5E5CB
+
+#1a120b7a #3c2a215a #D5CEA3 #e5e5cb58
+#b7b7b7
+#968200
+}
+
+.cvinput_box{
+    width: 70%;
+    margin: 2rem auto 2rem auto;
+    /* margin-top: 2rem; */
+    /* margin-bottom:100rem; */
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1.5rem;
+    background-color: transparent;
+    backdrop-filter: blur(14px);
+    background-color: #e5e5cb81;
+    box-sizing: border-box;
+}
+/* .cvinputform{  
+     width: 100%;
+    margin: 0 auto;
+    border-radius: 1rem 1rem 1rem 1rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    background-color: transparent;
+    backdrop-filter: blur(14px); 
+     background-color: rgba(35, 35, 35, 0.3); 
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 1rem; 
+} */
+
+.heading{
+    background-color: #f6eebe;
+    color: black;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem 1rem 0rem 0rem;
+    font-size: 2rem;
+    
+}
+
+.detailsComponent{
+    /* width: 100%; */
+    margin: 0 auto;
+    border-radius: 1rem 1rem 1rem 1rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    background-color: transparent;
+    margin: 0rem 1rem 1rem 1rem;
+    background-color: #E5E5CB;
+    /* background: linear-gradient(45deg, #3a40e2, #7965de); */
+    /* box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.1),
+    -2px -2px 4px rgba(255, 255, 255, 0.298); */
+    
+}
+
+
+.pagination{
+    display: flex;
+    gap: 0.5rem;
+    padding-left: 1rem;
+    margin: 1rem 0rem 1rem 0rem;
+}
+
+.linearprogress{
+    padding: 0rem 1rem 0rem 1rem;
+}
+
+.userDetails{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    
+}
+
+
+
+
+
+.workExperienceProjMain{
+    display: grid;
+    grid-template-columns: 9fr 1fr ;
+    grid-gap: 1rem;
+    
+}
+.workExperienceProjTitle {
+    display: flex;
+    flex-direction: column;
+}
+.workExpDate{
+    display: flex;
+    flex-direction: row;
+    gap:1rem
+}
+
+.workExperienceProjSub{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* backdrop-filter: blur(50px); */
+    /* background-color: #00000068;  */
+    background-color:#f6eebe;
+    padding: 1rem;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    justify-content: space-between;
+    grid-gap: 2.5rem;
+}
+
+.detailUnit{
+    display: flex;
+}
+
+.workexpprojdelete{
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: rgba(196, 53, 53, 0.791) ;
+border-radius: 10px;
+}
+.workexpprojdelete:hover{background-color: rgb(196, 53, 53) ;cursor: pointer;}
+
+
+.educationSub{
+    display: grid;
+    grid-template-columns: 6fr 6fr 6fr 1fr;
+    grid-gap: 1rem;
+    justify-content: space-between;
+    margin: 1rem 0rem 1rem 0rem;
+}
+
+.skillLang{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.skillLangIntdisplayunit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between  ;
+    gap: 0.5rem;
+}
+
+
+.achivementsub{display: grid;
+    grid-template-columns: 8fr 8fr 1fr;
+    grid-gap: 1rem;
+    justify-content: space-between;
+    margin: 1rem 0rem 1rem 0rem;}
+
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* CV Main Document */
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
+/* ---------------------------------- */
+
+.CVBox{
+    background-color: white;
+    width: 70%;
+    margin: 0 auto 2rem auto;
+    padding: 1rem;
+    border-radius: 1rem
+
+}
+
+.createCVBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+}
+.createCVText{
+    font-size: 1.5rem;
+}
+.cvboxButtonGroup{
+    margin: 2rem auto 2rem auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    
+}
+
+
+.cvpdfButtons{
+  width: 20rem;
+  padding: 2rem 2.5rem;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  letter-spacing: 4px;
+  transition: 0.2s;
+  cursor: pointer;
+  border: 3px solid #fff;
+  font-size: 1rem;
+  box-shadow:none;
+  transition: background-color 1s;
+  background: linear-gradient(90deg, #ce4949, transparent) #d47878;
+}
+
+.cvpdfButtons:hover{
+    color: #fff;
+    background-color: #D5CEA3;
+    /* box-shadow: 0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff; */
+     
+}
+
+/* .cvpdfButtons:focus{
+    color: #fff;
+    background:none;
+    background-color: #5c2121;
+    /* box-shadow: 0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff; */
+     
+
+
+/* .cvpdfButtons:not(:focus){
+    color: #fff;
+    background: linear-gradient(90deg, #ce4949, transparent) #d47878;
+} */
+
+.nameBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0rem 2rem 0rem;
+    font-size: 2rem;
+}
+
+.basicDetailsBox{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 4rem 1rem 4rem;
+    gap: 2rem;
+    /* background-color: #7c50b1; */
+    /* background-color: #7c50b1; */
+}
+
+.basicDetailsElement{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.basicDetailsElementR1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.basicDetailsElementR2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.workExperienceBox{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* background-color: aquamarine; */
+    padding: 1rem 4rem 1rem 4rem;
+    page-break-inside: avoid;
+
+}
+.workExpElement{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.workExpHeaderBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.designationBox {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.companyBox{
+    font-size: 1.1rem;
+}
+
+
+
+.workexpDetailsElement{
+    list-style-type: disc;
+}
+
+.educationBox{
+    page-break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* background-color: brown; */
+    padding: 1rem 4rem 1rem 4rem;
+}
+.qualificationBox{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.schoolBox{
+    font-size: 1.1rem;
+}
+
+.educationElement{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.skillsBox{
+    padding: 1rem 4rem 1rem 4rem;
+    /* background-color: #4977ce; */
+}
+.skillElements{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    height: 2rem;
+    
+}
+
+.projectBox{
+    display: flex;
+    flex-direction: column;
+    /* background-color: #4682A9; */
+    padding: 1rem 4rem 1rem 4rem;
+    gap: 1rem;
+    page-break-inside: avoid;
+}
+
+.projectnameBox{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.projectlinkBox{font-size: 1rem;font-weight:100 }
+
+.projectElement{
+    display: flex;
+    flex-direction: column;
+}
+.projectinfoBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.projectDetailsBox{
+    list-style-type: disc;
+}
+
+.achievementBox{
+    page-break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+    /* background-color: burlywood; */
+    gap: 1rem;
+    padding: 1rem 4rem 1rem 4rem;
+
+}
+.achievementTitleBox{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.achievementSubtitleBox{
+    font-size: 1.1rem;
+}
+
+.interestAndLangBox{
+    page-break-inside: avoid;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around;
+    align-items: center;
+    padding: 1rem 4rem 3rem 4rem;
+    gap: 1rem; */
+    width: 100%;
+    gap: 5rem;
+    padding: 1rem 4rem 3rem 4rem;
+}
+.interestBox{
+    flex:1;
+    
+}
+.languageBox{
+    flex: 1;
+}
+.languageElementBox{
+    flex: 1;
+display: flex;
+flex-direction: row;
+gap: 1rem;
+align-items: center;
+justify-content: center;
+height: 2rem;
+}
+.interestElementBox{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    height: 2rem;
+    justify-content: center;
+}
