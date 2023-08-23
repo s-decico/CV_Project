@@ -75,19 +75,21 @@ function Login() {
           }
         })
         .catch(function (err) {
-          console.log(err.response.status);
-          switch (err.response.status) {
-            case 401:
-              console.log("Incorrect Password");
-              setPasswordIncorrect(true);
-              break;
-            case 404:
-              console.log("User not found");
-              setUserNotFound(true);
-              break;
-            default:
-              console.log("Unexpected response");
-              break;
+          if (err) {
+            console.log(err.response.status);
+            switch (err.response.status) {
+              case 401:
+                console.log("Incorrect Password");
+                setPasswordIncorrect(true);
+                break;
+              case 404:
+                console.log("User not found");
+                setUserNotFound(true);
+                break;
+              default:
+                console.log("Unexpected response");
+                break;
+            }
           }
         })
         .finally(() => {
