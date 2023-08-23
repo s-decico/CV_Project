@@ -39,6 +39,7 @@ function Login() {
   }, [isAuthenticated]);
 
   const handleLogin = () => {
+    console.log(process.env.ENVIRONMENT);
     setPasswordIncorrect(false);
     setUserNotFound(false);
     setEmptyEmail(false);
