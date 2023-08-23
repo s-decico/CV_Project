@@ -18,12 +18,15 @@ import {
   LinkedIn,
   GitHub,
   Circle,
+  CleaningServices,
 } from "@mui/icons-material";
-import { Divider } from "@mui/material";
+import { CircularProgress, Divider } from "@mui/material";
 import ReactDOMServer from "react-dom/server";
+import { alignProperty } from "@mui/material/styles/cssUtils";
 
 function CVBox() {
   const [jsonData, setJsonData] = useState({});
+  const [loadstatus, setLoadstatus] = useState(false);
   const navigate = useNavigate();
   const token = cookie.get("token");
   const isAuthenticated = cookie.get("isAuthenticated");
@@ -38,8 +41,12 @@ function CVBox() {
       }, 0);
     } else if (isAuthenticated) {
       const fetchData = async () => {
+        let url =
+          process.env.ENVIRONMENT == "PRODUCTION"
+            ? "http://resumatebys.netlify.app:3001/fetchform"
+            : "http://localhost:3001/fetchform";
         axios
-          .get("http://localhost:3001/fetchform", {
+          .get(url, {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
             },
@@ -47,6 +54,7 @@ function CVBox() {
           })
           .then(function (res) {
             if (res.status === 200) {
+              setLoadstatus(true);
               console.log("Received Data from Database");
               if (res.data) setJsonData(res.data);
               console.log(res.data);
@@ -77,27 +85,6 @@ function CVBox() {
       .map((rule) => rule.cssText)
       .join("\n");
     console.log(styleTags);
-    // styleTags = styleTags.replace(
-    //   `.CVBox { background-color: white; width: 70%; margin: 0px auto; padding: 1rem; }`,
-    //   `.CVBox { background-color: white; width: 100%; margin: 0px auto; padding: 1rem; }`
-    // );
-    // styleTags = styleTags.replace(
-    //   `.nameBox { display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 2rem 0rem; font-size: 2rem; }`,
-    //   `.nameBox { display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 1rem 0rem; font-size: 2rem; }`
-    // );
-    // styleTags = styleTags.replace(`1rem`, `1rem`);
-    // styleTags = styleTags.replace(`0.9rem`, `0.9rem`);
-
-    //   const fullHtmlContent = `
-    //   <html>
-    //     <head>
-    //       <style>${styleTags}</style>
-    //     </head>
-    //     <body>
-    //       ${htmlContent}
-    //     </body>
-    //   </html>
-    // `;
 
     const fullHtmlContent = `
     <html>
@@ -387,368 +374,387 @@ font-size:1rem;
         console.error("Error generating PDF:", error);
       }
     }
-
-    // const FileDownload = require("js-file-download");
-    // Set either URL or HTML Content and have the flag
-
-    // var options = {
-    //   method: "POST",
-    //   url: "https://url-html-to-pdf.p.rapidapi.com/api/v1/pdf/html-to-pdf",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     "x-rapidapi-key": "564ddac7d5msh17887b39a040f38p1f3fccjsnb46b0e75b1be",
-    //     "x-rapidapi-host": "url-html-to-pdf.p.rapidapi.com",
-    //   },
-    //   data: {
-    //     html: contentAsHtml,
-    //     pdf: { width: 1000, height: 1400 },
-    //   },
-    //   responseType: "blob",
-    // };
-
-    // axios
-    //   .request(options)
-    //   .then(function (response) {
-    //     FileDownload(response.data, "out.pdf");
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //   });
   };
 
   return (
     <>
       <Navbar />
-      {Object.keys(jsonData).length === 0 ? (
+      {loadstatus === true ? (
         <>
-          <div className="home_body">
-            <p>
-              Looks like you don't have a <span>CV</span>
-              <br />
-              <span>Create one Now!</span>
-            </p>
+          {Object.keys(jsonData).length === 0 && loadstatus === true ? (
+            <>
+              <div className="home_body">
+                <p>
+                  Looks like you don't have a CV
+                  <br />
+                  <span>Create one Now!</span>
+                </p>
 
-            <button
-              type="button"
-              className="cvpdfButtons"
-              onClick={() => navigate("/cvinput")}
-              sx={{ height: "100%" }}
-            >
-              CREATE A CV
-            </button>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="cvboxButtonGroup">
-            <button
-              type="button"
-              className="cvpdfButtons"
-              onClick={generatePdf}
-            >
-              Download
-            </button>
-            <button
-              type="button"
-              className="cvpdfButtons"
-              onClick={() => navigate("/cvinput")}
-            >
-              Edit CV
-            </button>
-          </div>
-          <div className="CVBox" ref={pdfRef}>
-            <div className="userDetailsBox">
-              <div className="nameBox">
-                {jsonData.BasicDetails && jsonData.BasicDetails.fullname}
+                <button
+                  type="button"
+                  className="cvpdfButtons"
+                  onClick={() => navigate("/cvinput")}
+                  sx={{ height: "100%" }}
+                >
+                  CREATE A CV
+                </button>
               </div>
-              <Divider
-                sx={{
-                  backgroundColor: "black",
-                  width: "70%",
-                  margin: "0 auto",
-                }}
-              />
-              <div className="basicDetailsBox">
-                <div className="basicDetailsElementR1">
-                  {jsonData.BasicDetails &&
-                    Object.keys(jsonData.BasicDetails)
-                      .filter((key) => key !== "fullname" && key !== "_id")
-                      .map((key) => {
-                        switch (key) {
-                          case "phno":
-                            return (
-                              <div key={key} className="basicDetailsElement">
-                                <PhoneAndroid />
-                                {jsonData.BasicDetails[key]}
-                              </div>
-                            );
-                            break;
-                          case "email":
-                            let email = jsonData.BasicDetails[key];
-                            email = "mailto:" + email;
-                            return (
-                              <div key={key} className="basicDetailsElement">
-                                <Email />
-                                <a href={email}>{jsonData.BasicDetails[key]}</a>
-                              </div>
-                            );
-                            break;
-                          case "address":
-                            return (
-                              <div key={key} className="basicDetailsElement">
-                                <Home />
-                                {jsonData.BasicDetails[key]}
-                              </div>
-                            );
-                            break;
-                          default:
-                            if (
-                              key == "github" &&
-                              jsonData.BasicDetails[key] == ""
-                            ) {
-                              let url = jsonData.BasicDetails[key];
-                              url = url.startsWith("https://")
-                                ? url
-                                : "https://" + url;
-                              return (
-                                <div key={key} className="basicDetailsElement">
-                                  <LinkedIn />
-                                  {<a href={url}>LinkedIn</a>}
-                                </div>
-                              );
-                            }
+            </>
+          ) : (
+            <>
+              <div className="cvboxButtonGroup">
+                <button
+                  type="button"
+                  className="cvpdfButtons"
+                  onClick={generatePdf}
+                >
+                  Download
+                </button>
+                <button
+                  type="button"
+                  className="cvpdfButtons"
+                  onClick={() => navigate("/cvinput")}
+                >
+                  Edit CV
+                </button>
+              </div>
+              <div className="CVBox" ref={pdfRef}>
+                <div className="userDetailsBox">
+                  <div className="nameBox">
+                    {jsonData.BasicDetails && jsonData.BasicDetails.fullname}
+                  </div>
+                  <Divider
+                    sx={{
+                      backgroundColor: "black",
+                      width: "70%",
+                      margin: "0 auto",
+                    }}
+                  />
+                  <div className="basicDetailsBox">
+                    <div className="basicDetailsElementR1">
+                      {jsonData.BasicDetails &&
+                        Object.keys(jsonData.BasicDetails)
+                          .filter((key) => key !== "fullname" && key !== "_id")
+                          .map((key) => {
+                            switch (key) {
+                              case "phno":
+                                return (
+                                  <div
+                                    key={key}
+                                    className="basicDetailsElement"
+                                  >
+                                    <PhoneAndroid />
+                                    {jsonData.BasicDetails[key]}
+                                  </div>
+                                );
+                                break;
+                              case "email":
+                                let email = jsonData.BasicDetails[key];
+                                email = "mailto:" + email;
+                                return (
+                                  <div
+                                    key={key}
+                                    className="basicDetailsElement"
+                                  >
+                                    <Email />
+                                    <a href={email}>
+                                      {jsonData.BasicDetails[key]}
+                                    </a>
+                                  </div>
+                                );
+                                break;
+                              case "address":
+                                return (
+                                  <div
+                                    key={key}
+                                    className="basicDetailsElement"
+                                  >
+                                    <Home />
+                                    {jsonData.BasicDetails[key]}
+                                  </div>
+                                );
+                                break;
+                              default:
+                                if (
+                                  key == "github" &&
+                                  jsonData.BasicDetails[key] == ""
+                                ) {
+                                  let url = jsonData.BasicDetails[key];
+                                  url = url.startsWith("https://")
+                                    ? url
+                                    : "https://" + url;
+                                  return (
+                                    <div
+                                      key={key}
+                                      className="basicDetailsElement"
+                                    >
+                                      <LinkedIn />
+                                      {<a href={url}>LinkedIn</a>}
+                                    </div>
+                                  );
+                                }
 
-                            break;
-                        }
-                      })}
+                                break;
+                            }
+                          })}
+                    </div>
+                    <div className="basicDetailsElementR2">
+                      {jsonData.BasicDetails &&
+                        jsonData.BasicDetails["github"] != "" &&
+                        Object.keys(jsonData.BasicDetails)
+                          .filter((key) => key !== "fullname" && key !== "_id")
+                          .map((key) => {
+                            let url = jsonData.BasicDetails[key];
+                            url = url.startsWith("https://")
+                              ? url
+                              : "https://" + url;
+                            switch (key) {
+                              case "linkedin":
+                                return (
+                                  <div
+                                    key={key}
+                                    className="basicDetailsElement"
+                                  >
+                                    <LinkedIn />
+                                    {<a href={url}>LinkedIn</a>}
+                                  </div>
+                                );
+                                break;
+                              case "github":
+                                return (
+                                  <div
+                                    key={key}
+                                    className="basicDetailsElement"
+                                  >
+                                    <GitHub />
+                                    {<a href={url}>Github</a>}
+                                  </div>
+                                );
+                                break;
+                              default:
+                                break;
+                            }
+                          })}
+                    </div>
+                  </div>
                 </div>
-                <div className="basicDetailsElementR2">
-                  {jsonData.BasicDetails &&
-                    jsonData.BasicDetails["github"] != "" &&
-                    Object.keys(jsonData.BasicDetails)
-                      .filter((key) => key !== "fullname" && key !== "_id")
-                      .map((key) => {
-                        let url = jsonData.BasicDetails[key];
+
+                <div className="workExperienceBox">
+                  <Divider textAlign="center" sx={{ fontSize: "0.9rem" }}>
+                    Work Experience
+                  </Divider>
+                  {jsonData.WorkExperience &&
+                    jsonData.WorkExperience.map((x, index) => {
+                      return (
+                        <>
+                          <div className="workExpElement">
+                            <div className="workExpHeaderBox">
+                              <div className="designationInfoBox">
+                                <div className="designationBox">
+                                  {x.designation}
+                                </div>
+                                <div className="companyBox">
+                                  {x.companyname}
+                                </div>
+                              </div>
+                              <div className="workExpYearBox">
+                                {x.startdate
+                                  ? x.startdate +
+                                    "-" +
+                                    (x.enddate ? x.enddate : "Present")
+                                  : ""}
+                              </div>
+                            </div>
+                            <div className="workExpDetailsBox">
+                              {x.details.map((detail) => {
+                                return (
+                                  <div className="workexpDetailsElement">
+                                    <li>{detail}</li>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          {index !== jsonData.WorkExperience.length - 1 && (
+                            <Divider sx={{ width: "60%", margin: "0 auto" }} />
+                          )}
+                        </>
+                      );
+                    })}
+                </div>
+                <div className="educationBox">
+                  <Divider textAlign="center" sx={{ fontSize: "0.9rem" }}>
+                    Education
+                  </Divider>
+                  {jsonData.Education &&
+                    jsonData.Education.map((x, index) => {
+                      return (
+                        <>
+                          <div className="educationElement">
+                            <div className="qualificationInfoBox">
+                              <div className="qualificationBox">
+                                {x.qualification}
+                              </div>
+                              <div className="schoolBox">{x.school}</div>
+                            </div>
+                            <div className="educationYearBox">{x.doj}</div>
+                          </div>
+                          {index !== jsonData.Education.length - 1 && (
+                            <Divider sx={{ width: "60%", margin: "0 auto" }} />
+                          )}
+                        </>
+                      );
+                    })}
+                </div>
+                <div className="skillsBox">
+                  <Divider textAlign="center" sx={{ fontSize: "0.9rem" }}>
+                    Skills
+                  </Divider>
+                  <div className="skillElements">
+                    {jsonData.Skills &&
+                      jsonData.Skills.map((x, index) => {
+                        return (
+                          <>
+                            <div className="skillElement">{x}</div>
+                            {index !== jsonData.Skills.length - 1 && (
+                              <Divider
+                                orientation="vertical"
+                                variant="middle"
+                                flexItem
+                              />
+                            )}
+                          </>
+                        );
+                      })}
+                  </div>
+                </div>
+                <div className="projectBox">
+                  <Divider textAlign="center" sx={{ fontSize: "0.9rem" }}>
+                    Projects
+                  </Divider>
+                  {jsonData.Project &&
+                    jsonData.Project.map((x, index) => {
+                      let url = x.projectlink;
+                      if (url)
                         url = url.startsWith("https://")
                           ? url
                           : "https://" + url;
-                        switch (key) {
-                          case "linkedin":
-                            return (
-                              <div key={key} className="basicDetailsElement">
-                                <LinkedIn />
-                                {<a href={url}>LinkedIn</a>}
-                              </div>
-                            );
-                            break;
-                          case "github":
-                            return (
-                              <div key={key} className="basicDetailsElement">
-                                <GitHub />
-                                {<a href={url}>Github</a>}
-                              </div>
-                            );
-                            break;
-                          default:
-                            break;
-                        }
-                      })}
-                </div>
-              </div>
-            </div>
-
-            <div className="workExperienceBox">
-              <Divider textAlign="center" sx={{ fontSize: "0.9rem" }}>
-                Work Experience
-              </Divider>
-              {jsonData.WorkExperience &&
-                jsonData.WorkExperience.map((x, index) => {
-                  return (
-                    <>
-                      <div className="workExpElement">
-                        <div className="workExpHeaderBox">
-                          <div className="designationInfoBox">
-                            <div className="designationBox">
-                              {x.designation}
-                            </div>
-                            <div className="companyBox">{x.companyname}</div>
-                          </div>
-                          <div className="workExpYearBox">
-                            {x.startdate
-                              ? x.startdate +
-                                "-" +
-                                (x.enddate ? x.enddate : "Present")
-                              : ""}
-                          </div>
-                        </div>
-                        <div className="workExpDetailsBox">
-                          {x.details.map((detail) => {
-                            return (
-                              <div className="workexpDetailsElement">
-                                <li>{detail}</li>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                      {index !== jsonData.WorkExperience.length - 1 && (
-                        <Divider sx={{ width: "60%", margin: "0 auto" }} />
-                      )}
-                    </>
-                  );
-                })}
-            </div>
-            <div className="educationBox">
-              <Divider textAlign="center" sx={{ fontSize: "0.9rem" }}>
-                Education
-              </Divider>
-              {jsonData.Education &&
-                jsonData.Education.map((x, index) => {
-                  return (
-                    <>
-                      <div className="educationElement">
-                        <div className="qualificationInfoBox">
-                          <div className="qualificationBox">
-                            {x.qualification}
-                          </div>
-                          <div className="schoolBox">{x.school}</div>
-                        </div>
-                        <div className="educationYearBox">{x.doj}</div>
-                      </div>
-                      {index !== jsonData.Education.length - 1 && (
-                        <Divider sx={{ width: "60%", margin: "0 auto" }} />
-                      )}
-                    </>
-                  );
-                })}
-            </div>
-            <div className="skillsBox">
-              <Divider textAlign="center" sx={{ fontSize: "0.9rem" }}>
-                Skills
-              </Divider>
-              <div className="skillElements">
-                {jsonData.Skills &&
-                  jsonData.Skills.map((x, index) => {
-                    return (
-                      <>
-                        <div className="skillElement">{x}</div>
-                        {index !== jsonData.Skills.length - 1 && (
-                          <Divider
-                            orientation="vertical"
-                            variant="middle"
-                            flexItem
-                          />
-                        )}
-                      </>
-                    );
-                  })}
-              </div>
-            </div>
-            <div className="projectBox">
-              <Divider textAlign="center" sx={{ fontSize: "0.9rem" }}>
-                Projects
-              </Divider>
-              {jsonData.Project &&
-                jsonData.Project.map((x, index) => {
-                  let url = x.projectlink;
-                  url = url.startsWith("https://") ? url : "https://" + url;
-                  return (
-                    <>
-                      <div className="projectElement">
-                        <div className="projectinfoBox">
-                          <div className="projectnameBox">
-                            {x.projectname}
-                            <div className="projectlinkBox">
-                              <a href={url}>Link to the project</a>
-                            </div>
-                          </div>
-                          <div className="projectyearBox">{x.projectyear}</div>
-                        </div>
-                        <div className="projectDetailsBox">
-                          {x.details.map((x) => {
-                            return (
-                              <div className="projectDetailsBox">
-                                <li>{x}</li>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                      {index !== jsonData.Project.length - 1 && (
-                        <Divider sx={{ width: "60%", margin: "0 auto" }} />
-                      )}
-                    </>
-                  );
-                })}
-            </div>
-
-            <div className="achievementBox">
-              <Divider textAlign="center" sx={{ fontSize: "0.9rem " }}>
-                Achievements
-              </Divider>
-              {jsonData.Achievement &&
-                jsonData.Achievement.map((x, index) => {
-                  return (
-                    <>
-                      <div className="achievementElement">
-                        <div className="achievementTitleBox">{x.title}</div>
-                        <div className="achievementSubtitleBox">
-                          {x.subtitle}
-                        </div>
-                      </div>
-                      {index !== jsonData.Achievement.length - 1 && (
-                        <Divider sx={{ width: "60%", margin: "0 auto" }} />
-                      )}
-                    </>
-                  );
-                })}
-            </div>
-
-            <div className="interestAndLangBox">
-              <div className="interestBox">
-                <Divider textAlign="center">Interests</Divider>
-                <div className="interestElementBox">
-                  {jsonData.Interest &&
-                    jsonData.Interest.map((x, index) => {
                       return (
                         <>
-                          <div className="interestElement">{x}</div>
-                          {index !== jsonData.Skills.length - 1 && (
-                            <Divider
-                              orientation="vertical"
-                              variant="middle"
-                              flexItem
-                            />
+                          <div className="projectElement">
+                            <div className="projectinfoBox">
+                              <div className="projectnameBox">
+                                {x.projectname}
+                                <div className="projectlinkBox">
+                                  <a href={url}>Link to the project</a>
+                                </div>
+                              </div>
+                              <div className="projectyearBox">
+                                {x.projectyear}
+                              </div>
+                            </div>
+                            <div className="projectDetailsBox">
+                              {x.details.map((x) => {
+                                return (
+                                  <div className="projectDetailsBox">
+                                    <li>{x}</li>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          {index !== jsonData.Project.length - 1 && (
+                            <Divider sx={{ width: "60%", margin: "0 auto" }} />
                           )}
                         </>
                       );
                     })}
                 </div>
-              </div>
 
-              <div className="interestBox">
-                <Divider textAlign="center">Languages</Divider>
-                <div className="languageElementBox">
-                  {jsonData.Language &&
-                    jsonData.Language.map((x, index) => {
+                <div className="achievementBox">
+                  <Divider textAlign="center" sx={{ fontSize: "0.9rem " }}>
+                    Achievements
+                  </Divider>
+                  {jsonData.Achievement &&
+                    jsonData.Achievement.map((x, index) => {
                       return (
                         <>
-                          <div className="languageElement">{x}</div>
-                          {index !== jsonData.Language.length - 1 && (
-                            <Divider
-                              orientation="vertical"
-                              variant="middle"
-                              flexItem
-                            />
+                          <div className="achievementElement">
+                            <div className="achievementTitleBox">{x.title}</div>
+                            <div className="achievementSubtitleBox">
+                              {x.subtitle}
+                            </div>
+                          </div>
+                          {index !== jsonData.Achievement.length - 1 && (
+                            <Divider sx={{ width: "60%", margin: "0 auto" }} />
                           )}
                         </>
                       );
                     })}
                 </div>
+
+                <div className="interestAndLangBox">
+                  <div className="interestBox">
+                    <Divider textAlign="center">Interests</Divider>
+                    <div className="interestElementBox">
+                      {jsonData.Interest &&
+                        jsonData.Interest.map((x, index) => {
+                          return (
+                            <>
+                              <div className="interestElement">{x}</div>
+                              {index !== jsonData.Skills.length - 1 && (
+                                <Divider
+                                  orientation="vertical"
+                                  variant="middle"
+                                  flexItem
+                                />
+                              )}
+                            </>
+                          );
+                        })}
+                    </div>
+                  </div>
+
+                  <div className="interestBox">
+                    <Divider textAlign="center">Languages</Divider>
+                    <div className="languageElementBox">
+                      {jsonData.Language &&
+                        jsonData.Language.map((x, index) => {
+                          return (
+                            <>
+                              <div className="languageElement">{x}</div>
+                              {index !== jsonData.Language.length - 1 && (
+                                <Divider
+                                  orientation="vertical"
+                                  variant="middle"
+                                  flexItem
+                                />
+                              )}
+                            </>
+                          );
+                        })}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </>
+      ) : (
+        <div
+          className="progress"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <CircularProgress
+            size={300}
+            sx={{ color: "#ce4949", margin: "0 auto" }}
+          />
+        </div>
       )}
     </>
   );

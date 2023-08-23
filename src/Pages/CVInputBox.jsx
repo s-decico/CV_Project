@@ -44,9 +44,13 @@ function CVInputBox() {
     } else {
       setTimeout(() => {
         navigate("/cvinput");
+        let url =
+          process.env.ENVIRONMENT == "PRODUCTION"
+            ? "http://resumatebys.netlify.app:3001/fetchform"
+            : "http://localhost:3001/fetchform";
         const fetchData = async () => {
           axios
-            .get("http://localhost:3001/fetchform", {
+            .get(url, {
               headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
               },
@@ -253,9 +257,13 @@ function CVInputBox() {
   }, [workExperienceObj]);
 
   const sendDataToServer = (tempobj) => {
+    let url =
+      process.env.ENVIRONMENT == "PRODUCTION"
+        ? "http://resumatebys.netlify.app:3001/cvinput"
+        : "http://localhost:3001/cvinput";
     console.log("data send call");
     axios
-      .post("http://localhost:3001/cvinput", tempobj, {
+      .post(url, tempobj, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -527,7 +535,6 @@ function CVInputBox() {
             )}
           </div>
         </form>
-        {/* </div> */}
       </div>
     </>
   );

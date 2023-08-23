@@ -21,7 +21,13 @@ app.use((err, req, res, next) => {
   console.log("Error:" + err);
 });
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000"); // Replace with the appropriate origin (client URL)
+  if (process.env.ENVIRONMENT == "DEV")
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  else if (process.env.ENVIRONMENT == "PRODUCTION")
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "http://resumatebys.netlify.app"
+    );
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -112,9 +118,12 @@ app.route("/cvinput").post((req, res) => {
       parsedObject["UserID"] = decodedToken.id != null ? decodedToken.id : "";
 
       if (decodedToken) {
+        console.log("Inside update1:", decodedToken);
         UserDetails.findOne({ UserID: decodedToken.id })
           .then((response) => {
+            console.log(response);
             if (response) {
+              console.log("Inside update");
               UserDetails.updateOne({ UserID: decodedToken.id }, parsedObject)
                 .then((result) => {
                   res.status(200).send("Okay");
@@ -123,6 +132,16 @@ app.route("/cvinput").post((req, res) => {
                 .catch((err) => {
                   console.log("Error in updateOne function:" + err);
                   res.status(500).send("Server error");
+                });
+            } else if (!response) {
+              UserDetails.insertMany(parsedObject)
+                .then(() => {
+                  console.log("Data inserted successfully");
+                  res.sendStatus(200);
+                })
+                .catch((err) => {
+                  console.log("Error while inserting:" + err);
+                  res.sendStatus(500);
                 });
             }
           })
