@@ -54,7 +54,10 @@ function Registration() {
     if (_email && _password && _name) {
       if (isValidEmail(_email) && isValidName(_name)) {
         let UserData = { name: _name, email: _email, password: md5(_password) };
-
+        let url =
+          process.env.ENVIRONMENT == "PRODUCTION"
+            ? "http://resumatebys.netlify.app:3001/register"
+            : "http://localhost:3001/register";
         axios
           .post("http://localhost:3001/register", UserData, {
             headers: {

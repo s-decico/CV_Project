@@ -50,9 +50,12 @@ function Login() {
     if (_email && _password) {
       setLoading(true);
       let UserData = { email: _email, password: md5(_password) };
-
+      let url =
+        process.env.ENVIRONMENT == "PRODUCTION"
+          ? "http://resumatebys.netlify.app:3001/login"
+          : "http://localhost:3001/login";
       axios
-        .post("http://localhost:3001/login", UserData, {
+        .post(url, UserData, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
