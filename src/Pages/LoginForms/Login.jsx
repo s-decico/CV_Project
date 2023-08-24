@@ -54,7 +54,7 @@ function Login() {
       let UserData = { email: _email, password: md5(_password) };
       let url =
         process.env.ENVIRONMENT == "PRODUCTION"
-          ? "http://resumatebys.netlify.app:3001/login"
+          ? "https://resumatebys.netlify.app:3001/login"
           : "http://localhost:3001/login";
       axios
         .post(url, UserData, {

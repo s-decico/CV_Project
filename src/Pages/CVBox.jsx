@@ -43,7 +43,7 @@ function CVBox() {
       const fetchData = async () => {
         let url =
           process.env.ENVIRONMENT == "PRODUCTION"
-            ? "http://resumatebys.netlify.app:3001/fetchform"
+            ? "https://resumatebys.netlify.app:3001/fetchform"
             : "http://localhost:3001/fetchform";
         axios
           .get(url, {

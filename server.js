@@ -190,15 +190,7 @@ app.route("/login").post((req, res) => {
         if (result.password === password) {
           const token = generateToken(result.email, result._id);
           res.cookie("isAuthenticated", true);
-          res
-            .status(200)
-            .cookie("token", token, {
-              domain: "resumatebys.vercel.app",
-              secure: true,
-              httpOnly: true,
-              sameSite: "none",
-            })
-            .json({ token: token });
+          res.status(200).cookie("token", token).json({ token: token });
         } else {
           res.status(401).json({ error: "Incorrect password" });
         }

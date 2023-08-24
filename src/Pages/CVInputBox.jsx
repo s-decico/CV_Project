@@ -46,7 +46,7 @@ function CVInputBox() {
         navigate("/cvinput");
         let url =
           process.env.ENVIRONMENT == "PRODUCTION"
-            ? "http://resumatebys.netlify.app:3001/fetchform"
+            ? "https://resumatebys.netlify.app:3001/fetchform"
             : "http://localhost:3001/fetchform";
         const fetchData = async () => {
           axios
@@ -259,7 +259,7 @@ function CVInputBox() {
   const sendDataToServer = (tempobj) => {
     let url =
       process.env.ENVIRONMENT == "PRODUCTION"
-        ? "http://resumatebys.netlify.app:3001/cvinput"
+        ? "https://resumatebys.netlify.app:3001/cvinput"
         : "http://localhost:3001/cvinput";
     console.log("data send call");
     axios
