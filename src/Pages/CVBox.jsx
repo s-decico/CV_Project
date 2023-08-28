@@ -43,7 +43,7 @@ function CVBox() {
       const fetchData = async () => {
         let url =
           process.env.ENVIRONMENT == "PRODUCTION"
-            ? "https://resumatebys.netlify.app:3001/fetchform"
+            ? "cv-project-server.vercel.app/fetchform"
             : "http://localhost:3001/fetchform";
         axios
           .get(url, {

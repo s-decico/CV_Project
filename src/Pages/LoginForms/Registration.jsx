@@ -56,10 +56,10 @@ function Registration() {
         let UserData = { name: _name, email: _email, password: md5(_password) };
         let url =
           process.env.ENVIRONMENT == "PRODUCTION"
-            ? "https://resumatebys.netlify.app:3001/register"
+            ? "cv-project-server.vercel.app/register"
             : "http://localhost:3001/register";
         axios
-          .post("http://localhost:3001/register", UserData, {
+          .post("cv-project-server.vercel.app/register", UserData, {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
             },
