@@ -54,7 +54,7 @@ function Login() {
       let UserData = { email: _email, password: md5(_password) };
       let url =
         process.env.ENVIRONMENT == "PRODUCTION"
-          ? "http://resumatebys.netlify.app:3001/login"
+          ? "cv-project-server.vercel.app/login"
           : "http://localhost:3001/login";
       axios
         .post(url, UserData, {
@@ -78,7 +78,6 @@ function Login() {
         })
         .catch(function (err) {
           if (err) {
-            console.log(err.response.status);
             switch (err.response.status) {
               case 401:
                 console.log("Incorrect Password");
