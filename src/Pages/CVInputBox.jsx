@@ -44,7 +44,7 @@ function CVInputBox() {
     } else {
       setTimeout(() => {
         navigate("/cvinput");
-        let url = process.env.API_URL + "/fetchform";
+        let url = process.env.REACT_APP_API_URL + "/fetchform";
         const fetchData = async () => {
           axios
             .get(url, {
@@ -254,7 +254,7 @@ function CVInputBox() {
   }, [workExperienceObj]);
 
   const sendDataToServer = (tempobj) => {
-    let url = process.env.API_URL + "/cvinput";
+    let url = process.env.REACT_APP_API_URL + "/cvinput";
     console.log("data send call");
     axios
       .post(url, tempobj, {

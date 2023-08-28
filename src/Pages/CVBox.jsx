@@ -41,7 +41,7 @@ function CVBox() {
       }, 0);
     } else if (isAuthenticated) {
       const fetchData = async () => {
-        let url = process.env.API_URL + "/fetchform";
+        let url = process.env.REACT_APP_API_URL + "/fetchform";
         axios
           .get(url, {
             headers: {

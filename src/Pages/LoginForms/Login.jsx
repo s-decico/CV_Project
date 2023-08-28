@@ -52,7 +52,7 @@ function Login() {
     if (_email && _password) {
       setLoading(true);
       let UserData = { email: _email, password: md5(_password) };
-      let url = process.env.API_URL + "/login";
+      let url = process.env.REACT_APP_API_URL + "/login";
       console.log(url);
       axios
         .post(url, UserData, {
