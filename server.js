@@ -25,7 +25,7 @@ app.use((req, res, next) => {
     "http://localhost:3000",
     "https://resumatebys.netlify.app",
     "https://resumatebys.vercel.app",
-    "cv-project-server.vercel.app",
+    "https://cv-project-server.vercel.app",
   ];
   const origin = req.headers.origin;
 

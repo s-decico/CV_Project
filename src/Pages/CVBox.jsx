@@ -41,10 +41,7 @@ function CVBox() {
       }, 0);
     } else if (isAuthenticated) {
       const fetchData = async () => {
-        let url =
-          process.env.ENVIRONMENT == "PRODUCTION"
-            ? "cv-project-server.vercel.app/fetchform"
-            : "http://localhost:3001/fetchform";
+        let url = process.env.API_URL + "/fetchform";
         axios
           .get(url, {
             headers: {
