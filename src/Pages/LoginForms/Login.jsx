@@ -52,10 +52,7 @@ function Login() {
     if (_email && _password) {
       setLoading(true);
       let UserData = { email: _email, password: md5(_password) };
-      let url =
-        process.env.ENVIRONMENT == "PRODUCTION"
-          ? "cv-project-server.vercel.app/login"
-          : "http://localhost:3001/login";
+      let url = process.env.API_URL + "/login";
       axios
         .post(url, UserData, {
           headers: {

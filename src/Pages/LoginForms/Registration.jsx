@@ -54,10 +54,7 @@ function Registration() {
     if (_email && _password && _name) {
       if (isValidEmail(_email) && isValidName(_name)) {
         let UserData = { name: _name, email: _email, password: md5(_password) };
-        let url =
-          process.env.ENVIRONMENT == "PRODUCTION"
-            ? "cv-project-server.vercel.app/register"
-            : "http://localhost:3001/register";
+        let url = process.env.API_URL + "/register";
         axios
           .post("cv-project-server.vercel.app/register", UserData, {
             headers: {
