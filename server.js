@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
-
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -88,15 +88,15 @@ const verifyToken = (token, secret) => {
   }
 };
 
-app.route("/").get((req, res) => {
-  let decodedToken = false;
-  if (req.cookies.token) {
-    const receivedToken = req.cookies.token;
-    decodedToken = verifyToken(receivedToken, process.env.JWT_SECRET_KEY);
-  }
-  if (decodedToken) res.sendStatus(200);
-  else res.sendStatus(401);
-});
+// app.route("/").get((req, res) => {
+//   let decodedToken = false;
+//   if (req.cookies.token) {
+//     const receivedToken = req.cookies.token;
+//     decodedToken = verifyToken(receivedToken, process.env.JWT_SECRET_KEY);
+//   }
+//   if (decodedToken) res.sendStatus(200);
+//   else res.sendStatus(401);
+// });
 //API endpoints
 app.route("/validatetoken").post((req, res) => {
   if (req) {
@@ -191,7 +191,10 @@ app.route("/login").post((req, res) => {
         if (result.password === password) {
           const token = generateToken(result.email, result._id);
           res.cookie("isAuthenticated", true);
-          res.status(200).cookie("token", token).json({ token: token });
+          res
+            .status(200)
+            .cookie("token", token, { domain: ".vercel.app" })
+            .json({ token: token });
         } else {
           res.status(401).json({ error: "Incorrect password" });
         }
