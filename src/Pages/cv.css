@@ -250,11 +250,16 @@ border-radius: 10px;
      
 }
 
-.cvpdfButtons:focus{
-    background: linear-gradient(90deg, #918c6f, transparent) #918c6f;
-    
+/* .cvpdfButtons:focus{
+    color: #fff;
+    background:none;
+    background-color: #5c2121;
+    /* box-shadow: 0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff,
+                0 0 7px #ffffff; */
      
-}
+
 
 /* .cvpdfButtons:not(:focus){
     color: #fff;

@@ -58,7 +58,6 @@ function Login() {
         .post(url, UserData, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            credentials: "include",
           },
           withCredentials: true,
         })
