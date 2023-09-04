@@ -42,7 +42,7 @@ function Login() {
     const cookieValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith(name));
-    console.log(name, ":", cookieValue);
+
     return cookieValue ? cookieValue.split("=")[1] : null;
   };
 
@@ -84,6 +84,7 @@ function Login() {
                 });
                 cookie.set("token", token, { secure: true, sameSite: "None" });
               }
+              console.log("Cookie setting", isAuthenticated, "  :  ", token);
 
               navigate("/cv");
               break;
