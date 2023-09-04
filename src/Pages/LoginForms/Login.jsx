@@ -42,7 +42,7 @@ function Login() {
     const cookieValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith(name));
-
+    console.log(name, ":", cookieValue);
     return cookieValue ? cookieValue.split("=")[1] : null;
   };
 
@@ -77,12 +77,14 @@ function Login() {
               console.log("You are logged in now");
               let isAuthenticated = getCookie("isAuthenticated");
               let token = getCookie("token");
+              if (isAuthenticated && token) {
+                cookie.set("isAuthenticated", isAuthenticated, {
+                  secure: true,
+                  sameSite: "None",
+                });
+                cookie.set("token", token, { secure: true, sameSite: "None" });
+              }
 
-              cookie.set("isAuthenticated", isAuthenticated, {
-                secure: true,
-                sameSite: "None",
-              });
-              cookie.set("token", token, { secure: true, sameSite: "None" });
               navigate("/cv");
               break;
             default:
