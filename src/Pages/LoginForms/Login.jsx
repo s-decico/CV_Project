@@ -38,6 +38,14 @@ function Login() {
     }
   }, [isAuthenticated]);
 
+  const getCookie = (name) => {
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(name));
+
+    return cookieValue ? cookieValue.split("=")[1] : null;
+  };
+
   const handleLogin = () => {
     let abc = process.env.REACT_APP_ENVIRONMENT;
     console.log("ENV", abc);
@@ -67,6 +75,14 @@ function Login() {
           switch (res.status) {
             case 200:
               console.log("You are logged in now");
+              let isAuthenticated = getCookie("isAuthenticated");
+              let token = getCookie("token");
+
+              cookie.set("isAuthenticated", isAuthenticated, {
+                secure: true,
+                sameSite: "None",
+              });
+              cookie.set("token", token, { secure: true, sameSite: "None" });
               navigate("/cv");
               break;
             default:
