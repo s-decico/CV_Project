@@ -31,9 +31,14 @@
 #968200
 }
 
+.cvinputform{
+    /* background-color: #ce4949;
+    margin-bottom: 5rem; */
+}
 .cvinput_box{
     width: 70%;
     margin: 2rem auto 2rem auto;
+    /* margin-top: -5px; */
     /* margin-top: 2rem; */
     /* margin-bottom:100rem; */
     border-radius: 1rem;
@@ -43,6 +48,7 @@
     background-color: transparent;
     backdrop-filter: blur(14px);
     background-color: #e5e5cb81;
+    /* background-color:yellow; */
     box-sizing: border-box;
 }
 /* .cvinputform{  
