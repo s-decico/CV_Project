@@ -74,18 +74,6 @@ function Login() {
           console.log("Login Data Sent");
           switch (res.status) {
             case 200:
-              console.log("You are logged in now");
-              let isAuthenticated = getCookie("isAuthenticated");
-              let token = getCookie("token");
-              if (isAuthenticated && token) {
-                cookie.set("isAuthenticated", isAuthenticated, {
-                  secure: true,
-                  sameSite: "None",
-                });
-                cookie.set("token", token, { secure: true, sameSite: "None" });
-              }
-              console.log("Cookie setting", isAuthenticated, "  :  ", token);
-
               navigate("/cv");
               break;
             default:
