@@ -88,7 +88,7 @@ function Login() {
                 cookie.set("isAuthenticated", isAuthenticatedValue);
               }
 
-              console.log(tokenValue);
+              // console.log(res.data);
               navigate("/cv");
               break;
             default:

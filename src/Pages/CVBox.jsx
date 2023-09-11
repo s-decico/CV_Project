@@ -29,6 +29,7 @@ function CVBox() {
   const [loadstatus, setLoadstatus] = useState(false);
   const navigate = useNavigate();
   const token = cookie.get("token");
+  console.log("Token", token);
   const isAuthenticated = cookie.get("isAuthenticated");
   const pdfRef = useRef();
   let htmlContent;
@@ -43,12 +44,16 @@ function CVBox() {
       const fetchData = async () => {
         let url = process.env.REACT_APP_API_URL + "/fetchform";
         axios
-          .get(url, {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            withCredentials: true,
-          })
+          .get(
+            url,
+            { token: token },
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              withCredentials: true,
+            }
+          )
           .then(function (res) {
             if (res.status === 200) {
               setLoadstatus(true);
