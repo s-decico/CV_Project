@@ -61,6 +61,8 @@ function Login() {
       setLoading(true);
       let UserData = { email: _email, password: md5(_password) };
       let url = process.env.REACT_APP_API_URL + "/login";
+      let tokenValue;
+      let isAuthenticatedValue;
       console.log(url);
       axios
         .post(url, UserData, {
@@ -68,12 +70,25 @@ function Login() {
             "Content-Type": "application/x-www-form-urlencoded",
           },
           withCredentials: true,
+          // credentials: "same-origin",
         })
         .then(function (res) {
           console.log(res.status);
           console.log("Login Data Sent");
           switch (res.status) {
             case 200:
+              console.log("You are logged in!");
+              if (res.data) {
+                tokenValue = res.data.token;
+                isAuthenticatedValue = res.data.isAuthenticated;
+              }
+
+              if (tokenValue && isAuthenticatedValue) {
+                cookie.set("token", tokenValue);
+                cookie.set("isAuthenticated", isAuthenticatedValue);
+              }
+
+              console.log(tokenValue);
               navigate("/cv");
               break;
             default:
