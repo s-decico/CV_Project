@@ -84,8 +84,14 @@ function Login() {
               }
 
               if (tokenValue && isAuthenticatedValue) {
-                cookie.set("token", tokenValue);
-                cookie.set("isAuthenticated", isAuthenticatedValue);
+                cookie.set("token", tokenValue, {
+                  secure: true,
+                  sameSite: "None",
+                });
+                cookie.set("isAuthenticated", isAuthenticatedValue, {
+                  secure: true,
+                  sameSite: "None",
+                });
               }
 
               // console.log(res.data);
