@@ -49,6 +49,7 @@ function CVBox() {
             { token: token },
             {
               headers: {
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/x-www-form-urlencoded",
               },
               withCredentials: true,
