@@ -36,12 +36,13 @@ function CVInputBox() {
   let jsonData = {};
   const navigate = useNavigate();
   const token = cookie.get("token");
+  const isAuthenticated = cookie.get("isAuthenticated");
   useEffect(() => {
     if (token == null || token == undefined) {
       setTimeout(() => {
         navigate("/login");
       }, 0);
-    } else {
+    } else if (isAuthenticated && token) {
       setTimeout(() => {
         navigate("/cvinput");
         let url = process.env.REACT_APP_API_URL + "/fetchform";
@@ -49,6 +50,7 @@ function CVInputBox() {
           axios
             .get(url, {
               headers: {
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/x-www-form-urlencoded",
               },
               withCredentials: true,
