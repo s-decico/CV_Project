@@ -40,21 +40,17 @@ function CVBox() {
       setTimeout(() => {
         navigate("/login");
       }, 0);
-    } else if (isAuthenticated) {
+    } else if (isAuthenticated && token) {
       const fetchData = async () => {
         let url = process.env.REACT_APP_API_URL + "/fetchform";
         axios
-          .get(
-            url,
-            { token: token },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
-              withCredentials: true,
-            }
-          )
+          .get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            withCredentials: true,
+          })
           .then(function (res) {
             if (res.status === 200) {
               setLoadstatus(true);
