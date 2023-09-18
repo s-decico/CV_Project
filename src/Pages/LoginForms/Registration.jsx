@@ -56,7 +56,7 @@ function Registration() {
         let UserData = { name: _name, email: _email, password: md5(_password) };
         let url = process.env.REACT_APP_API_URL + "/register";
         axios
-          .post("cv-project-server.vercel.app/register", UserData, {
+          .post(url, UserData, {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
             },
