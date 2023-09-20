@@ -120,16 +120,20 @@ app.route("/cvinput").post((req, res) => {
       }
 
       const parsedObject = req.body;
-      parsedObject["UserID"] = decodedToken.id != null ? decodedToken.id : "";
+      parsedObject["UserID"] =
+        decodedToken.email != null ? decodedToken.email : "";
 
       if (decodedToken) {
         console.log("Inside update1:", decodedToken);
-        UserDetails.findOne({ UserID: decodedToken.id })
+        UserDetails.findOne({ UserID: decodedToken.email })
           .then((response) => {
             console.log(response);
             if (response) {
               console.log("Inside update");
-              UserDetails.updateOne({ UserID: decodedToken.id }, parsedObject)
+              UserDetails.updateOne(
+                { UserID: decodedToken.email },
+                parsedObject
+              )
                 .then((result) => {
                   res.status(200).send("Okay");
                   console.log("Successfully updated existing data");
@@ -208,7 +212,7 @@ app.route("/fetchform").get((req, res) => {
   const token = req.cookies.token;
   if (token) {
     decodedToken = verifyToken(token, process.env.JWT_SECRET_KEY);
-    UserDetails.findOne({ UserID: decodedToken.id })
+    UserDetails.findOne({ UserID: decodedToken.email })
       .then((result) => {
         console.log("Found User");
         res.json(result);

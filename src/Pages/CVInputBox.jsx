@@ -261,6 +261,7 @@ function CVInputBox() {
     axios
       .post(url, tempobj, {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         withCredentials: true,
