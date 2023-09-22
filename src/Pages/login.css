@@ -1,45 +1,83 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* min-width: 520px; */
+}
+body {
+  min-width: 520px;
 }
 input:-webkit-autofill {
-    color: white !important;
-    background-color: transparent !important;
-  }
-.headingLogin{
+  color: white !important;
+  background-color: transparent !important;
+}
+.headingLogin {
   font-size: 1.4rem;
 }
-.reg_container{
+.reg_container {
   padding: 2rem 4rem 2rem 4rem;
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;  
-    width: 30%;
-    align-items: center;
-    margin: 0 auto;
-    border-radius: 1rem;
-    margin-top: 5rem;
-    backdrop-filter: blur(10px);
-    background-color: #e5e5cb58;
-    color: #1a120b;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3)
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 30%;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 1rem;
+  margin-top: 5rem;
+  backdrop-filter: blur(10px);
+  background-color: #e5e5cb58;
+  color: #1a120b;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.login_container{
+.login_container {
   padding: 2rem 4rem 2rem 4rem;
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;  
-    width: 30%;
-    align-items: center;
-    margin: 0 auto;
-    border-radius: 1rem;
-    margin-top: 5rem;
-    backdrop-filter: blur(10px);
-    background-color:#e5e5cb58;
-    color: #1a120b;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3)
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 40%;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 1rem;
+  margin-top: 5rem;
+  backdrop-filter: blur(10px);
+  background-color: #e5e5cb58;
+  color: #1a120b;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
+@media (max-width: 1280px) {
+  .reg_container {
+    width: 40%;
+  }
+  .login_container {
+    width: 40%;
+  }
+}
 
+@media (max-width: 1000px) {
+  .reg_container {
+    width: 50%;
+  }
+  .login_container {
+    width: 50%;
+  }
+}
+
+@media (max-width: 720px) {
+  .reg_container {
+    width: 60%;
+  }
+  .login_container {
+    width: 60%;
+  }
+}
+
+@media (max-width: 600px) {
+  .reg_container {
+    width: 80%;
+  }
+  .login_container {
+    width: 80%;
+  }
+}

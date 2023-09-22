@@ -16,8 +16,9 @@ import { Login, Person, Work } from "@mui/icons-material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { useNavigate } from "react-router-dom";
-import { GradientButton } from "../MUIStyledComponents";
+import { GradientButton, StyledAppBar } from "../MUIStyledComponents";
 import cookie from "js-cookie";
+import { useTheme } from "@emotion/react";
 
 const pages = ["Home", "My CV", "Tips", "Contact Us"];
 const settings = ["My CV", "Logout"];
@@ -74,17 +75,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar
-      position="static"
-      sx={{
-        width: "70%",
-        margin: "0 auto",
-        borderRadius: "1rem",
-        marginTop: "1rem",
-        backdropFilter: "blur(5px)",
-        backgroundColor: "#e5e5cb58",
-      }}
-    >
+    <StyledAppBar position="static">
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
@@ -131,7 +122,7 @@ function Navbar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{ color: "#ce4949" }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -158,7 +149,13 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <Work sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Work
+            sx={{
+              display: { xs: "flex", md: "none" },
+              mr: 1,
+              color: "#ce4949",
+            }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -171,7 +168,7 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "#1a120b",
+              color: "#ce4949",
               textDecoration: "none",
               fontSize: "1.3rem",
             }}
@@ -217,6 +214,7 @@ function Navbar() {
                 <Menu
                   sx={{
                     mt: "45px",
+                    color: "blue",
                   }}
                   id="menu-appbar"
                   anchorEl={anchorElUser}
@@ -262,7 +260,7 @@ function Navbar() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </StyledAppBar>
   );
 }
 export default Navbar;
