@@ -60,12 +60,6 @@ function CVInputBox() {
                 console.log("Received Data from Database");
                 jsonData = res.data;
                 console.log(jsonData);
-
-                // setUserDetails(jsonData.BasicDetails);
-                // setworkExperienceObj(jsonData.WorkExperience);
-                // setEducationObj(jsonData.Education);
-                // setProjectObj(jsonData.Project);
-                // setAchievementObj(jsonData.Achievement);
                 if (jsonData != {}) {
                   if (Object.keys(jsonData.BasicDetails).length > 0) {
                     setUserDetails(jsonData.BasicDetails);
@@ -257,7 +251,7 @@ function CVInputBox() {
 
   const sendDataToServer = (tempobj) => {
     let url = process.env.REACT_APP_API_URL + "/cvinput";
-    console.log("data send call");
+    console.log("data send call", token);
     axios
       .post(url, tempobj, {
         headers: {
