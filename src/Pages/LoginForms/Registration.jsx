@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, CircularProgress } from "@mui/material";
 import { useRef, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import md5 from "md5";
@@ -27,6 +27,7 @@ function Registration() {
   const [emptyEmail, setEmptyEmail] = useState(false);
   const [emptyName, setEmptyName] = useState(false);
   const [emptyPassword, setEmptyPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -52,6 +53,7 @@ function Registration() {
     const _name = nameRef.current.value;
 
     if (_email && _password && _name) {
+      setLoading(true);
       if (isValidEmail(_email) && isValidName(_name)) {
         let UserData = { name: _name, email: _email, password: md5(_password) };
         let url = process.env.REACT_APP_API_URL + "/register";
@@ -69,6 +71,9 @@ function Registration() {
           })
           .catch((err) => {
             console.log(err);
+          })
+          .finally(() => {
+            setLoading(false);
           });
       } else if (!isValidEmail(_email)) {
         setEmptyEmail(true);
@@ -132,7 +137,11 @@ function Registration() {
             border: "2px solid #ce4949",
           }}
         >
-          Submit
+          {loading ? (
+            <CircularProgress size={24} sx={{ color: "#FFF" }} />
+          ) : (
+            "Submit"
+          )}
         </GradientButton>
         <span className="reg_login">
           Already have an account?
