@@ -143,7 +143,13 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    navbarSwitch(page);
+                  }}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -151,8 +157,8 @@ function Navbar() {
           </Box>
           <Work
             sx={{
-              display: { xs: "flex", md: "none" },
-              mr: 1,
+              display: { xs: "none", md: "none" },
+
               color: "#ce4949",
             }}
           />
@@ -163,7 +169,7 @@ function Navbar() {
             href=""
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
+              display: { xs: "none", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,

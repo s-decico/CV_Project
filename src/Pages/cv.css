@@ -33,19 +33,12 @@
 }*/
 
 body {
-  min-width: 520px;
 }
 
-.cvinputform {
-  /* background-color: #ce4949;
-    margin-bottom: 5rem; */
-}
 .cvinput_box {
   width: 70%;
   margin: 2rem auto 2rem auto;
-  /* margin-top: -5px; */
-  /* margin-top: 2rem; */
-  /* margin-bottom:100rem; */
+
   border-radius: 1rem;
   display: grid;
   grid-template-columns: 1fr;
@@ -53,23 +46,9 @@ body {
   background-color: transparent;
   backdrop-filter: blur(14px);
   background-color: #e5e5cb81;
-  /* background-color:yellow; */
+
   box-sizing: border-box;
 }
-/* .cvinputform{  
-     width: 100%;
-    margin: 0 auto;
-    border-radius: 1rem 1rem 1rem 1rem;
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-    background-color: transparent;
-    backdrop-filter: blur(14px); 
-     background-color: rgba(35, 35, 35, 0.3); 
-    background-color: rgba(255, 255, 255, 0.3);
-    margin: 1rem; 
-} */
 
 .heading {
   background-color: #f6eebe;
@@ -83,7 +62,6 @@ body {
 }
 
 .detailsComponent {
-  /* width: 100%; */
   margin: 0 auto;
   border-radius: 1rem 1rem 1rem 1rem;
   padding: 2rem;
@@ -93,10 +71,6 @@ body {
   background-color: transparent;
   margin: 0rem 1rem 1rem 1rem;
   background-color: #e5e5cb;
-  /* background: linear-gradient(45deg, #3a40e2, #7965de); */
-  /* box-shadow: 
-    8px 8px 16px rgba(0, 0, 0, 0.1),
-    -2px -2px 4px rgba(255, 255, 255, 0.298); */
 }
 
 .pagination {
@@ -134,8 +108,7 @@ body {
 .workExperienceProjSub {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* backdrop-filter: blur(50px); */
-  /* background-color: #00000068;  */
+
   background-color: #f6eebe;
   padding: 1rem;
   border: 1px solid #fff;
@@ -189,16 +162,6 @@ body {
   margin: 1rem 0rem 1rem 0rem;
 }
 
-/* ---------------------------------- */
-/* ---------------------------------- */
-/* ---------------------------------- */
-/* ---------------------------------- */
-/* CV Main Document */
-/* ---------------------------------- */
-/* ---------------------------------- */
-/* ---------------------------------- */
-/* ---------------------------------- */
-
 .CVBox {
   background-color: white;
   width: 70%;
@@ -245,25 +208,7 @@ body {
 .cvpdfButtons:hover {
   color: #fff;
   background-color: #d5cea3;
-  /* box-shadow: 0 0 7px #ffffff,
-                0 0 7px #ffffff,
-                0 0 7px #ffffff,
-                0 0 7px #ffffff; */
 }
-
-/* .cvpdfButtons:focus{
-    color: #fff;
-    background:none;
-    background-color: #5c2121;
-    /* box-shadow: 0 0 7px #ffffff,
-                0 0 7px #ffffff,
-                0 0 7px #ffffff,
-                0 0 7px #ffffff; */
-
-/* .cvpdfButtons:not(:focus){
-    color: #fff;
-    background: linear-gradient(90deg, #ce4949, transparent) #d47878;
-} */
 
 .nameBox {
   display: flex;
@@ -279,8 +224,6 @@ body {
   flex-direction: column;
   padding: 1rem 4rem 1rem 4rem;
   gap: 2rem;
-  /* background-color: #7c50b1; */
-  /* background-color: #7c50b1; */
 }
 
 .basicDetailsElement {
@@ -304,7 +247,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* background-color: aquamarine; */
+
   padding: 1rem 4rem 1rem 4rem;
   page-break-inside: avoid;
 }
@@ -336,7 +279,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* background-color: brown; */
+
   padding: 1rem 4rem 1rem 4rem;
 }
 .qualificationBox {
@@ -356,7 +299,6 @@ body {
 
 .skillsBox {
   padding: 1rem 4rem 1rem 4rem;
-  /* background-color: #4977ce; */
 }
 .skillElements {
   display: flex;
@@ -369,7 +311,7 @@ body {
 .projectBox {
   display: flex;
   flex-direction: column;
-  /* background-color: #4682A9; */
+
   padding: 1rem 4rem 1rem 4rem;
   gap: 1rem;
   page-break-inside: avoid;
@@ -402,7 +344,7 @@ body {
   page-break-inside: avoid;
   display: flex;
   flex-direction: column;
-  /* background-color: burlywood; */
+
   gap: 1rem;
   padding: 1rem 4rem 1rem 4rem;
 }
@@ -418,10 +360,7 @@ body {
   page-break-inside: avoid;
   display: flex;
   flex-direction: row;
-  /* justify-content: space-around;
-    align-items: center;
-    padding: 1rem 4rem 3rem 4rem;
-    gap: 1rem; */
+
   width: 100%;
   gap: 5rem;
   padding: 1rem 4rem 3rem 4rem;

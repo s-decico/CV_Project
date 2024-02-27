@@ -1,11 +1,11 @@
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* min-width: 520px; */
+
 }
 body {
-  min-width: 520px;
+
 }
 input:-webkit-autofill {
   color: white !important;
@@ -79,5 +79,76 @@ input:-webkit-autofill {
   }
   .login_container {
     width: 80%;
+  }
+} */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+}
+
+input:-webkit-autofill {
+  color: white !important;
+  background-color: transparent !important;
+}
+
+.headingLogin {
+  font-size: 1.4rem; /* Adjust base font size for better scaling */
+}
+
+.reg_container,
+.login_container {
+  padding: 2rem 4rem; /* Adjust padding as needed */
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 1rem;
+  margin-top: 5rem;
+  backdrop-filter: blur(10px);
+  background-color: #e5e5cb58;
+  color: #1a120b;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.reg_container {
+  width: 30%; /* Adjust base width */
+}
+
+.login_container {
+  width: 40%; /* Adjust base width */
+}
+
+@media (max-width: 1280px) {
+  .reg_container,
+  .login_container {
+    width: 40%; /* Adjust width as needed for smaller screens */
+  }
+}
+
+@media (max-width: 1000px) {
+  .reg_container,
+  .login_container {
+    width: 50%; /* Adjust width as needed for smaller screens */
+  }
+}
+
+@media (max-width: 720px) {
+  .reg_container,
+  .login_container {
+    width: 60%; /* Adjust width as needed for smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .reg_container,
+  .login_container {
+    width: 80%; /* Adjust width as needed for smaller screens */
+    padding: 1rem; /* Adjust padding as needed for smaller screens */
   }
 }

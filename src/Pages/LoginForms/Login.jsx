@@ -103,6 +103,7 @@ function Login() {
           }
         })
         .catch(function (err) {
+          setLoading(false);
           if (err) {
             switch (err.response.status) {
               case 401:
@@ -123,6 +124,7 @@ function Login() {
           setLoading(false);
         });
     } else {
+      setLoading(false);
       if (!_email) setEmptyEmail(true);
       if (!_password) setEmptyPassword(true);
     }

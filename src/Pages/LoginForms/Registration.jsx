@@ -70,6 +70,7 @@ function Registration() {
             } else navigate("/register");
           })
           .catch((err) => {
+            setLoading(false);
             console.log(err);
           })
           .finally(() => {
@@ -77,10 +78,13 @@ function Registration() {
           });
       } else if (!isValidEmail(_email)) {
         setEmptyEmail(true);
+        setLoading(false);
       } else if (!isValidName(_name)) {
         setEmptyName(true);
+        setLoading(false);
       }
     } else {
+      setLoading(false);
       if (!_email) setEmptyEmail(true);
       if (!_name) setEmptyName(true);
       if (!_password) setEmptyPassword(true);
