@@ -39,14 +39,16 @@ function AchievementInput({
             handleAchievementChange(event, index);
           }}
         />
-        <IconButton
-          aria-label="delete"
-          onClick={() => {
-            handleAchievementDelete(index);
-          }}
-        >
-          <Delete />
-        </IconButton>
+        <div className="workexpprojdelete">
+          <IconButton
+            aria-label="delete"
+            onClick={() => {
+              handleAchievementDelete(index);
+            }}
+          >
+            <WhiteDeleteIcon />
+          </IconButton>
+        </div>
       </div>
     </>
   );

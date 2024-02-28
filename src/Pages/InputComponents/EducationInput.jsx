@@ -52,12 +52,14 @@ function EducationInput({
             handleEducationChange(event, index);
           }}
         />
-        <IconButton
-          aria-label="delete"
-          onClick={() => handleEducationDelete(index)}
-        >
-          <Delete />
-        </IconButton>
+        <div className="workexpprojdelete">
+          <IconButton
+            aria-label="delete"
+            onClick={() => handleEducationDelete(index)}
+          >
+            <WhiteDeleteIcon />
+          </IconButton>
+        </div>
       </div>
     </>
   );
