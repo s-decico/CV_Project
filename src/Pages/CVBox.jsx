@@ -457,7 +457,8 @@ font-size:1rem;
                                   >
                                     <Email />
                                     <a href={email}>
-                                      {jsonData.BasicDetails[key]}
+                                      {/* {jsonData.BasicDetails[key]} */}
+                                      Email
                                     </a>
                                   </div>
                                 );
