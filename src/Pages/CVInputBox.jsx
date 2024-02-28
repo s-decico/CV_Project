@@ -376,7 +376,7 @@ function CVInputBox() {
               variant="outlined"
               type="button"
               onClick={renderEducation}
-              sx={{ borderRadius: "30px" }}
+              sx={{ borderRadius: "30px", width: "100%" }}
               // sx={{ width: "1rem", height: "1rem", borderRadius: "50%" }}
             >
               +
@@ -463,7 +463,7 @@ function CVInputBox() {
               variant="outlined"
               type="button"
               onClick={renderAchievement}
-              sx={{ borderRadius: "30px" }}
+              sx={{ borderRadius: "30px", width: "100%" }}
             >
               +
             </GradientButton>
