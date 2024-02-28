@@ -113,7 +113,7 @@ input:-webkit-autofill {
   backdrop-filter: blur(10px);
   background-color: #e5e5cb58;
   color: #1a120b;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.3);
 }
 
 .reg_container {

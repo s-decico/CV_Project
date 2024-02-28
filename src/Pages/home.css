@@ -239,6 +239,9 @@ body {
   }
   .home_body span {
     font-size: 2.5rem;
+    justify-content: center;
+    min-height: 10vh;
+    gap: 1rem;
   }
   .home_body button {
     margin-top: 2rem;
@@ -254,6 +257,9 @@ body {
   }
   .home_body {
     font-size: 1.2rem;
+    justify-content: center;
+    min-height: 10vh;
+    gap: 1rem;
   }
   .home_body button {
     width: 100%;
